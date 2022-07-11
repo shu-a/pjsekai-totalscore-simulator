@@ -5,6 +5,7 @@ import CardHeader from '@mui/material/CardHeader';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import IconButton from '@mui/material/IconButton';
 import { flexbox } from '@mui/system';
+import axios, { async } from 'axios';
 
 function switchiId(props) {
   switch (props) {
@@ -29,24 +30,39 @@ function switchTitle(props) {
 }
 
 export default function CharacterArea(props) {
+  const [characterList, setCharacterList] = React.useState([]);
+  const [characterLoad, setCharacterLoad] = React.useState('N');
+  const getCharacterList = async () => {
+    if (characterLoad === 'N') {
+      try {
+        const response = await axios.get('https://shu-a.github.io/sekai-master-db-kr-diff/gameCharacters.json');
+        setCharacterList(response.data);
+        setCharacterLoad('Y');
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  }
+  getCharacterList();
   const type = switchiId(props.type);
-  const characterList = [...props.characterList];
   let textField = [];
-  for (let i = 0; i < characterList.length; i++) {
-    let characterInfo = characterList[i];
-    textField.push(<TextField
-      required
-      key={type + characterInfo.id}
-      id={type + characterInfo.id}
-      label={characterInfo.firstName ? characterInfo.firstName + ' ' + characterInfo.givenName : characterInfo.givenName}
-      defaultValue=""
-      variant="standard"
-      sx={{ width: 256, margin: 1 }}
-      type="number"
-    />);
+  if (characterList.length > 0) {
+    for (let i = 0; i < characterList.length; i++) {
+      let characterInfo = characterList[i];
+      textField.push(<TextField
+        required
+        key={type + characterInfo.id}
+        id={type + characterInfo.id}
+        label={characterInfo.firstName ? characterInfo.firstName + ' ' + characterInfo.givenName : characterInfo.givenName}
+        defaultValue=""
+        variant="standard"
+        sx={{ width: 256, margin: 1 }}
+        type="number"
+      />);
+    }
   }
   return (
-    <Card variant="outlined" sx={{ minWidth:300, maxWidth: 600, paddingBottom: 2, margin: 0.5, marginTop: 3, display: flexbox }}>
+    <Card variant="outlined" sx={{ minWidth: 300, maxWidth: 600, paddingBottom: 2, margin: 0.5, marginTop: 3, display: flexbox }}>
       <CardHeader
         action={
           <IconButton aria-label="settings">

@@ -18,7 +18,7 @@ import App from '../App';
 const drawerWidth = 240;
 const navItems = ['Home', 'About', 'Contact'];
 
-function AppSkeleton(props) {
+export default function AppSkeleton(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -107,5 +107,3 @@ AppSkeleton.propTypes = {
    */
   window: PropTypes.func,
 };
-
-export default AppSkeleton;

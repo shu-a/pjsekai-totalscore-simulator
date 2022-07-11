@@ -16,15 +16,15 @@ export default function CharacterArea(props) {
     textField.push(<TextField
       required
       id={type === 'area' ? 'chareactArea_' + characterInfo.id : 'characterRank_' + characterInfo.id}
-      rows="number"
       label={characterInfo.firstName ? characterInfo.firstName + ' ' + characterInfo.givenName : characterInfo.givenName}
       defaultValue=""
       variant="standard"
       sx={{ width: 256, margin: 1 }}
+      type="number"
     />);
   }
   return (
-    <Card variant="outlined" sx={{ minWidth:300, maxWidth: 600, paddingBottom: 2, margin: 0.5, display: flexbox }}>
+    <Card variant="outlined" sx={{ minWidth:300, maxWidth: 600, paddingBottom: 2, margin: 0.5, marginTop: 3, display: flexbox }}>
       <CardHeader
         action={
           <IconButton aria-label="settings">

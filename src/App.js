@@ -1,23 +1,27 @@
-import logo from './logo.svg';
 import './App.css';
+import React, { useState } from 'react';
+import SekaiViewerLink from './pages/SekaiViewerLink';
+import CardList from './pages/CardList';
+import CharacterArea from './pages/CharacterArea';
+import AttrTeamArea from './pages/AttrTeamArea';
+import Box from '@mui/material/Box';
+// import TeamList from './components/TeamList';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <SekaiViewerLink />
+      <Box sx={{ display: 'flex' }}>
+        <CharacterArea type='area' />
+        <CharacterArea type='rank' />
+      </Box>
+      <Box sx={{ display: 'flex' }}>
+        <AttrTeamArea type='team' />
+        <AttrTeamArea type='attr' />
+      </Box>
+      <Box sx={{ display: 'flex' }}>
+        <CardList />
+      </Box>
     </div>
   );
 }

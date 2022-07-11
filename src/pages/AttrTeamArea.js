@@ -8,10 +8,10 @@ import { flexbox } from '@mui/system';
 
 function switchiId(props) {
   switch (props) {
-    case 'area':
-      return 'characterArea_';
-    case 'rank':
-      return 'characterRank_';
+    case 'team':
+      return 'teamArea_';
+    case 'attr':
+      return 'attrArea_';
     default:
       return '';
   }
@@ -19,26 +19,28 @@ function switchiId(props) {
 
 function switchTitle(props) {
   switch (props) {
-    case 'area':
-      return '캐릭터 에어리어';
-    case 'rank':
-      return '캐릭터 랭크';
+    case 'team':
+      return '팀 에어리어';
+    case 'attr':
+      return '속성 에어리어';
     default:
       return '';
   }
 }
 
-export default function CharacterArea(props) {
+export default function AttrTeamArea(props) {
+  console.log(props);
+  const attrTeamAreaList = [...props.attrTeamAreaList];
+  console.log(attrTeamAreaList)
   const type = switchiId(props.type);
-  const characterList = [...props.characterList];
   let textField = [];
-  for (let i = 0; i < characterList.length; i++) {
-    let characterInfo = characterList[i];
+  for (let i = 0; i < attrTeamAreaList.length; i++) {
+    let attrTeamListInfo = attrTeamAreaList[i];
     textField.push(<TextField
       required
-      key={type + characterInfo.id}
-      id={type + characterInfo.id}
-      label={characterInfo.firstName ? characterInfo.firstName + ' ' + characterInfo.givenName : characterInfo.givenName}
+      key={type + attrTeamListInfo.seq}
+      id={type + attrTeamListInfo.seq}
+      label={attrTeamListInfo.unitName}
       defaultValue=""
       variant="standard"
       sx={{ width: 256, margin: 1 }}

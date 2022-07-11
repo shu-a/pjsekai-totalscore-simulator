@@ -5,10 +5,9 @@ import CardList from './pages/CardList';
 import CharacterArea from './pages/CharacterArea';
 import AttrTeamArea from './pages/AttrTeamArea';
 import Box from '@mui/material/Box';
+// import TeamList from './components/TeamList';
 
 function App() {
-  const [cardList, setCardList] = useState('');
-
   return (
     <div className="App">
       <SekaiViewerLink />
@@ -21,7 +20,7 @@ function App() {
         <AttrTeamArea type='attr' />
       </Box>
       <Box sx={{ display: 'flex' }}>
-        {cardList}
+        <CardList />
       </Box>
     </div>
   );

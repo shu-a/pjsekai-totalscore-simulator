@@ -5,7 +5,7 @@ import CardHeader from '@mui/material/CardHeader';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import IconButton from '@mui/material/IconButton';
 import { flexbox } from '@mui/system';
-import axios, { async } from 'axios';
+import axios from 'axios';
 
 function switchiId(props) {
   switch (props) {

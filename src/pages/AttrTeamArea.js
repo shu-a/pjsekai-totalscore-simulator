@@ -29,9 +29,7 @@ function switchTitle(props) {
 }
 
 export default function AttrTeamArea(props) {
-  console.log(props);
   const attrTeamAreaList = [...props.attrTeamAreaList];
-  console.log(attrTeamAreaList)
   const type = switchiId(props.type);
   let textField = [];
   for (let i = 0; i < attrTeamAreaList.length; i++) {

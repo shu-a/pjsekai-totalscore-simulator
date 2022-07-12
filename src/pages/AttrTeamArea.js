@@ -47,7 +47,7 @@ export default function AttrTeamArea(props) {
         maxWidth: 600,
         paddingBottom: 2,
         margin: 0.5,
-        marginTop: 3,
+        marginTop: 1,
         display: flexbox
       }}
       id="teamCard"

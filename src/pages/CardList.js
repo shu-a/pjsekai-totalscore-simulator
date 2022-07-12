@@ -118,7 +118,7 @@ export default function CardList() {
           maxWidth: 300,
           paddingBottom: 2,
           margin: 0.5,
-          marginTop: 3,
+          marginTop: 1,
           display: flexbox
         }}
         id="teamCard"

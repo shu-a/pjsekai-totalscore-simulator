@@ -5,12 +5,20 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import IconButton from '@mui/material/IconButton';
 
 export default function MakeCard(props) {
+  /* 옵션
+  sx
+  id
+  title
+  subheader
+  content
+  */
   const card = [];
   card.push(
     <Card
       variant="outlined"
       sx={props.sx}
       key={props.id}
+      name={props.id}
     >
       <CardHeader
         action={
@@ -21,6 +29,7 @@ export default function MakeCard(props) {
         title={props.title}
         subheader={props.subheader}
         key={props.id}
+        name={props.id}
       />
       {props.content}
     </Card>

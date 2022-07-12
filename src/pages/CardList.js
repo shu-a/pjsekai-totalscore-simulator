@@ -7,6 +7,10 @@ import MakeCard from '../components/MakeCard';
 import MakeTextField from '../components/MakeTextField';
 
 export default function CardList() {
+  const validation = (props) => {
+    // if (props.name === 'team' && props.value !== '')
+      
+  }
   // 속성 목록 불러오기
   const [attrList, setAttrList] = React.useState([]);
   const getAttrList = () => {
@@ -99,6 +103,7 @@ export default function CardList() {
     getRaritiesList();
   }, []);
 
+  // 값 및 핸들러
   const [attr, setAttr] = React.useState('');
   const [affiliation, setAffiliation] = React.useState('');
   const [team, setTeam] = React.useState('');
@@ -106,11 +111,9 @@ export default function CardList() {
   const [rarities, setRarities] = React.useState('');
   const HandlerSelectAttr = (event) => {
     setAttr(event.target.value);
-    return null;
   }
   const HandlerSelectAffiliation = (event) => {
     setAffiliation(event.target.value);
-    return null;
   }
 
   const _characterList = [];
@@ -118,6 +121,7 @@ export default function CardList() {
   const HandlerSelectTeam = (event) => {
     setTeam(event.target.value);
     setCharacter('');
+    validation(event);
     for (let i = 0; i < characterList.length; i++) {
       let character = characterList[i]
       let characterName = character.firstName ? character.firstName + ' ' + character.givenName : character.givenName;
@@ -125,15 +129,12 @@ export default function CardList() {
         _characterList.push(<MenuItem key={'character_' + character.id} value={'character_' + character.id}>{characterName}</MenuItem>);
       __setCharacterList(_characterList);
     }
-    return null;
   }
   const HandlerSelectRarities = (event) => {
     setRarities(event.target.value);
-    return null;
   }
   const HandlerSelectCharacter = (event) => {
     setCharacter(event.target.value);
-    return null;
   }
 
   const _affiliationList = [];
@@ -160,18 +161,19 @@ export default function CardList() {
 
   const makeFormSelect = [];
   // const makeCardNum = 5;
-  
+
   const makeFormSelectContents = [
-    {sx: { m: 1, width: 256 }, id: 'attr', label: '속성', value: attr, handler: HandlerSelectAttr, selectList: _attrList},
-    {sx: { m: 1, width: 120 }, id: 'affiliation', label: '소속', value: affiliation, handler: HandlerSelectAffiliation, selectList: _affiliationList},
-    {sx: { m: 1, width: 120 }, id: 'team', label: '팀', value: team, handler: HandlerSelectTeam, selectList: _teamList},
-    {sx: { m: 1, width: 120 }, id: 'rarities', label: '성급', value: rarities, handler: HandlerSelectRarities, selectList: _raritiesList},
-    {sx: { m: 1, width: 120 }, id: 'character', label: '캐릭터명', value: character, handler: HandlerSelectCharacter, selectList: __characterList}
+    {sx: { m: 1, width: 256 }, id: 'attr', label: '속성', value: attr, handler: HandlerSelectAttr, selectList: _attrList, disabled: false},
+    {sx: { m: 1, width: 120 }, id: 'affiliation', label: '소속', value: affiliation, handler: HandlerSelectAffiliation, selectList: _affiliationList, disabled: false},
+    {sx: { m: 1, width: 120 }, id: 'team', label: '팀', value: team, handler: HandlerSelectTeam, selectList: _teamList, disabled: false},
+    {sx: { m: 1, width: 120 }, id: 'rarities', label: '성급', value: rarities, handler: HandlerSelectRarities, selectList: _raritiesList, disabled: false},
+    {sx: { m: 1, width: 120 }, id: 'character', label: '캐릭터명', value: character, handler: HandlerSelectCharacter, selectList: __characterList, disabled: true, helperText: '팀을 선택하세요.'}
   ];
   for (let i = 0; i < makeFormSelectContents.length; i++) {
     let c = makeFormSelectContents[i];
-    makeFormSelect.push(    
-      <MakeFormSelect key={c.id} id={c.id} sx={c.sx} label={c.label} inputLabel={c.label} value={c.value} handler={c.handler} selectList={c.selectList} />
+    makeFormSelect.push(
+      <MakeFormSelect key={c.id} id={c.id} sx={c.sx} label={c.label} inputLabel={c.label} value={c.value} handler={c.handler} selectList={c.selectList} disabled={c.disabled}
+      helperText={c.helperText} />
     );
   }
   
@@ -183,7 +185,7 @@ export default function CardList() {
   for (let i = 0; i < makeTextFieldContents.length; i++) {
     let c = makeTextFieldContents[i];
     makeFormSelect.push(
-      <MakeTextField key={c.id} id={c.id} label={c.label} type={c.type} sx={c.sx} />
+      <MakeTextField key={c.id} id={c.id} label={c.label} defaultValue='' type={c.type} sx={c.sx} />
     );
   }
   // console.log(makeFormSelect)

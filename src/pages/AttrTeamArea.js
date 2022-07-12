@@ -5,8 +5,10 @@ import CardHeader from '@mui/material/CardHeader';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import IconButton from '@mui/material/IconButton';
 import { flexbox } from '@mui/system';
-import axios from 'axios';
 import { getTeamList, getAttrList } from '../apis/apiClient'
+import MakeFormSelect from '../components/MakeFormSelect';
+import MakeCard from '../components/MakeCard';
+import MakeTextField from '../components/MakeTextField';
 
 function switchiId(props) {
   switch (props) {
@@ -31,7 +33,7 @@ function switchTitle(props) {
 }
 
 export default function AttrTeamArea(props) {
-  const [attrTeamAreaList, setAttrTeamAreaList] = useState([]);  
+  const [attrTeamAreaList, setAttrTeamAreaList] = useState([]);
   useEffect(() => {
     if (props.type === 'attr')
       setAttrTeamAreaList(getAttrList());
@@ -39,36 +41,41 @@ export default function AttrTeamArea(props) {
       getTeamList().then((resData) => setAttrTeamAreaList(resData));
   }, []);
   const type = switchiId(props.type);
-  let textField = [];
-  if (attrTeamAreaList.length > 0) {
-    for (let i = 0; i < attrTeamAreaList.length; i++) {
-      let attrTeamListInfo = attrTeamAreaList[i];
-      textField.push(<TextField
-        required
-        key={type + attrTeamListInfo.seq}
-        id={type + attrTeamListInfo.seq}
-        label={attrTeamListInfo.unitName}
-        defaultValue=""
-        variant="standard"
-        sx={{ width: 256, margin: 1 }}
-        type="number"
-      />);
-    }
-  }
+  const textField = [];
+  // if (attrTeamAreaList.length > 0) {
+  //   for (let i = 0; i < attrTeamAreaList.length; i++) {
+  //     let attrTeamListInfo = attrTeamAreaList[i];
+  //     textField.push(<TextField
+  //       required
+  //       key={type + attrTeamListInfo.seq}
+  //       id={type + attrTeamListInfo.seq}
+  //       label={attrTeamListInfo.unitName}
+  //       defaultValue=""
+  //       variant="standard"
+  //       sx={{ width: 256, margin: 1 }}
+  //       type="number"
+  //     />);
+  //   }
+  // }
+  
+  const makeFieldList = attrTeamAreaList.map((c) =>
+    <MakeTextField key={type + c.seq} id={type + c.seq} label={c.unitName} defaultValue='' type={'number'} sx={{width: 256, margin: 1}} />
+  );
+  textField.push(makeFieldList);
   return (
-    <Card variant="outlined" sx={{ minWidth:300, maxWidth: 600, paddingBottom: 2, margin: 0.5, marginTop: 3, display: flexbox }}>
-      <CardHeader
-        action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
-          </IconButton>
-        }
-        title={switchTitle(props.type)}
-      // subheader=""
-      />
-      <Fragment>
-        {textField}
-      </Fragment>
-    </Card>
+    <MakeCard
+      sx={{
+        minWidth: 300,
+        maxWidth: 600,
+        paddingBottom: 2,
+        margin: 0.5,
+        marginTop: 3,
+        display: flexbox
+      }}
+      id="teamCard"
+      key="teamCard"
+      title={switchTitle(props.type)}
+      content={textField}
+    />
   );
 }

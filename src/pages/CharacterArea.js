@@ -5,8 +5,10 @@ import CardHeader from '@mui/material/CardHeader';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import IconButton from '@mui/material/IconButton';
 import { flexbox } from '@mui/system';
-import axios from 'axios';
 import { getCharacterList } from '../apis/apiClient'
+import MakeFormSelect from '../components/MakeFormSelect';
+import MakeCard from '../components/MakeCard';
+import MakeTextField from '../components/MakeTextField';
 
 function switchiId(props) {
   switch (props) {
@@ -31,41 +33,31 @@ function switchTitle(props) {
 }
 
 export default function CharacterArea(props) {
-  const [characterList, setCharacterList] = useState([]);  
+  const [characterList, setCharacterList] = useState([]);
   useEffect(() => {
     getCharacterList().then((resData) => setCharacterList(resData));
   }, []);
   const type = switchiId(props.type);
-  let textField = [];
-  if (characterList.length > 0) {
-    for (let i = 0; i < characterList.length; i++) {
-      let characterInfo = characterList[i];
-      textField.push(<TextField
-        required
-        key={type + characterInfo.id}
-        id={type + characterInfo.id}
-        label={characterInfo.firstName ? characterInfo.firstName + ' ' + characterInfo.givenName : characterInfo.givenName}
-        defaultValue=""
-        variant="standard"
-        sx={{ width: 256, margin: 1 }}
-        type="number"
-      />);
-    }
-  }
+  const textField = [];
+  const makeFieldList = characterList.map((c) =>
+    <MakeTextField key={type + c.id} id={type + c.id} label={c.firstName ? c.firstName + ' ' + c.givenName : c.givenName} defaultValue=''
+    type={'number'} sx={{width: 256, margin: 1}} />
+  );
+  textField.push(makeFieldList);
   return (
-    <Card variant="outlined" sx={{ minWidth: 300, maxWidth: 600, paddingBottom: 2, margin: 0.5, marginTop: 3, display: flexbox }}>
-      <CardHeader
-        action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
-          </IconButton>
-        }
-        title={switchTitle(props.type)}
-      // subheader=""
-      />
-      <Fragment>
-        {textField}
-      </Fragment>
-    </Card>
+    <MakeCard
+      sx={{
+        minWidth: 300,
+        maxWidth: 600,
+        paddingBottom: 2,
+        margin: 0.5,
+        marginTop: 3,
+        display: flexbox
+      }}
+      id="teamCard"
+      key="teamCard"
+      title={switchTitle(props.type)}
+      content={textField}
+    />
   );
 }

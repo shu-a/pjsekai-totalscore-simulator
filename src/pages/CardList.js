@@ -163,32 +163,27 @@ export default function CardList() {
   // const makeCardNum = 5;
 
   const makeFormSelectContents = [
-    {sx: { m: 1, width: 256 }, id: 'attr', label: '속성', value: attr, handler: HandlerSelectAttr, selectList: _attrList, disabled: false},
-    {sx: { m: 1, width: 120 }, id: 'affiliation', label: '소속', value: affiliation, handler: HandlerSelectAffiliation, selectList: _affiliationList, disabled: false},
-    {sx: { m: 1, width: 120 }, id: 'team', label: '팀', value: team, handler: HandlerSelectTeam, selectList: _teamList, disabled: false},
-    {sx: { m: 1, width: 120 }, id: 'rarities', label: '성급', value: rarities, handler: HandlerSelectRarities, selectList: _raritiesList, disabled: false},
-    {sx: { m: 1, width: 120 }, id: 'character', label: '캐릭터명', value: character, handler: HandlerSelectCharacter, selectList: __characterList, disabled: true, helperText: '팀을 선택하세요.'}
+    { sx: { m: 1, width: 256 }, id: 'attr', label: '속성', value: attr, handler: HandlerSelectAttr, selectList: _attrList, disabled: false },
+    { sx: { m: 1, width: 120 }, id: 'affiliation', label: '소속', value: affiliation, handler: HandlerSelectAffiliation, selectList: _affiliationList, disabled: false },
+    { sx: { m: 1, width: 120 }, id: 'team', label: '팀', value: team, handler: HandlerSelectTeam, selectList: _teamList, disabled: false },
+    { sx: { m: 1, width: 120 }, id: 'rarities', label: '성급', value: rarities, handler: HandlerSelectRarities, selectList: _raritiesList, disabled: false },
+    { sx: { m: 1, width: 120 }, id: 'character', label: '캐릭터명', value: character, handler: HandlerSelectCharacter, selectList: __characterList, disabled: true, helperText: '팀을 선택하세요.' }
   ];
-  for (let i = 0; i < makeFormSelectContents.length; i++) {
-    let c = makeFormSelectContents[i];
-    makeFormSelect.push(
-      <MakeFormSelect key={c.id} id={c.id} sx={c.sx} label={c.label} inputLabel={c.label} value={c.value} handler={c.handler} selectList={c.selectList} disabled={c.disabled}
-      helperText={c.helperText} />
-    );
-  }
-  
+  const makeFormSelectlist = makeFormSelectContents.map((c) =>
+    <MakeFormSelect key={c.id} id={c.id} sx={c.sx} label={c.label} inputLabel={c.label} value={c.value} handler={c.handler} selectList={c.selectList} disabled={c.disabled}
+      helperText={c.makeFormSelectlist} />
+  );
+  makeFormSelect.push(makeFormSelectlist);
+
   const makeTextFieldContents = [
-    {id: 'performance', label: 'Performance', type: 'number', sx: { width: 256, marginTop: 1 }},
-    {id: 'technique', label: 'Technique', type: 'number', sx: { width: 256, marginTop: 1 }},
-    {id: 'stamina', label: 'Stamina', type: 'number', sx: { width: 256, marginTop: 1 }}
+    { id: 'performance', label: 'Performance', type: 'number', sx: { width: 256, marginTop: 1 } },
+    { id: 'technique', label: 'Technique', type: 'number', sx: { width: 256, marginTop: 1 } },
+    { id: 'stamina', label: 'Stamina', type: 'number', sx: { width: 256, marginTop: 1 } }
   ];
-  for (let i = 0; i < makeTextFieldContents.length; i++) {
-    let c = makeTextFieldContents[i];
-    makeFormSelect.push(
-      <MakeTextField key={c.id} id={c.id} label={c.label} defaultValue='' type={c.type} sx={c.sx} />
-    );
-  }
-  // console.log(makeFormSelect)
+  const makeTextFieldList = makeTextFieldContents.map((c) =>
+    <MakeTextField key={c.id} id={c.id} label={c.label} defaultValue='' type={c.type} sx={c.sx} />
+  );
+  makeFormSelect.push(makeTextFieldList);
   
   return (
     <div>

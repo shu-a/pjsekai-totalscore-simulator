@@ -35,7 +35,7 @@ export default function CharacterArea(props) {
   const textField = [];
   const makeFieldList = characterList.map((c) =>
     <MakeTextField key={type + c.id} id={type + c.id} label={c.firstName ? c.firstName + ' ' + c.givenName : c.givenName} defaultValue=''
-    type={'number'} sx={{width: 256, margin: 1}} />
+      type={'number'} sx={{ width: 256, margin: 1 }} />
   );
   textField.push(makeFieldList);
   return (

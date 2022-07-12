@@ -30,14 +30,14 @@ export default function AttrTeamArea(props) {
   const [attrTeamAreaList, setAttrTeamAreaList] = useState([]);
   useEffect(() => {
     if (props.type === 'attr')
-    setAttrTeamAreaList(getAttrList());
+      setAttrTeamAreaList(getAttrList());
     else if (props.type === 'team')
-    getTeamList().then((resData) => setAttrTeamAreaList(resData));
+      getTeamList().then((resData) => setAttrTeamAreaList(resData));
   }, [props.type]);
   const type = switchiId(props.type);
-  const textField = [];  
+  const textField = [];
   const makeFieldList = attrTeamAreaList.map((c) =>
-    <MakeTextField key={type + c.seq} id={type + c.seq} label={c.unitName} defaultValue='' type={'number'} sx={{width: 256, margin: 1}} />
+    <MakeTextField key={type + c.seq} id={type + c.seq} label={c.unitName} defaultValue='' type={'number'} sx={{ width: 256, margin: 1 }} />
   );
   textField.push(makeFieldList);
   return (

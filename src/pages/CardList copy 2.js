@@ -5,27 +5,101 @@ import axios from 'axios';
 import MakeFormSelect from '../components/MakeFormSelect';
 import MakeCard from '../components/MakeCard';
 import MakeTextField from '../components/MakeTextField';
-import { getTeamList, getCharacterList, getRaritiesList, getAttrList } from '../apis/apiClient'
 
 export default function CardList() {
-  const [teamList, setTeamList] = useState([]);
-  useEffect(() => {
-    getTeamList().then((resData) => setTeamList(resData));
-  }, []);
+  const [disabled, setDisabled] = useState(true);
+  // 속성 목록 불러오기
   const [attrList, setAttrList] = useState([]);
+  const getAttrList = () => {
+    const attrList = [{
+      "seq": 46,
+      "areaItemId": 46,
+      "level": 1,
+      "targetUnit": "any",
+      "targetCardAttr": "cool",
+      "unit": "cool",
+      "unitName": "쿨"
+    },
+    {
+      "seq": 48,
+      "areaItemId": 48,
+      "level": 1,
+      "targetUnit": "any",
+      "targetCardAttr": "cute",
+      "unit": "cute",
+      "unitName": "큐트"
+    },
+    {
+      "seq": 50,
+      "areaItemId": 50,
+      "level": 1,
+      "targetUnit": "any",
+      "targetCardAttr": "pure",
+      "unit": "pure",
+      "unitName": "퓨어"
+    },
+    {
+      "seq": 52,
+      "areaItemId": 52,
+      "level": 1,
+      "targetUnit": "any",
+      "targetCardAttr": "happy",
+      "unit": "happy",
+      "unitName": "해피"
+    },
+    {
+      "seq": 54,
+      "areaItemId": 54,
+      "level": 1,
+      "targetUnit": "any",
+      "targetCardAttr": "mysterious",
+      "unit": "mysterious",
+      "unitName": "미스테리어스"
+    }];
+    setAttrList(attrList);
+  }
   useEffect(() => {
-    setAttrList(getAttrList());
-  }, []);
-  const [characterList, setCharacterList] = useState([]);
-  useEffect(() => {
-    getCharacterList().then((resData) => setCharacterList(resData));
-  }, []);
-  const [raritiesList, setRaritiesList] = useState([]);
-  useEffect(() => {
-    getRaritiesList().then((resData) => setRaritiesList(resData));
+    getAttrList();
   }, []);
 
-  const [disabled, setDisabled] = useState(true);
+  // 팀 목록 불러오기
+  const [teamList, setTeamList] = useState([]);
+  const getTeamList = async () => {
+    try {
+      const response = await axios.get('https://shu-a.github.io/sekai-master-db-kr-diff/unitProfiles.json');
+      setTeamList(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  useEffect(() => {
+    getTeamList();
+  }, []);
+
+  // 캐릭터 목록 불러오기
+  const [characterList, setCharacterList] = useState([]);
+  const getCharacterList = async () => {
+    try {
+      const response = await axios.get('https://shu-a.github.io/sekai-master-db-kr-diff/gameCharacters.json');
+      setCharacterList(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  useEffect(() => {
+    getCharacterList();
+  }, [])
+
+  // 성급 목록 불러오기
+  const [raritiesList, setRaritiesList] = useState([]);
+  const getRaritiesList = async () => {
+    const response = await axios.get('https://shu-a.github.io/sekai-master-db-diff/cardRarities.json');
+    setRaritiesList(response.data);
+  }
+  useEffect(() => {
+    getRaritiesList();
+  }, []);
+
   // 값 및 핸들러
   const [attr, setAttr] = useState('');
   const [affiliation, setAffiliation] = useState('');
@@ -90,10 +164,10 @@ export default function CardList() {
   // const makeCardNum = 5;
 
   const makeFormSelectContents = [
-    { sx: { m: 1, width: 256 }, id: 'attr', label: '속성', value: attr, handler: HandlerSelectAttr, selectList: _attrList },
-    { sx: { m: 1, width: 120 }, id: 'affiliation', label: '소속', value: affiliation, handler: HandlerSelectAffiliation, selectList: _affiliationList },
-    { sx: { m: 1, width: 120 }, id: 'team', label: '팀', value: team, handler: HandlerSelectTeam, selectList: _teamList },
-    { sx: { m: 1, width: 120 }, id: 'rarities', label: '성급', value: rarities, handler: HandlerSelectRarities, selectList: _raritiesList },
+    { sx: { m: 1, width: 256 }, id: 'attr', label: '속성', value: attr, handler: HandlerSelectAttr, selectList: _attrList},
+    { sx: { m: 1, width: 120 }, id: 'affiliation', label: '소속', value: affiliation, handler: HandlerSelectAffiliation, selectList: _affiliationList},
+    { sx: { m: 1, width: 120 }, id: 'team', label: '팀', value: team, handler: HandlerSelectTeam, selectList: _teamList},
+    { sx: { m: 1, width: 120 }, id: 'rarities', label: '성급', value: rarities, handler: HandlerSelectRarities, selectList: _raritiesList},
     { sx: { m: 1, width: 120 }, id: 'character', label: '캐릭터명', value: character, handler: HandlerSelectCharacter, selectList: __characterList, disabled: disabled, helperText: '팀을 선택하세요.' }
   ];
   const makeFormSelectlist = makeFormSelectContents.map((c) =>
@@ -111,6 +185,7 @@ export default function CardList() {
     <MakeTextField key={c.id} id={c.id} label={c.label} defaultValue='' type={c.type} sx={c.sx} />
   );
   makeFormSelect.push(makeTextFieldList);
+  
   return (
     <div>
       <MakeCard

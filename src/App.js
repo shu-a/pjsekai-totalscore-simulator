@@ -1,5 +1,5 @@
 import './App.css';
-import React, { useState } from 'react';
+import React from 'react';
 import SekaiViewerLink from './pages/SekaiViewerLink';
 import CardList from './pages/CardList';
 import CharacterArea from './pages/CharacterArea';

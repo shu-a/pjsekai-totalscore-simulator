@@ -28,7 +28,6 @@ export default function MakeFormSelect(props) {
         label={props.label}
         labelId={props.id}
         id={props.id}
-        key={props.id}
         value={props.value}
         onChange={props.handler}
         name={props.id}

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import MenuItem from '@mui/material/MenuItem';
 import { flexbox } from '@mui/system';
-import axios from 'axios';
 import MakeFormSelect from '../components/MakeFormSelect';
 import MakeCard from '../components/MakeCard';
 import MakeTextField from '../components/MakeTextField';
@@ -119,7 +118,7 @@ export default function CardList() {
           maxWidth: 300,
           paddingBottom: 2,
           margin: 0.5,
-          marginTop: 3,
+          marginTop: 1,
           display: flexbox
         }}
         id="teamCard"

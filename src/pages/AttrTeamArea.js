@@ -1,12 +1,6 @@
-import React, { useState, useEffect, Fragment } from 'react';
-import TextField from '@mui/material/TextField';
-import Card from '@mui/material/Card';
-import CardHeader from '@mui/material/CardHeader';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
-import IconButton from '@mui/material/IconButton';
+import React, { useState, useEffect } from 'react';
 import { flexbox } from '@mui/system';
 import { getTeamList, getAttrList } from '../apis/apiClient'
-import MakeFormSelect from '../components/MakeFormSelect';
 import MakeCard from '../components/MakeCard';
 import MakeTextField from '../components/MakeTextField';
 
@@ -39,27 +33,11 @@ export default function AttrTeamArea(props) {
       setAttrTeamAreaList(getAttrList());
     else if (props.type === 'team')
       getTeamList().then((resData) => setAttrTeamAreaList(resData));
-  }, []);
+  }, [props.type]);
   const type = switchiId(props.type);
   const textField = [];
-  // if (attrTeamAreaList.length > 0) {
-  //   for (let i = 0; i < attrTeamAreaList.length; i++) {
-  //     let attrTeamListInfo = attrTeamAreaList[i];
-  //     textField.push(<TextField
-  //       required
-  //       key={type + attrTeamListInfo.seq}
-  //       id={type + attrTeamListInfo.seq}
-  //       label={attrTeamListInfo.unitName}
-  //       defaultValue=""
-  //       variant="standard"
-  //       sx={{ width: 256, margin: 1 }}
-  //       type="number"
-  //     />);
-  //   }
-  // }
-  
   const makeFieldList = attrTeamAreaList.map((c) =>
-    <MakeTextField key={type + c.seq} id={type + c.seq} label={c.unitName} defaultValue='' type={'number'} sx={{width: 256, margin: 1}} />
+    <MakeTextField key={type + c.seq} id={type + c.seq} label={c.unitName} defaultValue='' type={'number'} sx={{ width: 256, margin: 1 }} />
   );
   textField.push(makeFieldList);
   return (
@@ -69,7 +47,7 @@ export default function AttrTeamArea(props) {
         maxWidth: 600,
         paddingBottom: 2,
         margin: 0.5,
-        marginTop: 3,
+        marginTop: 1,
         display: flexbox
       }}
       id="teamCard"

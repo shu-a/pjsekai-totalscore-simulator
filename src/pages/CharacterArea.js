@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import TextField from '@mui/material/TextField';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
@@ -6,6 +6,7 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import IconButton from '@mui/material/IconButton';
 import { flexbox } from '@mui/system';
 import axios from 'axios';
+import { getCharacterList } from '../apis/apiClient'
 
 function switchiId(props) {
   switch (props) {
@@ -30,20 +31,10 @@ function switchTitle(props) {
 }
 
 export default function CharacterArea(props) {
-  const [characterList, setCharacterList] = React.useState([]);
-  const [characterLoad, setCharacterLoad] = React.useState('N');
-  const getCharacterList = async () => {
-    if (characterLoad === 'N') {
-      try {
-        const response = await axios.get('https://shu-a.github.io/sekai-master-db-kr-diff/gameCharacters.json');
-        setCharacterList(response.data);
-        setCharacterLoad('Y');
-      } catch (error) {
-        console.log(error);
-      }
-    }
-  }
-  getCharacterList();
+  const [characterList, setCharacterList] = useState([]);  
+  useEffect(() => {
+    getCharacterList().then((resData) => setCharacterList(resData));
+  }, []);
   const type = switchiId(props.type);
   let textField = [];
   if (characterList.length > 0) {
@@ -72,9 +63,9 @@ export default function CharacterArea(props) {
         title={switchTitle(props.type)}
       // subheader=""
       />
-      <React.Fragment>
+      <Fragment>
         {textField}
-      </React.Fragment>
+      </Fragment>
     </Card>
   );
 }

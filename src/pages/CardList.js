@@ -1,9 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import MenuItem from '@mui/material/MenuItem';
-import { flexbox } from '@mui/system';
-import MakeFormSelect from '../components/MakeFormSelect';
-import MakeCard from '../components/MakeCard';
-import MakeTextField from '../components/MakeTextField';
+import React, { useState, useEffect, Fragment } from 'react';
 import MakeCardList from '../components/MakeCardList';
 import { getTeamList, getCharacterList, getRaritiesList, getAttrList } from '../apis/apiClient'
 
@@ -24,11 +19,23 @@ export default function CardList() {
   useEffect(() => {
     getRaritiesList().then((resData) => setRaritiesList(resData));
   }, []);
-  const cardList = (<MakeCardList teamList={teamList} attrList={attrList} characterList={characterList} raritiesList={raritiesList} />);
+  const cardContents = [
+    { title: 'Reader', idx: 1, color: '#ed5fab', border: 2 },
+    { title: 'SubReader', idx: 2, color: '#6fc6bd', border: 2 },
+    { title: 'Member1', idx: 3, color: '#444564', border: 2 },
+    { title: 'Member2', idx: 4, color: '#444564', border: 2 },
+    { title: 'Member3', idx: 5, color: '#444564', border: 2 }
+  ];
+  const cardList = [];
+  const makeCardList = cardContents.map((c) =>
+    <MakeCardList teamList={teamList} attrList={attrList} characterList={characterList} raritiesList={raritiesList} title={c.title} key={c.idx} border={c.border}
+    color={c.color} />
+  );
+  cardList.push(makeCardList);
 
   return (
-    <div>
+    <Fragment>
       {cardList}
-    </div>
+    </Fragment>
   );
 }

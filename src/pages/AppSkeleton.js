@@ -29,7 +29,7 @@ export default function AppSkeleton(props) {
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
       <Typography variant="h6" sx={{ my: 2 }}>
-        Sekai Event Deck Simulator
+        Sekai Talant Score Simulator
       </Typography>
       <Divider />
       <List>
@@ -64,7 +64,7 @@ export default function AppSkeleton(props) {
             component="div"
             sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
           >
-            Sekai Event Deck Simulator
+            Sekai Talant Score Simulator
           </Typography>
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
             {navItems.map((item) => (

@@ -40,9 +40,8 @@ export default function CardContents(props) {
       setDisabled(true);
 
     const _characterList = props.characterList.map((c) => {
-      let characterName = c.firstName ? c.firstName + ' ' + c.givenName : c.givenName;
       if (value === ('affiliation_' + c.unit))
-        return <MenuItem key={c.id} value={'character_' + c.id}>{characterName}</MenuItem>;
+        return <MenuItem key={c.id} value={'character_' + c.id}>{c.fullName}</MenuItem>;
       else
         return false;
     });

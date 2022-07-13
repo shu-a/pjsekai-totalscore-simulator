@@ -32,12 +32,12 @@ export default function CharacterArea(props) {
     getCharacterList().then((resData) => setCharacterList(resData));
   }, []);
   const type = switchiId(props.type);
-  const textField = [];
-  const makeFieldList = characterList.map((c) =>
+
+  const textField = characterList.map((c) =>
     <MakeTextField key={type + c.id} id={type + c.id} label={c.firstName ? c.firstName + ' ' + c.givenName : c.givenName} defaultValue=''
       type={'number'} sx={{ width: 256, margin: 1 }} />
   );
-  textField.push(makeFieldList);
+  
   return (
     <MakeCard
       sx={{

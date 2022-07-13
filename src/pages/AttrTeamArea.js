@@ -35,11 +35,11 @@ export default function AttrTeamArea(props) {
       getTeamList().then((resData) => setAttrTeamAreaList(resData));
   }, [props.type]);
   const type = switchiId(props.type);
-  const textField = [];
-  const makeFieldList = attrTeamAreaList.map((c) =>
+
+  const textField = attrTeamAreaList.map((c) =>
     <MakeTextField key={type + c.seq} id={type + c.seq} label={c.unitName} defaultValue='' type={'number'} sx={{ width: 256, margin: 1 }} />
   );
-  textField.push(makeFieldList);
+  
   return (
     <MakeCard
       sx={{

@@ -28,12 +28,10 @@ export default function Card() {
     { title: 'Member3', idx: 5, color: '#444564', border: 2 }
   ];
   
-  const card = [];
-  const makeMemberCard = cardInfo.map((c) =>
+  const card = cardInfo.map((c) =>
     <CardContents key={c.idx} teamList={teamList} attrList={attrList} characterList={characterList} raritiesList={raritiesList}
     title={c.title} border={c.border} color={c.color} />
   );
-  card.push(makeMemberCard);
 
   return (
     <Fragment>

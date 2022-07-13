@@ -3,7 +3,7 @@ import axios from 'axios';
 // 팀 목록 불러오기
 export async function getTeamList() {
   try {
-    const response = await axios.get('https://shu-a.github.io/sekai-master-db-kr-diff/unitProfiles.json')
+    const response = await axios.get('https://shu-a.github.io/sekai-master-db-kr-diff/unitProfiles.json');
     return response.data;
   } catch (error) {
     console.log(error);
@@ -11,11 +11,15 @@ export async function getTeamList() {
 }
 
 // 캐릭터 목록 불러오기
-
 export async function getCharacterList() {
   try {
     const response = await axios.get('https://shu-a.github.io/sekai-master-db-kr-diff/gameCharacters.json');
-    return response.data;
+    const data = [...response.data];
+    for (let i = 0; i < data.length; i++) {
+      let c = data[i];
+      c.fullName = c.firstName ? c.firstName + c.givenName : '' + c.givenName;
+    }
+    return data;
   } catch (error) {
     console.log(error);
   }

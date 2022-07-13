@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 function SekaiViewerLink() {
   return(
     <div>
-      <Button variant="outlined" onClick={e => {
+      <Button variant="contained" sx={{ backgroundColor: '#4ca692', '&:hover': { backgroundColor: '#3b8071' }}} onClick={e => {
         e.preventDefault();
         window.open('https://sekai.best/card', '_blank')
         console.log('클릭');

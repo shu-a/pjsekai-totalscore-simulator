@@ -11,15 +11,22 @@ function App() {
   return (
     <div className="App">
       <SekaiViewerLink />
-      <Box sx={{ display: 'flex' }}>
+      <Box sx={{
+        display: 'flex'
+      }}>
         <CharacterArea type='area' />
         <CharacterArea type='rank' />
       </Box>
-      <Box sx={{ display: 'flex' }}>
+      <Box sx={{
+        display: 'flex'
+      }}>
         <AttrTeamArea type='team' />
         <AttrTeamArea type='attr' />
       </Box>
-      <Box sx={{ display: 'flex' }}>
+      <Box sx={{
+        display: 'flex',
+        flexWrap: 'wrap'
+      }}>
         <CardList />
       </Box>
     </div>

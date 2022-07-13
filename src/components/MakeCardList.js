@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import MenuItem from '@mui/material/MenuItem';
-import { flexbox } from '@mui/system';
 import MakeFormSelect from '../components/MakeFormSelect';
 import MakeCard from '../components/MakeCard';
 import MakeTextField from '../components/MakeTextField';
@@ -93,21 +92,19 @@ export default function MakeCardList(props) {
   );
   makeFormSelect.push(makeTextFieldList);
   return (
-    <div>
       <MakeCard
         sx={{
-          minWidth: 300,
-          maxWidth: 300,
+          width: 298,
           paddingBottom: 2,
           margin: 0.5,
           marginTop: 1,
-          display: flexbox
+          border: props.border,
+          borderColor: props.color
         }}
         id="teamCard"
         key="teamCard"
-        title="Reader"
+        title={props.title}
         content={makeFormSelect}
       />
-    </div>
   );
 }

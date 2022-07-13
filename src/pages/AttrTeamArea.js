@@ -44,7 +44,7 @@ export default function AttrTeamArea(props) {
     <MakeCard
       sx={{
         minWidth: 300,
-        maxWidth: 600,
+        maxWidth: 765,
         paddingBottom: 2,
         margin: 0.5,
         marginTop: 1,

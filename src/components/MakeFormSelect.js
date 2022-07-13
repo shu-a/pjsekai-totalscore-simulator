@@ -23,13 +23,16 @@ export default function MakeFormSelect(props) {
       key={props.id}
       disabled={props.disabled}
     >
-      <InputLabel id={props.id}>{props.inputLabel}</InputLabel>
+      <InputLabel>{props.inputLabel}</InputLabel>
       <Select
         label={props.label}
         labelId={props.id}
         value={props.value}
         onChange={props.handler}
         name={props.id}
+        inputProps={{
+          id: props.id
+        }}
       >
         {props.selectList}
       </Select>

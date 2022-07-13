@@ -17,8 +17,11 @@ export default function CardContents(props) {
   }
   const HandlerSelectAffiliation = (event) => {
     setAffiliation(event.target.value);
-    // console.log(event);
     enableCharacter(event.target.value);
+    if (event.target.value === 'piapro')
+      setTeam('');
+    else
+      setTeam(event.target.value);
   }
   const HandlerSelectTeam = (event) => {
     setTeam(event.target.value);
@@ -40,8 +43,8 @@ export default function CardContents(props) {
       setDisabled(true);
 
     const _characterList = props.characterList.map((c) => {
-      if (value === ('affiliation_' + c.unit))
-        return <MenuItem key={c.id} value={'character_' + c.id}>{c.fullName}</MenuItem>;
+      if (value === (c.unit))
+        return <MenuItem key={c.id} value={c.id}>{c.fullName}</MenuItem>;
       else
         return false;
     });
@@ -50,19 +53,19 @@ export default function CardContents(props) {
 
   const _affiliationList = props.teamList.map((c) =>
   // ***
-    <MenuItem key={'affiliation_' + c.seq} value={'affiliation_' + c.unit} unit={'affiliation_' + c.unit}>{c.unitName}</MenuItem>
+    <MenuItem key={c.seq} value={c.unit} unit={c.unit}>{c.unitName}</MenuItem>
   );
   const _attrList = props.attrList.map((c) =>
-    <MenuItem key={'attr_' + c.seq} value={'attr_' + c.seq}>{c.unitName}</MenuItem>
+    <MenuItem key={c.unit} value={c.unit}>{c.unitName}</MenuItem>
   );
   const _teamList = props.teamList.map((c) => {
     if (Number(c.seq) !== 1)
-      return <MenuItem key={'team_' + c.seq} value={'team_' + c.seq}>{c.unitName}</MenuItem>
+      return <MenuItem key={c.unit} value={c.unit}>{c.unitName}</MenuItem>
     else
       return false
   });
   const _raritiesList = props.raritiesList.map((c) =>
-    <MenuItem key={'rarities_' + c.seq} value={'rarities_' + c.seq} >{c.cardRarityType.split('_')[1]}</MenuItem>
+    <MenuItem key={c.seq} value={c.seq} >{c.cardRarityType.split('_')[1]}</MenuItem>
   );
 
   const makeFormSelect = [];
@@ -70,7 +73,7 @@ export default function CardContents(props) {
   const makeFormSelectContents = [
     { sx: { m: 1, width: 256 }, id: 'attr', label: '속성', value: attr, handler: HandlerSelectAttr, selectList: _attrList },
     { sx: { m: 1, width: 120 }, id: 'affiliation', label: '소속', value: affiliation, handler: HandlerSelectAffiliation, selectList: _affiliationList },
-    { sx: { m: 1, width: 120 }, id: 'team', label: '팀', value: team, handler: HandlerSelectTeam, selectList: _teamList },
+    { sx: { m: 1, width: 120 }, id: 'team', label: '팀', value: team, handler: HandlerSelectTeam, selectList: _teamList, disabled: disabled },
     { sx: { m: 1, width: 120 }, id: 'rarities', label: '성급', value: rarities, handler: HandlerSelectRarities, selectList: _raritiesList },
     { sx: { m: 1, width: 120 }, id: 'character', label: '캐릭터명', value: character, handler: HandlerSelectCharacter, selectList: __characterList, disabled: disabled, helperText: '팀을 선택하세요.' }
   ];

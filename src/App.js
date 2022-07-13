@@ -8,85 +8,189 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import { FormControl } from '@mui/material';
 
-const rankBonus = (pVal, tVal, sVal, rankVal) => {
-  return Math.floor(Number(pVal) * Number(rankVal) / 1000) + Math.floor(Number(tVal) * Number(rankVal) / 1000) + Math.floor(Number(sVal) * Number(rankVal) / 1000);
-}
-const areaBonus = (pVal, tVal, sVal, charVal, teamVal, areaVal) => {
+const memberScore = (array, characterArea, characterRank, teamArea, attrArea) => {
+  let performance = 0;
+  let technique = 0;
+  let stamina = 0;
+  let characterAreaScore = 0;
+  let characterRankScore = 0;
+  let teamAreaScore = 0;
+  let affiliationScore = 0;
+  let attrAreaScore = 0;
+  let areaScore = 0;
+  array.forEach(c => {
+    let cardId = c.id.split('_')[1];  
+    if (cardId === 'performance')
+      performance = Number(c.value);
+    if (cardId === 'technique')
+      technique = Number(c.value);
+    if (cardId === 'stamina')
+    stamina = Number(c.value);
+    if (cardId === 'character') {
+      for (let i = 0; i < characterArea.length; i++) {
+        let target = characterArea[i];
+        let targetId = target.id.split('_')[1];
+        if (targetId === c.value) {
+          characterAreaScore = Number(target.value);
+          break;
+        }
+      }
+      for (let i = 0; i < characterRank.length; i++) {
+        let target = characterRank[i];
+        let targetId = target.id.split('_')[1];
+        if (targetId === c.value) {
+          characterRankScore = Number(target.value);
+          break;
+        }
+      }
+    }
+    if (cardId === 'team' || cardId === 'affiliation') {
+      for (let i = 0; i < teamArea.length; i++) {
+        let target = teamArea[i];
+        let targetId = '';
+        if (target.id.split('_').length === 2)
+          targetId = target.id.split('_')[1];
+        else
+          targetId = target.id.split('_')[1] + '_' + target.id.split('_')[2];
+        console.log(targetId)
+        if (targetId === c.value) {
+          if (cardId === 'team') {
+            teamAreaScore = Number(target.value);
+            break;
+          }
+          else if (cardId === 'affiliation') {
+            affiliationScore = Number(target.value);
+            break;
+          }
+        }
+      }
+    }
+    if (cardId === 'attr') {
+      for (let i = 0; i < attrArea.length; i++) {
+        let target = attrArea[i];
+        let targetId = target.id.split('_')[1];
+        if (targetId === c.value) {
+          attrAreaScore = Number(target.value);
+          break;
+        }
+      }
+    }
+  });
+  if(teamAreaScore >= affiliationScore)
+    areaScore = characterAreaScore + teamAreaScore + attrAreaScore;
+  else
+    areaScore = characterAreaScore + affiliationScore + attrAreaScore;
+  console.log('areaScore', areaScore)
+  console.log('teamAreaScore', teamAreaScore)
+  console.log('affiliationScore', affiliationScore)
+  console.log('attrAreaScore', attrAreaScore)
+
   return (
-    Math.floor(Number(pVal) * (Number(charVal) + Number(teamVal) + Number(areaVal)) / 100) + 
-    Math.floor(Number(tVal) * (Number(charVal) + Number(teamVal) + Number(areaVal)) / 100) + 
-    Math.floor(Number(sVal) * (Number(charVal) + Number(teamVal) + Number(areaVal)) / 100)
+    rankBonus(performance, technique, stamina, characterRankScore) +
+    areaBonus(performance, technique, stamina, areaScore) +
+    performance + technique + stamina
   );
 }
 
-function handlerSubmit(event) {
+const rankBonus = (pVal, tVal, sVal, rankVal) => {
+  return Math.floor(Number(pVal) * Number(rankVal) / 1000) + Math.floor(Number(tVal) * Number(rankVal) / 1000) + Math.floor(Number(sVal) * Number(rankVal) / 1000);
+}
+const areaBonus = (pVal, tVal, sVal, areaVal) => {
+  console.log(areaVal)
+  return (
+    Math.floor(Number(pVal) * Number(areaVal) / 100) +
+    Math.floor(Number(tVal) * Number(areaVal) / 100) +
+    Math.floor(Number(sVal) * Number(areaVal) / 100)
+  );
+}
+
+const msg = (message) => {
+  return console.log(message);
+}
+
+const submitValidation = (array, maxIdx, message) => {
+  let idx = array.length - 1;
+  if (idx === maxIdx - 1) {
+    if (!array[idx].value) {
+      msg(message);
+      document.getElementById(array[idx].id).focus();
+      return false;
+    } else {
+      return true;
+    }
+  } else {
+    msg(message);
+    document.getElementById(array[idx].id).focus();
+    return false;
+  }
+}
+const handlerSubmit = (event) => {
   event.preventDefault();
   const formData = new FormData(event.currentTarget);
-  let deckCnt = 0;
-  let areaRankCnt = 0;
-  let readerCnt = 0;
-  let subReaderCnt = 0;
-  let member1Cnt = 0;
-  let member2Cnt = 0;
-  let member3Cnt = 0;
+  const characterArea = [];
+  const characterRank = [];
+  const teamArea = [];
+  const attrArea = [];
+  const reader = [];
+  const subReader = [];
+  const member1 = [];
+  const member2 = [];
+  const member3 = [];
   for (let key of formData.keys()) {
     let value = formData.get(key);
     let id = key.split('_')[0];
-    if (id === 'Reader' && value) {
-      deckCnt += 1;
-      readerCnt += 1;
-    } else if (id === "SubReader" && value) {
-      deckCnt += 1;
-      subReaderCnt += 1;
-    } else if (id === "Member1" && value) {
-      deckCnt += 1;
-      member1Cnt += 1;
-    } else if (id === "Member2" && value) {
-      deckCnt += 1;
-      member2Cnt += 1;
-    } else if (id === "Member3" && value) {
-      deckCnt += 1;
-      member3Cnt += 1;
-    } else if(id === 'characterArea' && value) {
-      areaRankCnt += 1;
-    } else if(id === 'characterRank' && value) {
-      areaRankCnt += 1;
-    } else if(id === 'teamArea' && value) {
-      areaRankCnt += 1;
-    } else if(id === 'attrArea' && value) {
-      areaRankCnt += 1;
+    if (id === 'characterArea') {
+      characterArea.push({ id: key, value: value });
+      if (!value)
+        break;
+    } else if (id === 'characterRank') {
+      characterRank.push({ id: key, value: value });
+      if (!value)
+        break;
+    } else if (id === 'teamArea') {
+      teamArea.push({ id: key, value: value });
+      if (!value)
+        break;
+    } else if (id === 'attrArea') {
+      attrArea.push({ id: key, value: value });
+      if (!value)
+        break;
+    } else if (id === 'Reader') {
+      id += key.split('_')[1];
+      reader.push({ id: key, value: value });
+    } else if (id === 'SubReader') {
+      id += key.split('_')[1];
+      subReader.push({ id: key, value: value });
+    } else if (id === 'Member1') {
+      id += key.split('_')[1];
+      member1.push({ id: key, value: value });
+    } else if (id === 'Member2') {
+      id += key.split('_')[1];
+      member2.push({ id: key, value: value });
+    } else if (id === 'Member3') {
+      id += key.split('_')[1];
+      member3.push({ id: key, value: value });
     }
   }
-
-  if (areaRankCnt < 63) {
-    alert('에어리어와 랭크 정보를 모두 입력해주세요.');
-  } else if (deckCnt === 0) {
-    alert('덱 정보를 입력해주세요.');
-  } else if (readerCnt > 0 && readerCnt < 8) {
-    alert('Reader 덱 정보를 전부 입력해주세요.');
-  } else if (subReaderCnt > 0 && subReaderCnt < 8) {
-    alert('SubReader 덱 정보를 전부 입력해주세요.');
-  } else if (member1Cnt > 0 && member1Cnt < 8) {
-    alert('Member1 덱 정보를 전부 입력해주세요.');
-  } else if (member2Cnt > 0 && member2Cnt < 8) {
-    alert('Member2 덱 정보를 전부 입력해주세요.');
-  } else if (member3Cnt > 0 && member3Cnt < 8) {
-    alert('Member3 덱 정보를 전부 입력해주세요.');
-  }
   
-  if (readerCnt === 8) {
-    console.log(rankBonus(formData.get('Reader_performance'), formData.get('Reader_technique'), formData.get('Reader_stamina'), formData.get('characterRank_1')));
-    console.log(areaBonus(formData.get('Reader_performance'), formData.get('Reader_technique'), formData.get('Reader_stamina'), formData.get('characterArea_1'),
-    formData.get('teamArea_light_sound'), formData.get('attrArea_cool')));
-  } else if (subReaderCnt === 8) {
-    
-  } else if (member1Cnt === 8) {
-    
-  } else if (member2Cnt === 8) {
-    
-  } else if (member3Cnt === 8) {
-    
-  }
+  if (!submitValidation(characterArea, 26, '캐릭터 에어리어 정보를 모두 입력해주세요.'))
+    return false;
+  else if (!submitValidation(characterRank, 26, '캐릭터 랭크 정보를 모두 입력해주세요.'))
+    return false;
+  else if (!submitValidation(teamArea, 6, '팀 에어리어 정보를 모두 입력해주세요.'))
+    return false;
+  else if (!submitValidation(attrArea, 5, '속성 에어리어 정보를 모두 입력해주세요.'))
+    return false;
+  // else if (!submitValidation(reader, 8, 'Reader 정보를 모두 입력해주세요.'))
+  //   return false;
+  // else if (!submitValidation(subReader, 8, 'SubReader 정보를 모두 입력해주세요.'))
+  //   return false;
+  // else if (!submitValidation(member1, 8, 'Member1 정보를 모두 입력해주세요.'))
+  //   return false;
+  // else if (!submitValidation(member2, 8, 'Member2 정보를 모두 입력해주세요.'))
+  //   return false;
+  // else if (!submitValidation(member3, 8, 'Member3 정보를 모두 입력해주세요.'))
+  //   return false;
 }
 
 function App() {

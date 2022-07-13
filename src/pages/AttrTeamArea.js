@@ -37,9 +37,9 @@ export default function AttrTeamArea(props) {
   const type = switchiId(props.type);
 
   const textField = attrTeamAreaList.map((c) =>
-    <MakeTextField key={type + c.seq} id={type + c.seq} label={c.unitName} defaultValue='' type={'number'} sx={{ width: 256, margin: 1 }} />
+    <MakeTextField key={type + c.unit} id={type + c.unit} label={c.unitName} defaultValue='' type={'number'} sx={{ width: 256, margin: 1 }} />
   );
-  
+
   return (
     <MakeCard
       sx={{

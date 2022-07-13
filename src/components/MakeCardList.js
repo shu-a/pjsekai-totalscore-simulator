@@ -17,13 +17,21 @@ export default function MakeCardList(props) {
   }
   const HandlerSelectAffiliation = (event) => {
     setAffiliation(event.target.value);
+    enableCharacter(event.target.value);
+  }
+  const HandlerSelectTeam = (event) => {
+    setTeam(event.target.value);
+  }
+  const HandlerSelectRarities = (event) => {
+    setRarities(event.target.value);
+  }
+  const HandlerSelectCharacter = (event) => {
+    setCharacter(event.target.value);
   }
 
   const _characterList = [];
   const [__characterList, __setCharacterList] = useState([]);
-  const HandlerSelectTeam = (event) => {
-    const value = event.target.value;
-    setTeam(value);
+  const enableCharacter = (value) => {
     setCharacter('');
     if (value)
       setDisabled(false);
@@ -32,16 +40,10 @@ export default function MakeCardList(props) {
     for (let i = 0; i < props.characterList.length; i++) {
       let character = props.characterList[i]
       let characterName = character.firstName ? character.firstName + ' ' + character.givenName : character.givenName;
-      if (value === ('team_' + character.unit))
-        _characterList.push(<MenuItem key={'character_' + character.id} value={'character_' + character.id}>{characterName}</MenuItem>);
+      if (value === ('affiliation_' + character.unit))
+        _characterList.push(<MenuItem key={character.id} value={'character_' + character.id}>{characterName}</MenuItem>);
       __setCharacterList(_characterList);
     }
-  }
-  const HandlerSelectRarities = (event) => {
-    setRarities(event.target.value);
-  }
-  const HandlerSelectCharacter = (event) => {
-    setCharacter(event.target.value);
   }
 
   const _affiliationList = [];

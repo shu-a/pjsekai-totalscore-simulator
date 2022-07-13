@@ -8,8 +8,15 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import { FormControl } from '@mui/material';
 
-const rankScore = (pVal, tVal, sVal, rVal) => {
-  return Math.floor(Number(pVal) * Number(rVal) / 1000) + Math.floor(Number(tVal) * Number(rVal) / 1000) + Math.floor(Number(sVal) * Number(rVal) / 1000);
+const rankBonus = (pVal, tVal, sVal, rankVal) => {
+  return Math.floor(Number(pVal) * Number(rankVal) / 1000) + Math.floor(Number(tVal) * Number(rankVal) / 1000) + Math.floor(Number(sVal) * Number(rankVal) / 1000);
+}
+const areaBonus = (pVal, tVal, sVal, charVal, teamVal, areaVal) => {
+  return (
+    Math.floor(Number(pVal) * (Number(charVal) + Number(teamVal) + Number(areaVal)) / 100) + 
+    Math.floor(Number(tVal) * (Number(charVal) + Number(teamVal) + Number(areaVal)) / 100) + 
+    Math.floor(Number(sVal) * (Number(charVal) + Number(teamVal) + Number(areaVal)) / 100)
+  );
 }
 
 function handlerSubmit(event) {
@@ -68,7 +75,9 @@ function handlerSubmit(event) {
   }
   
   if (readerCnt === 8) {
-    console.log(rankScore(formData.get('Reader_performance'), formData.get('Reader_technique'), formData.get('Reader_stamina'), formData.get('characterRank_1')));
+    console.log(rankBonus(formData.get('Reader_performance'), formData.get('Reader_technique'), formData.get('Reader_stamina'), formData.get('characterRank_1')));
+    console.log(areaBonus(formData.get('Reader_performance'), formData.get('Reader_technique'), formData.get('Reader_stamina'), formData.get('characterArea_1'),
+    formData.get('teamArea_light_sound'), formData.get('attrArea_cool')));
   } else if (subReaderCnt === 8) {
     
   } else if (member1Cnt === 8) {

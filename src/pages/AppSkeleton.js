@@ -14,9 +14,10 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import App from '../App';
+import { Link } from 'react-router-dom';
 
 const drawerWidth = 240;
-const navItems = ['Home', 'About', 'Contact'];
+const navItems = ['Home', 'Instruction', 'Contact'];
 
 export default function AppSkeleton(props) {
   const { window } = props;
@@ -35,7 +36,7 @@ export default function AppSkeleton(props) {
       <List>
         {navItems.map((item) => (
           <ListItem key={item} disablePadding>
-            <ListItemButton sx={{ textAlign: 'center' }}>
+            <ListItemButton sx={{ textAlign: 'center' }} component={Link} to={item === 'Home' ? '/' : item}>
               <ListItemText primary={item} />
             </ListItemButton>
           </ListItem>
@@ -68,7 +69,7 @@ export default function AppSkeleton(props) {
           </Typography>
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
             {navItems.map((item) => (
-              <Button key={item} sx={{ color: '#fff' }}>
+              <Button key={item} sx={{ color: '#fff' }} component={Link} to={item === 'Home' ? '/' : item}>
                 {item}
               </Button>
             ))}

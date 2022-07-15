@@ -16,6 +16,7 @@ export default function CardContents(props) {
       setHelperText(defaultHelperText);
     }
   }
+  
   const [attr, setAttr] = useState('');
   const [affiliation, setAffiliation] = useState('');
   const [team, setTeam] = useState('');

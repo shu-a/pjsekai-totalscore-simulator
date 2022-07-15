@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { flexbox } from '@mui/system';
-import { getTeamList, getAttrList } from '../../apis/apiClient'
-import MakeCard from '../../components/MakeCard';
-import MakeTextField from '../../components/MakeTextField';
+import { getTeamList, getAttrList } from '../../../apis/apiClient'
+import MakeCard from '../../../components/MakeCard';
+import MakeTextField from '../../../components/MakeTextField';
 
 function switchiId(props) {
   switch (props) {

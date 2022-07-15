@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import CardSet from './CardSet';
-import CharacterArea from '../Area/CharacterArea';
-import AttrTeamArea from '../Area/AttrTeamArea';
+import CharacterArea from './Area/CharacterArea';
+import AttrTeamArea from './Area/AttrTeamArea';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import { FormControl } from '@mui/material';

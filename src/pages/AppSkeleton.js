@@ -48,7 +48,7 @@ export default function AppSkeleton(props) {
   const container = window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <Box sx={{ display: 'flex', backgroundColor: '#e4f2ea' }}>
+    <Box sx={{ display: 'flex', backgroundColor: '#ffffff' }}>
       <AppBar component="nav">
         <Toolbar sx={{ backgroundColor: '#4ca692' }}>
           <IconButton

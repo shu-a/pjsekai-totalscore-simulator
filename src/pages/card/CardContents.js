@@ -58,10 +58,11 @@ export default function CardContents(props) {
   const [charactList, setCharacterList] = useState([]);
   useEffect(() => {
     changeDisabled(team);
-    if (team === 'piapro')
-      setSubUnit('');
-    else
-      setSubUnit(team);
+    // if (team === 'piapro')
+    //   setSubUnit('');
+    // else
+    //   setSubUnit(team);
+    setSubUnit(team);
     setCharacterList(props.characterList.map((c) => {
       if (team === (c.unit))
         return <MenuItem key={c.id} value={c.id}>{c.fullName}</MenuItem>;
@@ -76,12 +77,14 @@ export default function CardContents(props) {
   const attrList = props.attrList.map((c) =>
     <MenuItem key={c.unit} value={c.unit}>{c.unitName}</MenuItem>
   );
-  const subUnitList = props.teamList.map((c) => {
-    if (Number(c.seq) !== 1)
-      return <MenuItem key={c.unit} value={c.unit}>{c.unitName}</MenuItem>
-    else
-      return false
-  });
+
+  // 에어리어 계산 조건 문제로 사용 중지
+  // const subUnitList = props.teamList.map((c) => {
+  //   if (Number(c.seq) !== 1)
+  //     return <MenuItem key={c.unit} value={c.unit}>{c.unitName}</MenuItem>
+  //   else
+  //     return false
+  // });
   const raritiesList = props.raritiesList.map((c) =>
     <MenuItem key={c.seq} value={c.seq} >{c.cardRarityType.split('_')[1]}</MenuItem>
   );

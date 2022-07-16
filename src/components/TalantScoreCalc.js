@@ -19,10 +19,10 @@ export const validation = (array, maxIdx, message) => {
   }
 }
 
+
+
 // 테스트중
 export const talantScoreCalc = (props) => {
-  console.log(props);
-  
   const readerSubUnit = props.reader.Reader_subUnit;
   const subReaderSubUnit = props.subReader.SubReader_subUnit;
   const member1SubUnit = props.member1.Member1_subUnit;
@@ -39,19 +39,15 @@ export const talantScoreCalc = (props) => {
   const member2Attr = props.member2.Member2_attr;
   const member3Attr = props.member3.Member3_attr;
   let teamBonus = 'none';
-  if (readerTeam === subReaderTeam && readerTeam === member1Team &&
-    readerTeam === member2Team && readerTeam === member3Team) {
-      if (readerTeam === 'piapro')
-        teamBonus = 'piapro';
-      else
-        teamBonus = 'unit';
+  if (readerTeam === subReaderTeam && readerTeam === member1Team && readerTeam === member2Team && readerTeam === member3Team) {
+    teamBonus = 'piapro'
   } else if (readerSubUnit === subReaderSubUnit && readerSubUnit === member1SubUnit && readerSubUnit === member2SubUnit && readerSubUnit === member3SubUnit) {
     teamBonus = 'unit';
   }
   let attrBonus = 'N';
   if (readerAttr === subReaderAttr && readerAttr === member1Attr && readerAttr === member2Attr && readerAttr === member3Attr)
     attrBonus = 'Y';
-    
+
   return (
     memberBonus(props.reader, props.characterArea, props.characterRank, props.teamArea, props.attrArea, teamBonus, attrBonus) +
     memberBonus(props.subReader, props.characterArea, props.characterRank, props.teamArea, props.attrArea, teamBonus, attrBonus) +
@@ -62,6 +58,7 @@ export const talantScoreCalc = (props) => {
 }
 
 const memberBonus = (obj, characterArea, characterRank, teamArea, attrArea, teamBonus, attrBonus) => {
+  console.log(obj);
   let performance = 0;
   let technique = 0;
   let stamina = 0;
@@ -71,6 +68,7 @@ const memberBonus = (obj, characterArea, characterRank, teamArea, attrArea, team
   let teamAreaBonus = 0;
   let attrAreaBonus = 0;
   let areaBonus = 0;
+  let vsingerUnit = 'N';
   for (let key in obj) {
     let cardId = key.substring(key.indexOf('_') + 1);
     let cardValue = obj[key];
@@ -99,6 +97,8 @@ const memberBonus = (obj, characterArea, characterRank, teamArea, attrArea, team
       }
     }
     if (cardId === 'subUnit' || cardId === 'team') {
+      if (cardId === 'subUnit')
+        vsingerUnit = cardValue === 'piapro' ? 'Y' : 'N';
       for (let subKey in teamArea) {
         let subId = subKey.substring(subKey.indexOf('_') + 1)
         let subValue = teamArea[subKey];
@@ -111,7 +111,7 @@ const memberBonus = (obj, characterArea, characterRank, teamArea, attrArea, team
             break;
           }
         }
-      }      
+      }
     }
     if (cardId === 'attr') {
       for (let subKey in attrArea) {
@@ -124,20 +124,20 @@ const memberBonus = (obj, characterArea, characterRank, teamArea, attrArea, team
       }
     }
   }
+  // 팀 보너스 계산
   if (teamBonus === 'piapro') {
-    if (subUnitAreaBonus > teamAreaBonus)
-      teamAreaBonus = subUnitAreaBonus;
+    if (vsingerUnit === 'Y')
+      teamAreaBonus += teamAreaBonus;
+    else
+      teamAreaBonus = teamAreaBonus > subUnitAreaBonus ? teamAreaBonus : subUnitAreaBonus
   } else if (teamBonus === 'unit')
-    subUnitAreaBonus += subUnitAreaBonus;
+      subUnitAreaBonus += subUnitAreaBonus;
   else
-    if (subUnitAreaBonus > teamAreaBonus)
-      teamAreaBonus = subUnitAreaBonus;
+    teamAreaBonus = teamAreaBonus > subUnitAreaBonus ? teamAreaBonus : subUnitAreaBonus
+  // 속성 보너스 계산
   if (attrBonus === 'Y')
     attrAreaBonus += attrAreaBonus;
 
-  console.log('===teamBonus', teamBonus)
-  console.log('===attrBonus', attrBonus)
-  console.log('area', characterAreaBonus, 'rank', characterRankBonus, 'team', teamAreaBonus, 'attr', attrAreaBonus)
   areaBonus = characterAreaBonus + teamAreaBonus + attrAreaBonus;
   const value = {};
   value.performance = performance;
@@ -145,29 +145,32 @@ const memberBonus = (obj, characterArea, characterRank, teamArea, attrArea, team
   value.stamina = stamina;
   value.rankBonus = characterRankBonus;
   value.areaBonus = areaBonus;
-  console.log(performance, technique, stamina)
   return (
     getBonus(value, 'rank') + getBonus(value, 'area') + performance + technique + stamina
   );
 }
+
 const getPerformanceBonus = (props, type) => {
   const bonus = Math.floor(Number(props.performance) * Number(type === 'rank' ? props.rankBonus / 1000 : props.areaBonus / 100));
   console.log('type', type);
   console.log('performance', bonus);
   return bonus;
 }
+
 const getTechniqueBonus = (props, type) => {
   const bonus = Math.floor(Number(props.technique) * Number(type === 'rank' ? props.rankBonus / 1000 : props.areaBonus / 100));
   console.log('type', type);
   console.log('technique', bonus);
   return bonus;
 }
+
 const getStaminaBonus = (props, type) => {
   const bonus = Math.floor(Number(props.stamina) * Number(type === 'rank' ? props.rankBonus / 1000 : props.areaBonus / 100));
   console.log('type', type);
   console.log('stamina', bonus);
   return bonus;
 }
+
 const getBonus = (props, type) => {
   const bonus = getPerformanceBonus(props, type) + getTechniqueBonus(props, type) + getStaminaBonus(props, type);
   console.log('===bonus' + type, bonus)

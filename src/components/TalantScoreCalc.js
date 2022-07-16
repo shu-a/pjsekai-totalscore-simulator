@@ -22,12 +22,42 @@ export const validation = (array, maxIdx, message) => {
 // 테스트중
 export const talantScoreCalc = (props) => {
   console.log(props);
+  
+  const readerSubUnit = props.reader.Reader_subUnit;
+  const subReaderSubUnit = props.subReader.SubReader_subUnit;
+  const member1SubUnit = props.member1.Member1_subUnit;
+  const member2SubUnit = props.member2.Member2_subUnit;
+  const member3SubUnit = props.member3.Member3_subUnit;
+  const readerTeam = props.reader.Reader_team;
+  const subReaderTeam = props.subReader.SubReader_team;
+  const member1Team = props.member1.Member1_team;
+  const member2Team = props.member2.Member2_team;
+  const member3Team = props.member3.Member3_team;
+  const readerAttr = props.reader.Reader_attr;
+  const subReaderAttr = props.subReader.SubReader_attr;
+  const member1Attr = props.member1.Member1_attr;
+  const member2Attr = props.member2.Member2_attr;
+  const member3Attr = props.member3.Member3_attr;
+  let teamBonus = 'none';
+  if (readerTeam === subReaderTeam && readerTeam === member1Team &&
+    readerTeam === member2Team && readerTeam === member3Team) {
+      if (readerTeam === 'piapro')
+        teamBonus = 'piapro';
+      else
+        teamBonus = 'unit';
+  } else if (readerSubUnit === subReaderSubUnit && readerSubUnit === member1SubUnit && readerSubUnit === member2SubUnit && readerSubUnit === member3SubUnit) {
+    teamBonus = 'unit';
+  }
+  let attrBonus = 'N';
+  if (readerAttr === subReaderAttr && readerAttr === member1Attr && readerAttr === member2Attr && readerAttr === member3Attr)
+    attrBonus = 'Y';
+    
   return (
-    memberBonus(props.reader, props.characterArea, props.characterRank, props.teamArea, props.attrArea, props.teamBonus, props.attrBonus) +
-    memberBonus(props.subReader, props.characterArea, props.characterRank, props.teamArea, props.attrArea, props.teamBonus, props.attrBonus) +
-    memberBonus(props.member1, props.characterArea, props.characterRank, props.teamArea, props.attrArea, props.teamBonus, props.attrBonus) +
-    memberBonus(props.member2, props.characterArea, props.characterRank, props.teamArea, props.attrArea, props.teamBonus, props.attrBonus) +
-    memberBonus(props.member3, props.characterArea, props.characterRank, props.teamArea, props.attrArea, props.teamBonus, props.attrBonus) + Number(props.bonus)
+    memberBonus(props.reader, props.characterArea, props.characterRank, props.teamArea, props.attrArea, teamBonus, attrBonus) +
+    memberBonus(props.subReader, props.characterArea, props.characterRank, props.teamArea, props.attrArea, teamBonus, attrBonus) +
+    memberBonus(props.member1, props.characterArea, props.characterRank, props.teamArea, props.attrArea, teamBonus, attrBonus) +
+    memberBonus(props.member2, props.characterArea, props.characterRank, props.teamArea, props.attrArea, teamBonus, attrBonus) +
+    memberBonus(props.member3, props.characterArea, props.characterRank, props.teamArea, props.attrArea, teamBonus, attrBonus) + Number(props.bonus)
   );
 }
 
@@ -94,19 +124,20 @@ const memberBonus = (obj, characterArea, characterRank, teamArea, attrArea, team
       }
     }
   }
-  if (teamBonus === 'piapro')
-    teamAreaBonus = teamAreaBonus * 2;
-  else if (teamBonus === 'unit')
+  if (teamBonus === 'piapro') {
+    if (subUnitAreaBonus > teamAreaBonus)
+      teamAreaBonus = subUnitAreaBonus;
+  } else if (teamBonus === 'unit')
     subUnitAreaBonus += subUnitAreaBonus;
   else
-    if (teamAreaBonus > teamAreaBonus)
+    if (subUnitAreaBonus > teamAreaBonus)
       teamAreaBonus = subUnitAreaBonus;
   if (attrBonus === 'Y')
     attrAreaBonus += attrAreaBonus;
 
   console.log('===teamBonus', teamBonus)
   console.log('===attrBonus', attrBonus)
-  console.log('character', characterAreaBonus, 'team', teamAreaBonus, 'attr', attrAreaBonus)
+  console.log('area', characterAreaBonus, 'rank', characterRankBonus, 'team', teamAreaBonus, 'attr', attrAreaBonus)
   areaBonus = characterAreaBonus + teamAreaBonus + attrAreaBonus;
   const value = {};
   value.performance = performance;
@@ -142,17 +173,3 @@ const getBonus = (props, type) => {
   console.log('===bonus' + type, bonus)
   return bonus;
 }
-// const getRankBonus = (props) => {
-//   return (
-//     Math.floor(Number(props.performance) * Number(props.rankBonus) / 1000) +
-//     Math.floor(Number(props.technique) * Number(props.rankBonus) / 1000) +
-//     Math.floor(Number(props.stamina) * Number(props.rankBonus) / 1000)
-//   );
-// }
-// const getAreaBonus = (props) => {
-//   return (
-//     Math.floor(Number(props.performance) * Number(props.areaBonus) / 100) +
-//     Math.floor(Number(props.technique) * Number(props.areaBonus) / 100) +
-//     Math.floor(Number(props.stamina) * Number(props.areaBonus) / 100)
-//   );
-// }

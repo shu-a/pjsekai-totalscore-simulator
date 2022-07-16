@@ -64,36 +64,6 @@ const handlerSubmit = (event) => {
   cardData.member2 = member2;
   cardData.member3 = member3;
   cardData.bonus = 100;
-  const readerSubUnit = reader.Reader_subUnit;
-  const subReaderSubUnit = subReader.SubReader_subUnit;
-  const member1SubUnit = member1.Member1_subUnit;
-  const member2SubUnit = member2.Member2_subUnit;
-  const member3SubUnit = member3.Member3_subUnit;
-  const readerTeam = reader.Reader_team;
-  const subReaderTeam = subReader.SubReader_team;
-  const member1Team = member1.Member1_team;
-  const member2Team = member2.Member2_team;
-  const member3Team = member3.Member3_team;
-  const readerAttr = reader.Reader_attr;
-  const subReaderAttr = subReader.SubReader_attr;
-  const member1Attr = member1.Member1_attr;
-  const member2Attr = member2.Member2_attr;
-  const member3Attr = member3.Member3_attr;
-  let teamBonus = 'none';
-  if (readerTeam === subReaderTeam && readerTeam === member1Team &&
-    readerTeam === member2Team && readerTeam === member3Team) {
-      if (readerTeam === 'piapro')
-        teamBonus = 'piapro';
-      else
-        teamBonus = 'unit';
-  } else if (readerSubUnit === subReaderSubUnit && readerSubUnit === member1SubUnit && readerSubUnit === member2SubUnit && readerSubUnit === member3SubUnit) {
-    teamBonus = 'unit';
-  }
-  let attrBonus = 'N';
-  if (readerAttr === subReaderAttr && readerAttr === member1Attr && readerAttr === member2Attr && readerAttr === member3Attr)
-    attrBonus = 'Y';
-  cardData.teamBonus = teamBonus;
-  cardData.attrBonus = attrBonus;
   
   console.log('talant: ', talantScoreCalc(cardData));
 }

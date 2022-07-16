@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import TextField from '@mui/material/TextField';
 
 export default function MakeTextField(props) {
@@ -8,6 +8,7 @@ export default function MakeTextField(props) {
   defaultValue
   type
   sx
+  inputProps
   */
   const textField = [];
   textField.push(
@@ -15,11 +16,13 @@ export default function MakeTextField(props) {
       id={props.id}
       key={props.id}
       label={props.label}
-      defaultValue=""
+      value = {props.value}
+      onChange={props.handler}
       variant="standard"
       type={props.type}
       sx={props.sx}
       name={props.id}
+      inputProps={props.inputProps}
     />
   );
   return (

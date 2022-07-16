@@ -64,8 +64,8 @@ export default function CharacterArea(props) {
         marginTop: 3,
         display: flexbox
       }}
-      id="teamCard"
-      key="teamCard"
+      id="subUnitCard"
+      key="subUnitCard"
       title={switchTitle(props.type)}
       content={textField}
     />

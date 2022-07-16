@@ -3,9 +3,9 @@ import CardContents from './CardContents';
 import { getTeamList, getCharacterList, getRaritiesList, getAttrList } from '../../apis/apiClient'
 
 export default function Card() {
-  const [teamList, setTeamList] = useState([]);
+  const [subUnitList, setSubUnitList] = useState([]);
   useEffect(() => {
-    getTeamList().then((resData) => setTeamList(resData));
+    getTeamList().then((resData) => setSubUnitList(resData));
   }, []);
   const [attrList, setAttrList] = useState([]);
   useEffect(() => {
@@ -29,7 +29,7 @@ export default function Card() {
   ];
   
   const card = cardInfo.map((c) =>
-    <CardContents key={c.idx} teamList={teamList} attrList={attrList} characterList={characterList} raritiesList={raritiesList}
+    <CardContents key={c.idx} subUnitList={subUnitList} attrList={attrList} characterList={characterList} raritiesList={raritiesList}
     title={c.title} border={c.border} color={c.color} />
   );
 

@@ -55,9 +55,7 @@ export default function AttrTeamArea(props) {
       value = formValue[id];
     return <MakeTextField key={type + c.unit} id={type + c.unit} label={c.unitName} value={value} handler={handleChangeText}
       type={"number"} sx={{ width: 256, margin: 1 }} inputProps={{ step: 0.1 }} />
-
-  }
-  );
+  });
 
   return (
     <MakeCard

@@ -70,13 +70,13 @@ export default function CardContents(props) {
     }));
   }, [team, props.characterList]);
 
-  const teamList = props.subUnitList.map((c) =>
+  const teamList = props.teamList.map((c) =>
     <MenuItem key={c.seq} value={c.unit} unit={c.unit}>{c.unitName}</MenuItem>
   );
   const attrList = props.attrList.map((c) =>
     <MenuItem key={c.unit} value={c.unit}>{c.unitName}</MenuItem>
   );
-  const subUnitList = props.subUnitList.map((c) => {
+  const subUnitList = props.teamList.map((c) => {
     if (Number(c.seq) !== 1)
       return <MenuItem key={c.unit} value={c.unit}>{c.unitName}</MenuItem>
     else
@@ -87,12 +87,12 @@ export default function CardContents(props) {
   );
   
   const makeFormSelect = [];
-  const defaultHelperText = '소속을 선택하세요';
+  const defaultHelperText = '팀을 선택하세요';
   const [helperText, setHelperText] = useState(defaultHelperText);
   const makeFormSelectContents = [
     { sx: { m: 1, width: 256 }, id: 'attr', label: '속성', value: attr, handler: handleSelectAttr, selectList: attrList },
     { sx: { m: 1, width: 120 }, id: 'team', label: '팀', value: team, handler: handleSelectTeam, selectList: teamList },
-    { sx: { m: 1, width: 120 }, id: 'subUnit', label: '서브유닛', value: subUnit, handler: handleSelectSubUnit, selectList: subUnitList, disabled: disabled, helperText: helperText },
+    { sx: { m: 1, width: 120 }, id: 'subUnit', label: '서브유닛', value: subUnit, handler: handleSelectSubUnit, selectList: teamList, disabled: disabled, helperText: helperText },
     { sx: { m: 1, width: 120 }, id: 'rarities', label: '성급', value: rarities, handler: handleSelectRarities, selectList: raritiesList },
     { sx: { m: 1, width: 120 }, id: 'character', label: '캐릭터명', value: character, handler: handleSelectCharacter, selectList: charactList, disabled: disabled, helperText: helperText }
   ];

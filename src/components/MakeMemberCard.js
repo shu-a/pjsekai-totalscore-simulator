@@ -12,9 +12,11 @@ export default function MakeMemberCard(props) {
       <MakeCard
         sx={{
           width: 298,
-          paddingBottom: 2,
-          margin: 0.5,
-          marginTop: 1,
+          maxWidth: 310,
+          pb: 2,
+          ml: 0.5,
+          mr: 0.5,
+          mb: 0.5,
           border: props.border,
           borderColor: props.color
         }}

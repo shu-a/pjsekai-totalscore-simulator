@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { flexbox } from '@mui/system';
-import { getTeamList, getAttrList } from '../../../apis/apiClient'
-import MakeCard from '../../../components/MakeCard';
-import MakeTextField from '../../../components/MakeTextField';
+import { getTeamList, getAttrList } from '../../apis/apiClient'
+import MakeCard from '../../components/MakeCard';
+import MakeTextField from '../../components/MakeTextField';
 import localforage from 'localforage';
 
 function switchiId(props) {
@@ -21,7 +20,7 @@ function switchTitle(props) {
     case 'team':
       return '팀 에어리어';
     case 'attr':
-      return '속성 에어리어';
+      return '속성 에어리어 / 칭호 보너스';
     default:
       return '';
   }
@@ -56,16 +55,14 @@ export default function AttrTeamArea(props) {
     return <MakeTextField key={type + c.unit} id={type + c.unit} label={c.unitName} value={value} handler={handleChangeText}
       type={"number"} sx={{ width: 256, margin: 1 }} inputProps={{ step: 0.1 }} />
   });
-
+  if (props.type === 'attr')
+    textField.push(<MakeTextField key="titleBonus" id="titleBonus" label="칭호 보너스" value={formValue['titleBonus'] ? formValue['titleBonus'] : ''}
+    handler={handleChangeText} type={"number"} sx={{ width: 256, margin: 1 }} inputProps={{ step: 0.1 }} />);
   return (
     <MakeCard
       sx={{
         minWidth: 300,
-        maxWidth: 765,
-        paddingBottom: 2,
-        margin: 0.5,
-        marginTop: 1,
-        display: flexbox
+        pb: 2,
       }}
       id="teamCard"
       key="teamCard"

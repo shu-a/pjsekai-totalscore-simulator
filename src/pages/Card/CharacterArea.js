@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { flexbox } from '@mui/system';
-import { getCharacterList } from '../../../apis/apiClient'
-import MakeCard from '../../../components/MakeCard';
-import MakeTextField from '../../../components/MakeTextField';
+import { getCharacterList } from '../../apis/apiClient'
+import MakeCard from '../../components/MakeCard';
+import MakeTextField from '../../components/MakeTextField';
 import localforage from 'localforage';
 
 function switchiId(props) {
@@ -58,11 +57,7 @@ export default function CharacterArea(props) {
     <MakeCard
       sx={{
         minWidth: 300,
-        maxWidth: 765,
-        paddingBottom: 2,
-        margin: 0.5,
-        marginTop: 3,
-        display: flexbox
+        pb: 2
       }}
       id="subUnitCard"
       key="subUnitCard"

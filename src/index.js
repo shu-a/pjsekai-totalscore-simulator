@@ -4,18 +4,15 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router } from 'react-router-dom';
 import App from './App';
-// import AppSkeleton from './pages/AppSkeleton';
-const AppSkeleton = lazy(() => import('./pages/AppSkeleton'));
+const AppSkeleton = lazy(() => import('./AppSkeleton'));
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <Router>
-      <Suspense fallback={<AppSkeleton><div>Loading...</div></AppSkeleton>}>
-        <AppSkeleton>
-          <App />
-        </AppSkeleton>
-      </Suspense>      
+      <Suspense fallback={<AppSkeleton />}>
+        <AppSkeleton content={<App />}/>        
+      </Suspense>
     </Router>
   </React.StrictMode>
 );

@@ -1,103 +1,85 @@
-import React, { Fragment } from 'react';
+import React, { useState } from 'react';
 import CardSet from './CardSet';
-import CharacterArea from './Area/CharacterArea';
-import AttrTeamArea from './Area/AttrTeamArea';
+import CharacterArea from './CharacterArea';
+import AttrTeamArea from './AttrTeamArea';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import { FormControl } from '@mui/material';
-import { talantScoreCalc } from '../../components/TalantScoreCalc'
-// import localforage from 'localforage';
+import { FormControl, Grid } from '@mui/material';
+import SekaiViewerLink from '../SekaiViewerLink';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import { talantScore } from '../../components/TalantScoreCalc'
 
-const handlerSubmit = (event) => {
-  event.preventDefault();
-  const formData = new FormData(event.currentTarget);
-  let characterArea = {};
-  let characterRank = {};
-  let teamArea = {};
-  let attrArea = {};
-  let reader = {};
-  let subReader = {};
-  let member1 = {};
-  let member2 = {};
-  let member3 = {};
-  for (let key of formData.keys()) {
-    let id = key.split('_')[0];
-    let value = formData.get(key);
-    if (id === 'characterArea') {
-      characterArea = {...characterArea, [key]: value}
-      // if (!value)
-      //   break;
-    } else if (id === 'characterRank') {
-      console.log(id)
-      characterRank = {...characterRank, [key]: value}
-      // if (!value)
-      //   break;
-    } else if (id === 'teamArea') {
-      teamArea = {...teamArea, [key]: value}
-      // if (!value)
-      //   break;
-    } else if (id === 'attrArea') {
-      attrArea = {...attrArea, [key]: value}
-      // if (!value)
-      //   break;
-    } else if (id === 'Reader') {
-      reader = {...reader, [key]: value}
-    } else if (id === 'SubReader') {
-      subReader = {...subReader, [key]: value}
-    } else if (id === 'Member1') {
-      member1 = {...member1, [key]: value}
-    } else if (id === 'Member2') {
-      member2 = {...member2, [key]: value}
-    } else if (id === 'Member3') {
-      member3 = {...member3, [key]: value}
-    }
-     
-  }
-  const cardData = {}
-  cardData.characterArea = characterArea;
-  cardData.characterRank = characterRank;
-  cardData.teamArea = teamArea;
-  cardData.attrArea = attrArea;
-  cardData.reader = reader;
-  cardData.subReader = subReader;
-  cardData.member1 = member1;
-  cardData.member2 = member2;
-  cardData.member3 = member3;
-  cardData.bonus = 100;
-  
-  console.log('talant: ', talantScoreCalc(cardData));
+const gridStyle = {
+  mt: 0.5,
+  mb: 0.5
 }
 
 export default function Card() {
-  const content =
-    <Box component='form' onSubmit={handlerSubmit}>
-      <FormControl component='fieldset' variant='standard'>
-        <Box sx={{
-          display: 'flex'
-        }}>
-          <CharacterArea type='area' />
-          <CharacterArea type='rank' />
-        </Box>
-        <Box sx={{
-          display: 'flex'
-        }}>
-          <AttrTeamArea type='team' />
-          <AttrTeamArea type='attr' />
-        </Box>
-        <Box sx={{
-          display: 'flex',
-          flexWrap: 'wrap'
-        }}>
-          <CardSet />
-        </Box>
-      </FormControl>
-      <div>
-        <Button type='submit'>클릭</Button>
-      </div>
-    </Box>;
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    setOpen(true);
+    setValue(talantScore(event));
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState('');
   return (
-    <Fragment>
-      {content}
-    </Fragment>
+    <Box component="form" onSubmit={handleSubmit} id="talantForm">
+      <FormControl component="fieldset" variant="standard">
+        <Grid container sx={{ maxWidth: 1550 }}>
+          <Grid container spacing={0.5} sx={gridStyle}>
+            <Grid item xs>
+              <SekaiViewerLink />
+            </Grid>
+          </Grid>
+          <Grid container spacing={0.5} sx={gridStyle}>
+            <Grid item xs>
+              <CharacterArea type="area" />
+            </Grid>
+            <Grid item xs>
+              <CharacterArea type="rank" />
+            </Grid>
+          </Grid>
+          <Grid container spacing={0.5} sx={gridStyle}>
+            <Grid item xs>
+              <AttrTeamArea type="team" />
+            </Grid>
+            <Grid item xs>
+              <AttrTeamArea type="attr" />
+            </Grid>
+          </Grid>
+          <Grid container spacing={0.05} sx={gridStyle}>
+            <CardSet />
+          </Grid>
+        </Grid>        
+        <Dialog
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogTitle id="alert-dialog-title">
+            {"종합력 계산 결과"}
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+              {value}
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            {/* <Button onClick={handleClose}>Disagree</Button> */}
+            <Button onClick={handleClose} autoFocus>
+              확인
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </FormControl>
+    </Box>
   );
 }

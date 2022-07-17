@@ -19,20 +19,75 @@ export const validation = (array, maxIdx, message) => {
   }
 }
 
+export const talantScore = (event) => {
+  const formData = new FormData(event.currentTarget);
+  let characterArea = {};
+  let characterRank = {};
+  let teamArea = {};
+  let attrArea = {};
+  let reader = {};
+  let subReader = {};
+  let member1 = {};
+  let member2 = {};
+  let member3 = {};
+  for (let key of formData.keys()) {
+    let id = key.split('_')[0];
+    let value = formData.get(key);
+    if (id === 'characterArea') {
+      characterArea = { ...characterArea, [key]: value }
+      // if (!value)
+      //   break;
+    } else if (id === 'characterRank') {
+      characterRank = { ...characterRank, [key]: value }
+      // if (!value)
+      //   break;
+    } else if (id === 'teamArea') {
+      teamArea = { ...teamArea, [key]: value }
+      // if (!value)
+      //   break;
+    } else if (id === 'attrArea') {
+      attrArea = { ...attrArea, [key]: value }
+      // if (!value)
+      //   break;
+    } else if (id === 'Reader') {
+      reader = { ...reader, [key]: value }
+    } else if (id === 'SubReader') {
+      subReader = { ...subReader, [key]: value }
+    } else if (id === 'Member1') {
+      member1 = { ...member1, [key]: value }
+    } else if (id === 'Member2') {
+      member2 = { ...member2, [key]: value }
+    } else if (id === 'Member3') {
+      member3 = { ...member3, [key]: value }
+    }
+  }
+  const cardData = {}
+  cardData.characterArea = characterArea;
+  cardData.characterRank = characterRank;
+  cardData.teamArea = teamArea;
+  cardData.attrArea = attrArea;
+  cardData.reader = reader;
+  cardData.subReader = subReader;
+  cardData.member1 = member1;
+  cardData.member2 = member2;
+  cardData.member3 = member3;
+  cardData.bonus = formData.get('titleBonus');
+  console.log('talant: ', talantScoreCalc(cardData));
+  return talantScoreCalc(cardData);
+}
 
-
-// 테스트중
 export const talantScoreCalc = (props) => {
-  const readerSubUnit = props.reader.Reader_subUnit;
-  const subReaderSubUnit = props.subReader.SubReader_subUnit;
-  const member1SubUnit = props.member1.Member1_subUnit;
-  const member2SubUnit = props.member2.Member2_subUnit;
-  const member3SubUnit = props.member3.Member3_subUnit;
+  console.log(props);
   const readerTeam = props.reader.Reader_team;
   const subReaderTeam = props.subReader.SubReader_team;
   const member1Team = props.member1.Member1_team;
   const member2Team = props.member2.Member2_team;
   const member3Team = props.member3.Member3_team;
+  const readerSubUnit = props.reader.Reader_subUnit;
+  const subReaderSubUnit = props.subReader.SubReader_subUnit;
+  const member1SubUnit = props.member1.Member1_subUnit;
+  const member2SubUnit = props.member2.Member2_subUnit;
+  const member3SubUnit = props.member3.Member3_subUnit;
   const readerAttr = props.reader.Reader_attr;
   const subReaderAttr = props.subReader.SubReader_attr;
   const member1Attr = props.member1.Member1_attr;
@@ -48,6 +103,7 @@ export const talantScoreCalc = (props) => {
   if (readerAttr === subReaderAttr && readerAttr === member1Attr && readerAttr === member2Attr && readerAttr === member3Attr)
     attrBonus = 'Y';
 
+    console.log(teamBonus, attrBonus)
   return (
     memberBonus(props.reader, props.characterArea, props.characterRank, props.teamArea, props.attrArea, teamBonus, attrBonus) +
     memberBonus(props.subReader, props.characterArea, props.characterRank, props.teamArea, props.attrArea, teamBonus, attrBonus) +
@@ -57,8 +113,7 @@ export const talantScoreCalc = (props) => {
   );
 }
 
-const memberBonus = (obj, characterArea, characterRank, teamArea, attrArea, teamBonus, attrBonus) => {
-  console.log(obj);
+const memberBonus = (card, characterArea, characterRank, teamArea, attrArea, teamBonus, attrBonus) => {
   let performance = 0;
   let technique = 0;
   let stamina = 0;
@@ -69,9 +124,9 @@ const memberBonus = (obj, characterArea, characterRank, teamArea, attrArea, team
   let attrAreaBonus = 0;
   let areaBonus = 0;
   let vsingerUnit = 'N';
-  for (let key in obj) {
+  for (let key in card) {
     let cardId = key.substring(key.indexOf('_') + 1);
-    let cardValue = obj[key];
+    let cardValue = card[key];
     if (cardId === 'performance')
       performance = Number(cardValue);
     if (cardId === 'technique')

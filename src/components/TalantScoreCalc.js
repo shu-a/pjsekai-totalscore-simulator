@@ -185,9 +185,10 @@ const memberBonus = (card, characterArea, characterRank, teamArea, attrArea, tea
       teamAreaBonus += teamAreaBonus;
     else
       teamAreaBonus = teamAreaBonus > subUnitAreaBonus ? teamAreaBonus : subUnitAreaBonus
-  } else if (teamBonus === 'unit')
-      subUnitAreaBonus += subUnitAreaBonus;
-  else
+  } else if (teamBonus === 'unit') {
+    subUnitAreaBonus += subUnitAreaBonus;
+    teamAreaBonus = subUnitAreaBonus;
+  } else
     teamAreaBonus = teamAreaBonus > subUnitAreaBonus ? teamAreaBonus : subUnitAreaBonus
   // 속성 보너스 계산
   if (attrBonus === 'Y')

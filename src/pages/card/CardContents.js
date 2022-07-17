@@ -1,4 +1,4 @@
-import React, { useState, Fragment, useEffect } from 'react';
+import React, { useState, Fragment, useEffect, useLayoutEffect } from 'react';
 import MakeMemberCard from '../../components/MakeMemberCard';
 import MenuItem from '@mui/material/MenuItem';
 import MakeFormSelect from '../../components/MakeFormSelect';
@@ -39,30 +39,41 @@ export default function CardContents(props) {
   const [character, setCharacter] = useState('');
   const [rarities, setRarities] = useState('');
   const handleSelectAttr = (e) => {
+    const { name, value } = e.target;
     setAttr(e.target.value);
+    setFormValue({ ...formValue, [name]: value });
   }
   const handleSelectTeam = (e) => {
+    const { name, value } = e.target;
     setTeam(e.target.value);
-    setCharacter('');
+    setFormValue({ ...formValue, [name]: value });
   }
   const handleSelectSubUnit = (e) => {
+    const { name, value } = e.target;
     setSubUnit(e.target.value);
+    setFormValue({ ...formValue, [name]: value });
   }
   const handleSelectRarities = (e) => {
+    const { name, value } = e.target;
     setRarities(e.target.value);
+    setFormValue({ ...formValue, [name]: value });
   }
   const handleSelectCharacter = (e) => {
+    const { name, value } = e.target;
     setCharacter(e.target.value);
+    setFormValue({ ...formValue, [name]: value });
   }
 
   const [charactList, setCharacterList] = useState([]);
-  useEffect(() => {
+  useLayoutEffect(() => {
+    setCharacter('');
     changeDisabled(team);
+    setSubUnit(team);
+    console.log(team)
     // if (team === 'piapro')
     //   setSubUnit('');
     // else
     //   setSubUnit(team);
-    setSubUnit(team);
     setCharacterList(props.characterList.map((c) => {
       if (team === (c.unit))
         return <MenuItem key={c.id} value={c.id}>{c.fullName}</MenuItem>;
@@ -88,7 +99,7 @@ export default function CardContents(props) {
   const raritiesList = props.raritiesList.map((c) =>
     <MenuItem key={c.seq} value={c.seq} >{c.cardRarityType.split('_')[1]}</MenuItem>
   );
-  
+
   const makeFormSelect = [];
   const defaultHelperText = '팀을 선택하세요';
   const [helperText, setHelperText] = useState(defaultHelperText);
@@ -99,10 +110,17 @@ export default function CardContents(props) {
     { sx: { m: 1, width: 120 }, id: 'rarities', label: '성급', value: rarities, handler: handleSelectRarities, selectList: raritiesList },
     { sx: { m: 1, width: 120 }, id: 'character', label: '캐릭터명', value: character, handler: handleSelectCharacter, selectList: charactList, disabled: disabled, helperText: helperText }
   ];
-  const makeFormSelectlist = makeFormSelectContents.map((c) =>
-    <MakeFormSelect key={c.id} id={props.title + '_' + c.id} sx={c.sx} label={c.label} inputLabel={c.label} value={c.value} handler={c.handler}
+  const makeFormSelectlist = makeFormSelectContents.map((c) => {
+    let value = c.value;
+    if (c.id === 'attr') {
+      let id = props.title + '_' + c.id;
+      if (formValue[id]) {
+        value = formValue[id];
+      }
+    }
+    return <MakeFormSelect key={c.id} id={props.title + '_' + c.id} sx={c.sx} label={c.label} inputLabel={c.label} value={value} handler={c.handler}
       selectList={c.selectList} disabled={c.disabled} helperText={c.helperText} />
-  );
+  });
   makeFormSelect.push(makeFormSelectlist);
 
   const makeTextFieldContents = [
@@ -119,11 +137,9 @@ export default function CardContents(props) {
   }
   );
   makeFormSelect.push(makeTextFieldList);
-
-  const cardContents = <MakeMemberCard key="MakeMemberCard" makeFormSelect={makeFormSelect} title={props.title} border={props.border} color={props.color} />;
   return (
     <Fragment>
-      {cardContents}
+      <MakeMemberCard key="MakeMemberCard" makeFormSelect={makeFormSelect} title={props.title} border={props.border} color={props.color} />
     </Fragment>
   );
 }

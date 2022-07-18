@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
+import RefreshIcon from '@mui/icons-material/Refresh';
 import IconButton from '@mui/material/IconButton';
 
 export default function MakeCard(props) {
@@ -22,8 +22,8 @@ export default function MakeCard(props) {
     >
       <CardHeader
         action={
-          <IconButton aria-label={'ariaLabel_' + props.id}>
-            <MoreVertIcon />
+          <IconButton aria-label={'ariaLabel_' + props.id} onClick={props.clearHandler}>
+            <RefreshIcon />
           </IconButton>
         }
         title={props.title}

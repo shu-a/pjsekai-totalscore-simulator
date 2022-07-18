@@ -20,6 +20,7 @@ export default function MakeMemberCard(props) {
           border: props.border,
           borderColor: props.color
         }}
+        clearHandler={props.clearHandler}
         id="teamCard"
         key="teamCard"
         title={props.title}

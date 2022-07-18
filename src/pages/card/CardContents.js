@@ -33,6 +33,12 @@ export default function CardContents(props) {
     localforage.setItem(props.title, formValue);
   }, [formValue]);
 
+  const handleClear = () => {
+    for (let key in formValue) {
+      setFormValue(delete formValue[key]);
+    }
+  }
+
   const [attr, setAttr] = useState('');
   const [team, setTeam] = useState('');
   const [subUnit, setSubUnit] = useState('');
@@ -138,7 +144,7 @@ export default function CardContents(props) {
   makeFormSelect.push(makeTextFieldList);
   return (
     <Fragment>
-      <MakeMemberCard key="MakeMemberCard" makeFormSelect={makeFormSelect} title={props.title} border={props.border} color={props.color} />
+      <MakeMemberCard key="MakeMemberCard" makeFormSelect={makeFormSelect} title={props.title} border={props.border} color={props.color} clearHandler={handleClear} />
     </Fragment>
   );
 }

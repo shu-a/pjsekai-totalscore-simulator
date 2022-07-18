@@ -9,7 +9,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
-import TalantScore from './pages/Card/TalantSocre'
+import TotalScore from './pages/Card/TotalSocre'
 import { Link } from 'react-router-dom';
 
 const pages = ['Home', 'Instruction', 'Contact'];
@@ -26,7 +26,7 @@ const ResponsiveAppBar = () => {
   };
 
   return (
-    <AppBar position="fixed" sx={{ backgroundColor: '#4ca692' }}>
+    <AppBar position="fixed" sx={{ backgroundColor: '#00b3a4' }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
@@ -113,7 +113,7 @@ const ResponsiveAppBar = () => {
               </Button>
             ))}
           </Box>
-          <TalantScore />
+          <TotalScore />
         </Toolbar>
       </Container>
     </AppBar>

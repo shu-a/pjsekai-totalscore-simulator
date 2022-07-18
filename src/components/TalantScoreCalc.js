@@ -111,8 +111,8 @@ export const talantScoreCalc = (props) => {
   const totalScore = {};
   totalScore.totalScore = reader.resultBonus + subReader.resultBonus + member1.resultBonus + member2.resultBonus + member3.resultBonus + Number(props.bonus);
   totalScore.titleBonus = Number(props.bonus);
-  totalScore.areaBonus = reader.value.areaBonus + reader.value.areaBonus + reader.value.areaBonus + reader.value.areaBonus + reader.value.areaBonus;
-  totalScore.rankBonus = reader.value.rankBonus + reader.value.rankBonus + reader.value.rankBonus + reader.value.rankBonus + reader.value.rankBonus;
+  totalScore.areaBonus = reader.cAreaBonus + subReader.cAreaBonus + member1.cAreaBonus + member2.cAreaBonus + member3.cAreaBonus;
+  totalScore.rankBonus = reader.cRankBonus + subReader.cRankBonus + member1.cRankBonus + member2.cRankBonus + member3.cRankBonus;
   totalScore.ptsScore = totalScore.totalScore - totalScore.titleBonus - totalScore.areaBonus - totalScore.rankBonus;
   return totalScore;
 }
@@ -206,9 +206,12 @@ const memberBonus = (card, characterArea, characterRank, teamArea, attrArea, tea
   value.rankBonus = characterRankBonus;
   value.areaBonus = areaBonus;
 
+  const cAreaBonus = getBonus(value, 'area');
+  const cRankBonus = getBonus(value, 'rank');
   const resultBonus = {};
-  resultBonus.resultBonus = getBonus(value, 'rank') + getBonus(value, 'area') + performance + technique + stamina;
-  resultBonus.value = value;
+  resultBonus.resultBonus = cAreaBonus + cRankBonus + performance + technique + stamina;
+  resultBonus.cAreaBonus = cAreaBonus;
+  resultBonus.cRankBonus = cRankBonus;
 
   return resultBonus;
 }

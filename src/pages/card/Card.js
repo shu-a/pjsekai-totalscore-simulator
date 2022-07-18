@@ -57,7 +57,7 @@ export default function Card() {
           <Grid container spacing={0.05} sx={gridStyle}>
             <CardSet />
           </Grid>
-        </Grid>        
+        </Grid>
         <Dialog
           open={open}
           onClose={handleClose}

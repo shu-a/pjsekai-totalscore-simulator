@@ -15,8 +15,26 @@ import { talantScore } from '../../components/TalantScoreCalc'
 import Chip from '@mui/material/Chip';
 
 const gridStyle = {
-  mt: 0.5,
-  mb: 0.5
+  default: {
+    mt: 0.5,
+    mb: 0.5
+  },
+  bonus: {
+    fontSize: 20,
+    mt: 1,
+    textAlign: 'right'
+  },
+  chip: {
+    fontSize: 20,
+    mt: 1
+  }
+}
+const chipStyle = {
+  backgroundColor: '#00b3a4',
+  color: '#ffffff',
+  width: 220,
+  height: 30,
+  fontSize: 15
 }
 const style3 = {
   backgroundColor: '#00b3a4',
@@ -30,31 +48,31 @@ export default function Card() {
     event.preventDefault();
     setOpen(true);
     const totalScore = talantScore(event);
-    setTotalScore(totalScore.totalScore);
-    setAreaBonus(totalScore.areaBonus);
-    setRankBonus(totalScore.rankBonus);
-    setTitleBonus(totalScore.titleBonus);
-    setPtsScore(totalScore.ptsScore);
+    setTotalScore(totalScore.totalScore ? totalScore.totalScore : 0);
+    setAreaBonus(totalScore.areaBonus ? totalScore.areaBonus : 0);
+    setRankBonus(totalScore.rankBonus ? totalScore.rankBonus : 0);
+    setTitleBonus(totalScore.titleBonus ? totalScore.titleBonus : 0);
+    setPtsScore(totalScore.ptsScore ? totalScore.ptsScore : 0);
   };
   const handleClose = () => {
     setOpen(false);
   };
   const [open, setOpen] = useState(false);
-  const [totalScore, setTotalScore] = useState('');
-  const [areaBonus, setAreaBonus] = useState('');
-  const [rankBonus, setRankBonus] = useState('');
-  const [titleBonus, setTitleBonus] = useState('');
-  const [ptsScore, setPtsScore] = useState('');
+  const [totalScore, setTotalScore] = useState(0);
+  const [areaBonus, setAreaBonus] = useState(0);
+  const [rankBonus, setRankBonus] = useState(0);
+  const [titleBonus, setTitleBonus] = useState(0);
+  const [ptsScore, setPtsScore] = useState(0);
   return (
     <Box component="form" onSubmit={handleSubmit} id="talantForm">
       <FormControl component="fieldset" variant="standard">
         <Grid container sx={{ maxWidth: 1550 }}>
-          <Grid container spacing={0.5} sx={gridStyle}>
+          <Grid container spacing={0.5} sx={gridStyle.default}>
             <Grid item xs>
               <SekaiViewerLink />
             </Grid>
           </Grid>
-          <Grid container spacing={0.5} sx={gridStyle}>
+          <Grid container spacing={0.5} sx={gridStyle.default}>
             <Grid item xs>
               <CharacterArea type="area" />
             </Grid>
@@ -62,7 +80,7 @@ export default function Card() {
               <CharacterArea type="rank" />
             </Grid>
           </Grid>
-          <Grid container spacing={0.5} sx={gridStyle}>
+          <Grid container spacing={0.5} sx={gridStyle.default}>
             <Grid item xs>
               <AttrTeamArea type="team" />
             </Grid>
@@ -70,7 +88,7 @@ export default function Card() {
               <AttrTeamArea type="attr" />
             </Grid>
           </Grid>
-          <Grid container spacing={0.05} sx={gridStyle}>
+          <Grid container spacing={0.05} sx={gridStyle.default}>
             <CardSet />
           </Grid>
         </Grid>
@@ -80,7 +98,7 @@ export default function Card() {
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
           PaperProps={{ sx: { borderRadius: 3 } }}
-          fullWidth={true}
+          maxWidth='sm'
         >
           <DialogTitle id="alert-dialog-title" sx={{ color: '#ffffff', backgroundColor: '#00b3a4', textAlign: 'center' }}>
             {"종합 능력치 상세 보기"}
@@ -93,51 +111,51 @@ export default function Card() {
               </Box>
               <Grid container spacing={3} sx={{ m: 0, width: '100%', backgroundColor: '#feffed', borderRadius: 3, p: 1, border: 2, borderColor: '#cceeef' }}>
                 <Grid container justifyContent="space-between" sx={{ pb: 1, borderBottom: 2, borderColor: '#cceeef' }}>
-                  <Grid item xs={2}>
+                  <Grid item xs={1} sm={2}>
                   </Grid>
-                  <Grid item xs={5} sx={{ fontSize: 20, mt: 1 }}>
-                    <Chip sx={{ backgroundColor: '#00b3a4', color: '#ffffff', width: 220, height: 30, fontSize: 15 }} label="종합 능력치" />
+                  <Grid item xs={5} sm={5} sx={gridStyle.chip}>
+                    <Chip sx={chipStyle} label="종합 능력치" />
                   </Grid>
-                  <Grid item xs={5} sx={{ fontSize: 20, mt: 1 }}>
+                  <Grid item xs={5} sm={3} sx={gridStyle.bonus}>
                     {ptsScore}
                   </Grid>
-                  <Grid item xs>
+                  <Grid item xs sm>
                   </Grid>
                 </Grid>
                 <Grid container justifyContent="space-between">
-                  <Grid item xs={2}>
+                  <Grid item xs={1} sm={2}>
                   </Grid>
-                  <Grid item xs={5} sx={{ fontSize: 20, mt: 1 }}>
-                    <Chip sx={{ backgroundColor: '#00b3a4', color: '#ffffff', width: 220, height: 30, fontSize: 15 }} label="에어리어 아이템 보너스" />
+                  <Grid item xs={5} sm={5} sx={gridStyle.chip}>
+                    <Chip sx={chipStyle} label="에어리어 아이템 보너스" />
                   </Grid>
-                  <Grid item xs={5} sx={{ fontSize: 20, mt: 1 }}>
+                  <Grid item xs={5} sm={3} sx={gridStyle.bonus}>
                     {areaBonus}
                   </Grid>
-                  <Grid item xs>
+                  <Grid item xs sm>
                   </Grid>
                 </Grid>
                 <Grid container justifyContent="space-between">
-                  <Grid item xs={2}>
+                  <Grid item xs={1} sm={2}>
                   </Grid>
-                  <Grid item xs={5} sx={{ fontSize: 20, mt: 1 }}>
-                    <Chip sx={{ backgroundColor: '#00b3a4', color: '#ffffff', width: 220, height: 30, fontSize: 15 }} label="캐릭터 랭크 보너스" />
+                  <Grid item xs={5} sm={5} sx={gridStyle.chip}>
+                    <Chip sx={chipStyle} label="캐릭터 랭크 보너스" />
                   </Grid>
-                  <Grid item xs={5} sx={{ fontSize: 20, mt: 1 }}>
+                  <Grid item xs={5} sm={3} sx={gridStyle.bonus}>
                     {rankBonus}
                   </Grid>
-                  <Grid item xs>
+                  <Grid item xs sm>
                   </Grid>
                 </Grid>
                 <Grid container justifyContent="space-between" sx={{ pb: 1 }}>
-                  <Grid item xs={2}>
+                  <Grid item xs={1} sm={2}>
                   </Grid>
-                  <Grid item xs={5} sx={{ fontSize: 20, mt: 1 }}>
-                    <Chip sx={{ backgroundColor: '#00b3a4', color: '#ffffff', width: 220, height: 30, fontSize: 15 }} label="칭호 보너스" />
+                  <Grid item xs={5} sm={5} sx={gridStyle.chip}>
+                    <Chip sx={chipStyle} label="칭호 보너스" />
                   </Grid>
-                  <Grid item xs={5} sx={{ fontSize: 20, mt: 1 }}>
+                  <Grid item xs={5} sm={3} sx={gridStyle.bonus}>
                     {titleBonus}
                   </Grid>
-                  <Grid item xs>
+                  <Grid item xs sm>
                   </Grid>
                 </Grid>
               </Grid>

@@ -7,7 +7,6 @@ import Button from '@mui/material/Button';
 import { FormControl, Grid } from '@mui/material';
 import SekaiViewerLink from '../SekaiViewerLink';
 import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
@@ -43,7 +42,7 @@ const style3 = {
   fontSize: 15
 }
 
-export default function Card() {
+export default function CardIndex() {
   const handleSubmit = (event) => {
     event.preventDefault();
     setOpen(true);

@@ -1,8 +1,8 @@
 import React, { Fragment } from 'react';
-import Card from '../Card/Card';
 
-export default function Home() {
-  const content = <Card />;
+export default function AboutIndex() {
+  const content = 'About';
+  
   return (
     <Fragment>
       {content}

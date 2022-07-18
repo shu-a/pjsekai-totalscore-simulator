@@ -12,7 +12,7 @@ import MenuItem from '@mui/material/MenuItem';
 import TotalScore from './pages/Card/TotalSocre'
 import { Link } from 'react-router-dom';
 
-const pages = ['Home', 'Instruction', 'Contact'];
+const pages = ['Home', 'Manual', 'About'];
 
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);

@@ -17,7 +17,6 @@ function SekaiViewerLink() {
       <Button variant="contained" sx={style1} onClick={e => {
         e.preventDefault();
         window.open('https://sekai.best/card', '_blank')
-        console.log('클릭');
       }}>
         Sekai Viewer 카드 목록
       </Button>

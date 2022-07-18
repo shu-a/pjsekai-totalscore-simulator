@@ -64,17 +64,17 @@ export default function Card() {
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
         >
-          <DialogTitle id="alert-dialog-title">
+          <DialogTitle id="alert-dialog-title" sx={{ color: '#ffffff', backgroundColor: '#4ca692' }}>
             {"종합력 계산 결과"}
           </DialogTitle>
           <DialogContent>
-            <DialogContentText id="alert-dialog-description">
+            <DialogContentText id="alert-dialog-description" sx={{ textAlign: 'center', fontSize: 25, pr: 3, pl: 3, mt: 5 }}>
               {value}
             </DialogContentText>
           </DialogContent>
           <DialogActions>
             {/* <Button onClick={handleClose}>Disagree</Button> */}
-            <Button onClick={handleClose} autoFocus>
+            <Button onClick={handleClose} autoFocus sx={{ color: '#4ca692' }}>
               확인
             </Button>
           </DialogActions>

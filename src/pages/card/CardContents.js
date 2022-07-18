@@ -20,7 +20,7 @@ export default function CardContents(props) {
   const [formValue, setFormValue] = useState('');
 
   useEffect(() => {
-    localforage.getItem('cards').then((value) => {
+    localforage.getItem(props.title).then((value) => {
       if (value)
         setFormValue(value);
     });
@@ -30,7 +30,7 @@ export default function CardContents(props) {
     setFormValue({ ...formValue, [name]: value });
   }
   useEffect(() => {
-    localforage.setItem('cards', formValue);
+    localforage.setItem(props.title, formValue);
   }, [formValue]);
 
   const [attr, setAttr] = useState('');
@@ -69,7 +69,6 @@ export default function CardContents(props) {
     setCharacter('');
     changeDisabled(team);
     setSubUnit(team);
-    console.log(team)
     // if (team === 'piapro')
     //   setSubUnit('');
     // else

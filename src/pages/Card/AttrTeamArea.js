@@ -31,7 +31,7 @@ export default function AttrTeamArea(props) {
   const [formValue, setFormValue] = useState({});
   const type = switchiId(props.type);
   useEffect(() => {
-    localforage.getItem('team').then((value) => {
+    localforage.getItem(type).then((value) => {
       if (value)
         setFormValue(value);
     });
@@ -45,7 +45,7 @@ export default function AttrTeamArea(props) {
     setFormValue({ ...formValue, [name]: value });
   }
   useEffect(() => {
-    localforage.setItem('team', formValue);
+    localforage.setItem(type, formValue);
   }, [formValue]);
   const textField = attrTeamAreaList.map((c) => {
     let value = '';

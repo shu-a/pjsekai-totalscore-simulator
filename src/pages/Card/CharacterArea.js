@@ -27,7 +27,6 @@ function switchTitle(props) {
 }
 
 export default function CharacterArea(props) {
-  console.log(props.type);
   const [characterList, setCharacterList] = useState([]);
   const [formValue, setFormValue] = useState({});
   const type = switchiId(props.type);
@@ -41,13 +40,8 @@ export default function CharacterArea(props) {
   const handleChangeText = (e) => {
     const { name, value } = e.target;
     setFormValue({ ...formValue, [name]: value });
-    localforage.getItem(type).then((value) => {
-      if (value)
-        console.log(value);
-    });
   }
   useEffect(() => {
-    console.log(formValue);
     localforage.setItem(type, formValue);
   }, [formValue]);
   const textField = characterList.map((c) => {

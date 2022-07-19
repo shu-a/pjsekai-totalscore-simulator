@@ -15,13 +15,12 @@ export default function MakeFormSelect(props) {
   helperText
   selectList
   */
-  const formSelect = [];
-  formSelect.push(
+  return (
+    <Fragment>
     <FormControl
       variant="standard"
-      sx={props.sx}
       key={props.id}
-      disabled={props.disabled}
+      sx={props.sx}
     >
       <InputLabel>{props.inputLabel}</InputLabel>
       <Select
@@ -31,17 +30,15 @@ export default function MakeFormSelect(props) {
         onChange={props.handler}
         name={props.id}
         inputProps={{
-          id: props.id
+          id: props.id,
+          readOnly: props.readonly
         }}
+        sx={props.sx}
       >
         {props.selectList}
       </Select>
       <FormHelperText>{props.helperText}</FormHelperText>
     </FormControl>
-  );
-  return (
-    <Fragment>
-      {formSelect}
     </Fragment>
   );
 }

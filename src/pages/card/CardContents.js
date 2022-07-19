@@ -1,4 +1,4 @@
-import React, { useState, Fragment, useEffect, useLayoutEffect } from 'react';
+import React, { useState, Fragment, useEffect } from 'react';
 import MakeMemberCard from '../../components/MakeMemberCard';
 import MenuItem from '@mui/material/MenuItem';
 import MakeFormSelect from '../../components/MakeFormSelect';
@@ -21,8 +21,15 @@ export default function CardContents(props) {
 
   useEffect(() => {
     localforage.getItem(props.title).then((value) => {
-      if (value)
+      const getAttr = props.title + '_attr';
+      const getTeam = props.title + '_team';
+      const getRarities = props.title + '_rarities';
+      if (value) {
         setFormValue(value);
+        setAttr(value[getAttr] ? value[getAttr] : '');
+        setTeam(value[getTeam] ? value[getTeam] : '');
+        setRarities(value[getRarities] ? value[getRarities] : '')
+      }
     });
   }, []);
   const handleChangeText = (e) => {
@@ -36,6 +43,11 @@ export default function CardContents(props) {
   const handleClear = () => {
     for (let key in formValue) {
       setFormValue(delete formValue[key]);
+      setAttr('');
+      setTeam('');
+      setSubUnit('');
+      setCharacter('');
+      setRarities('');
     }
   }
 
@@ -71,14 +83,18 @@ export default function CardContents(props) {
   }
 
   const [charactList, setCharacterList] = useState([]);
-  useLayoutEffect(() => {
+  useEffect(() => {
     setCharacter('');
     changeDisabled(team);
-    setSubUnit(team);
-    // if (team === 'piapro')
-    //   setSubUnit('');
-    // else
-    //   setSubUnit(team);
+    const subUnitEvent = { target: { name: props.title + '_subUnit', value: team } };
+    if (team) {
+      handleSelectSubUnit(subUnitEvent);
+    }
+    const characterName = props.title + '_character';
+    const characterEvent = { target: { name: props.title + '_chracter', value: formValue[characterName] } };
+    if (team && formValue[characterName]) {
+      handleSelectCharacter(characterEvent);
+    }
     setCharacterList(props.characterList.map((c) => {
       if (team === (c.unit))
         return <MenuItem key={c.id} value={c.id}>{c.fullName}</MenuItem>;
@@ -93,14 +109,6 @@ export default function CardContents(props) {
   const attrList = props.attrList.map((c) =>
     <MenuItem key={c.unit} value={c.unit}>{c.unitName}</MenuItem>
   );
-
-  // 에어리어 계산 조건 문제로 사용 중지
-  // const subUnitList = props.teamList.map((c) => {
-  //   if (Number(c.seq) !== 1)
-  //     return <MenuItem key={c.unit} value={c.unit}>{c.unitName}</MenuItem>
-  //   else
-  //     return false
-  // });
   const raritiesList = props.raritiesList.map((c) =>
     <MenuItem key={c.seq} value={c.seq} >{c.cardRarityType.split('_')[1]}</MenuItem>
   );
@@ -116,14 +124,7 @@ export default function CardContents(props) {
     { sx: { m: 1, width: 120 }, id: 'character', label: '캐릭터명', value: character, handler: handleSelectCharacter, selectList: charactList, disabled: disabled, helperText: helperText }
   ];
   const makeFormSelectlist = makeFormSelectContents.map((c) => {
-    let value = c.value;
-    if (c.id === 'attr') {
-      let id = props.title + '_' + c.id;
-      if (formValue[id]) {
-        value = formValue[id];
-      }
-    }
-    return <MakeFormSelect key={c.id} id={props.title + '_' + c.id} sx={c.sx} label={c.label} inputLabel={c.label} value={value} handler={c.handler}
+    return <MakeFormSelect key={c.id} id={props.title + '_' + c.id} sx={c.sx} label={c.label} inputLabel={c.label} value={c.value} handler={c.handler}
       selectList={c.selectList} disabled={c.disabled} helperText={c.helperText} />
   });
   makeFormSelect.push(makeFormSelectlist);

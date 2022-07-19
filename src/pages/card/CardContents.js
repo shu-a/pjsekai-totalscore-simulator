@@ -18,7 +18,6 @@ export default function CardContents(props) {
     }
   }
   const [formValue, setFormValue] = useState('');
-
   useEffect(() => {
     localforage.getItem(props.title).then((value) => {
       const getAttr = props.title + '_attr';
@@ -50,7 +49,6 @@ export default function CardContents(props) {
       setRarities('');
     }
   }
-
   const [attr, setAttr] = useState('');
   const [team, setTeam] = useState('');
   const [subUnit, setSubUnit] = useState('');

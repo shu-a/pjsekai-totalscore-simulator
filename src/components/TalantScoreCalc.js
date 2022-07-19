@@ -218,27 +218,20 @@ const memberBonus = (card, characterArea, characterRank, teamArea, attrArea, tea
 
 const getPerformanceBonus = (props, type) => {
   const bonus = Math.floor(Number(props.performance) * Number(type === 'rank' ? props.rankBonus / 1000 : props.areaBonus / 100));
-  console.log('type', type);
-  console.log('performance', bonus);
   return bonus;
 }
 
 const getTechniqueBonus = (props, type) => {
   const bonus = Math.floor(Number(props.technique) * Number(type === 'rank' ? props.rankBonus / 1000 : props.areaBonus / 100));
-  console.log('type', type);
-  console.log('technique', bonus);
   return bonus;
 }
 
 const getStaminaBonus = (props, type) => {
   const bonus = Math.floor(Number(props.stamina) * Number(type === 'rank' ? props.rankBonus / 1000 : props.areaBonus / 100));
-  console.log('type', type);
-  console.log('stamina', bonus);
   return bonus;
 }
 
 const getBonus = (props, type) => {
   const bonus = getPerformanceBonus(props, type) + getTechniqueBonus(props, type) + getStaminaBonus(props, type);
-  console.log('===bonus' + type, bonus)
   return bonus;
 }

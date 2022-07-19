@@ -171,7 +171,8 @@ export default function CardContents(props) {
   makeFormSelect.push(makeTextFieldList);
   return (
     <Fragment>
-      <MakeMemberCard key="MakeMemberCard" makeFormSelect={makeFormSelect} title={props.title} border={props.border} color={props.color} clearHandler={handleClear} />
+      <MakeMemberCard key="MakeMemberCard" makeFormSelect={makeFormSelect} title={props.title} border={props.border} color={props.color}
+      backgroundColor={props.backgroundColor} clearHandler={handleClear} />
     </Fragment>
   );
 }

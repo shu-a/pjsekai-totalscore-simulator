@@ -18,7 +18,8 @@ export default function MakeMemberCard(props) {
         mr: 0.5,
         mb: 0.5,
         border: props.border,
-        borderColor: props.color
+        borderColor: props.color,
+        backgroundColor: props.backgroundColor
       }}
       clearHandler={props.clearHandler}
       id="teamCard"

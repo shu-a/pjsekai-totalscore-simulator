@@ -62,7 +62,9 @@ export default function CharacterArea(props) {
     <MakeCard
       sx={{
         minWidth: 300,
-        pb: 2
+        pb: 2,
+        backgroundColor: '#fffff7',
+        border: '2px solid #cceeef'
       }}
       id="subUnitCard"
       key="subUnitCard"

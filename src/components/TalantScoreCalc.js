@@ -72,12 +72,12 @@ export const talantScore = (event) => {
   cardData.member2 = member2;
   cardData.member3 = member3;
   cardData.bonus = formData.get('titleBonus');
-  console.log('talant: ', talantScoreCalc(cardData));
+  // console.log('talant: ', talantScoreCalc(cardData));
   return talantScoreCalc(cardData);
 }
 
 export const talantScoreCalc = (props) => {
-  console.log(props);
+  // console.log(props);
   const readerTeam = props.reader.Reader_team;
   const subReaderTeam = props.subReader.SubReader_team;
   const member1Team = props.member1.Member1_team;

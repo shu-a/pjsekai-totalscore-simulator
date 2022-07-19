@@ -31,7 +31,7 @@ export default function CharacterArea(props) {
   const [formValue, setFormValue] = useState({});
   const type = switchiId(props.type);
   useEffect(() => {
-    localforage.getItem('character').then((value) => {
+    localforage.getItem(type).then((value) => {
       if (value)
         setFormValue(value);
     });
@@ -42,7 +42,7 @@ export default function CharacterArea(props) {
     setFormValue({ ...formValue, [name]: value });
   }
   useEffect(() => {
-    localforage.setItem('character', formValue);
+    localforage.setItem(type, formValue);
   }, [formValue]);
   const textField = characterList.map((c) => {
     let value = '';
@@ -52,6 +52,11 @@ export default function CharacterArea(props) {
     return <MakeTextField key={type + c.id} id={type + c.id} label={c.fullName} value={value} handler={handleChangeText}
       type={'number'} sx={{ width: 256, margin: 1 }} />
   });
+  const handleClear = () => {
+    for (let key in formValue) {
+      setFormValue(delete formValue[key]);
+    }
+  }
 
   return (
     <MakeCard
@@ -63,6 +68,7 @@ export default function CharacterArea(props) {
       key="subUnitCard"
       title={switchTitle(props.type)}
       content={textField}
+      clearHandler={handleClear}
     />
   );
 }

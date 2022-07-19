@@ -9,10 +9,10 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
-import TalantScore from './pages/Card/TalantSocre'
+import TotalScore from './pages/Card/TotalSocre'
 import { Link } from 'react-router-dom';
 
-const pages = ['Home', 'Instruction', 'Contact'];
+const pages = ['Home', 'Manual', 'About'];
 
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -26,15 +26,16 @@ const ResponsiveAppBar = () => {
   };
 
   return (
-    <AppBar position="fixed" sx={{ backgroundColor: '#4ca692' }}>
+    <AppBar position="fixed" sx={{ backgroundColor: '#00b3a4' }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
           <Typography
             variant="h6"
             noWrap
-            component="a"
-            href="/"
+            // component="a"
+            // href="/"            
+            component={Link} to={'/'}
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
@@ -45,7 +46,7 @@ const ResponsiveAppBar = () => {
               textDecoration: 'none',
             }}
           >
-            Sekai Talant Score Simulator
+            Sekai Total Score Simulator
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
@@ -87,20 +88,18 @@ const ResponsiveAppBar = () => {
           <Typography
             variant="h5"
             noWrap
-            component="a"
-            href=""
+            // component="a"
+            // href="/"
+            component={Link} to={'/'}
             sx={{
               mr: 2,
               display: { xs: 'flex', md: 'none' },
               flexGrow: 1,
-              // fontFamily: 'monospace',
-              // fontWeight: 700,
-              // letterSpacing: '.3rem',
               color: 'inherit',
               textDecoration: 'none',
             }}
           >
-            Sekai Talant<br/> Score Simulator
+            Sekai Total<br/>Score Simulator
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
@@ -114,7 +113,7 @@ const ResponsiveAppBar = () => {
               </Button>
             ))}
           </Box>
-          <TalantScore />
+          <TotalScore />
         </Toolbar>
       </Container>
     </AppBar>

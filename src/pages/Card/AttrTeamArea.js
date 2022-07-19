@@ -31,7 +31,7 @@ export default function AttrTeamArea(props) {
   const [formValue, setFormValue] = useState({});
   const type = switchiId(props.type);
   useEffect(() => {
-    localforage.getItem('team').then((value) => {
+    localforage.getItem(type).then((value) => {
       if (value)
         setFormValue(value);
     });
@@ -45,7 +45,7 @@ export default function AttrTeamArea(props) {
     setFormValue({ ...formValue, [name]: value });
   }
   useEffect(() => {
-    localforage.setItem('team', formValue);
+    localforage.setItem(type, formValue);
   }, [formValue]);
   const textField = attrTeamAreaList.map((c) => {
     let value = '';
@@ -55,6 +55,12 @@ export default function AttrTeamArea(props) {
     return <MakeTextField key={type + c.unit} id={type + c.unit} label={c.unitName} value={value} handler={handleChangeText}
       type={"number"} sx={{ width: 256, margin: 1 }} inputProps={{ step: 0.1 }} />
   });
+  const handleClear = () => {
+    for (let key in formValue) {
+      setFormValue(delete formValue[key]);
+    }
+  }
+
   if (props.type === 'attr')
     textField.push(<MakeTextField key="titleBonus" id="titleBonus" label="칭호 보너스" value={formValue['titleBonus'] ? formValue['titleBonus'] : ''}
     handler={handleChangeText} type={"number"} sx={{ width: 256, margin: 1 }} inputProps={{ step: 0.1 }} />);
@@ -68,6 +74,7 @@ export default function AttrTeamArea(props) {
       key="teamCard"
       title={switchTitle(props.type)}
       content={textField}
+      clearHandler={handleClear}
     />
   );
 }

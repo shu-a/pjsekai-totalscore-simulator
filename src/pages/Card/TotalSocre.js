@@ -11,21 +11,17 @@ import Button from '@mui/material/Button';
 //   '&:hover': { color: '#ffffff', backgroundColor: '#3b8071' }
 // }
 const style3 = {
-  backgroundColor: '#00b3a4',
-  '&:hover': { backgroundColor: '#008075' }
+  backgroundColor: '#ffffff',
+  color: '#00b3a4',
+  '&:hover': { color: '#ffffff', backgroundColor: '#008075' }
 }
 
-function SekaiViewerLink() {
-  return(
+export default function TotalScore() {
+  return (
     <div>
-      <Button variant="contained" sx={style3} onClick={e => {
-        e.preventDefault();
-        window.open('https://sekai.best/card', '_blank')
-      }}>
-        Sekai Viewer 카드 목록
+      <Button type="submit" variant="contained" sx={style3} form="talantForm">
+        종합력 계산
       </Button>
     </div>
   );
 }
-
-export default SekaiViewerLink;

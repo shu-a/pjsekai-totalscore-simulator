@@ -103,14 +103,18 @@ export const talantScoreCalc = (props) => {
   if (readerAttr === subReaderAttr && readerAttr === member1Attr && readerAttr === member2Attr && readerAttr === member3Attr)
     attrBonus = 'Y';
 
-    console.log(teamBonus, attrBonus)
-  return (
-    memberBonus(props.reader, props.characterArea, props.characterRank, props.teamArea, props.attrArea, teamBonus, attrBonus) +
-    memberBonus(props.subReader, props.characterArea, props.characterRank, props.teamArea, props.attrArea, teamBonus, attrBonus) +
-    memberBonus(props.member1, props.characterArea, props.characterRank, props.teamArea, props.attrArea, teamBonus, attrBonus) +
-    memberBonus(props.member2, props.characterArea, props.characterRank, props.teamArea, props.attrArea, teamBonus, attrBonus) +
-    memberBonus(props.member3, props.characterArea, props.characterRank, props.teamArea, props.attrArea, teamBonus, attrBonus) + Number(props.bonus)
-  );
+  const reader = memberBonus(props.reader, props.characterArea, props.characterRank, props.teamArea, props.attrArea, teamBonus, attrBonus);
+  const subReader = memberBonus(props.subReader, props.characterArea, props.characterRank, props.teamArea, props.attrArea, teamBonus, attrBonus);
+  const member1 = memberBonus(props.member1, props.characterArea, props.characterRank, props.teamArea, props.attrArea, teamBonus, attrBonus);
+  const member2 = memberBonus(props.member2, props.characterArea, props.characterRank, props.teamArea, props.attrArea, teamBonus, attrBonus);
+  const member3 = memberBonus(props.member3, props.characterArea, props.characterRank, props.teamArea, props.attrArea, teamBonus, attrBonus);
+  const totalScore = {};
+  totalScore.totalScore = reader.resultBonus + subReader.resultBonus + member1.resultBonus + member2.resultBonus + member3.resultBonus + Number(props.bonus);
+  totalScore.titleBonus = Number(props.bonus);
+  totalScore.areaBonus = reader.cAreaBonus + subReader.cAreaBonus + member1.cAreaBonus + member2.cAreaBonus + member3.cAreaBonus;
+  totalScore.rankBonus = reader.cRankBonus + subReader.cRankBonus + member1.cRankBonus + member2.cRankBonus + member3.cRankBonus;
+  totalScore.ptsScore = totalScore.totalScore - totalScore.titleBonus - totalScore.areaBonus - totalScore.rankBonus;
+  return totalScore;
 }
 
 const memberBonus = (card, characterArea, characterRank, teamArea, attrArea, teamBonus, attrBonus) => {
@@ -201,34 +205,33 @@ const memberBonus = (card, characterArea, characterRank, teamArea, attrArea, tea
   value.stamina = stamina;
   value.rankBonus = characterRankBonus;
   value.areaBonus = areaBonus;
-  return (
-    getBonus(value, 'rank') + getBonus(value, 'area') + performance + technique + stamina
-  );
+
+  const cAreaBonus = getBonus(value, 'area');
+  const cRankBonus = getBonus(value, 'rank');
+  const resultBonus = {};
+  resultBonus.resultBonus = cAreaBonus + cRankBonus + performance + technique + stamina;
+  resultBonus.cAreaBonus = cAreaBonus;
+  resultBonus.cRankBonus = cRankBonus;
+
+  return resultBonus;
 }
 
 const getPerformanceBonus = (props, type) => {
   const bonus = Math.floor(Number(props.performance) * Number(type === 'rank' ? props.rankBonus / 1000 : props.areaBonus / 100));
-  console.log('type', type);
-  console.log('performance', bonus);
   return bonus;
 }
 
 const getTechniqueBonus = (props, type) => {
   const bonus = Math.floor(Number(props.technique) * Number(type === 'rank' ? props.rankBonus / 1000 : props.areaBonus / 100));
-  console.log('type', type);
-  console.log('technique', bonus);
   return bonus;
 }
 
 const getStaminaBonus = (props, type) => {
   const bonus = Math.floor(Number(props.stamina) * Number(type === 'rank' ? props.rankBonus / 1000 : props.areaBonus / 100));
-  console.log('type', type);
-  console.log('stamina', bonus);
   return bonus;
 }
 
 const getBonus = (props, type) => {
   const bonus = getPerformanceBonus(props, type) + getTechniqueBonus(props, type) + getStaminaBonus(props, type);
-  console.log('===bonus' + type, bonus)
   return bonus;
 }

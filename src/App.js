@@ -1,17 +1,17 @@
 import './App.css';
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import Instruction from './pages/Instruction/Instruction';
-import Home from './pages/Home/Home';
-import Contact from './pages/Contact/Contact';
+import ManualIndex from './pages/Manual/ManualIndex';
+import HomeIndex from './pages/Home/HomeIndex';
+import AboutIndex from './pages/About/AboutIndex';
 
 function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='Instruction' element={<Instruction />} />
-        <Route path='Contact' element={<Contact />} />
+        <Route path='/' element={<HomeIndex />} />
+        <Route path='Manual' element={<ManualIndex />} />
+        <Route path='About' element={<AboutIndex />} />
       </Routes>
     </div>
   );

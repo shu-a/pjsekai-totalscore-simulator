@@ -33,7 +33,7 @@ export default function MakeFormSelect(props) {
           id: props.id,
           readOnly: props.readonly
         }}
-        sx={props.sx}
+        sx={props.selectSx}
       >
         {props.selectList}
       </Select>

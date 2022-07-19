@@ -10,11 +10,12 @@ import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import TotalScore from './pages/Card/TotalSocre'
-import { Link } from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 
 const pages = ['Home', 'Manual', 'About'];
 
 const ResponsiveAppBar = () => {
+  const { pathname } = useLocation();
   const [anchorElNav, setAnchorElNav] = React.useState(null);
 
   const handleOpenNavMenu = (event) => {
@@ -29,19 +30,13 @@ const ResponsiveAppBar = () => {
     <AppBar position="fixed" sx={{ backgroundColor: '#00b3a4' }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
           <Typography
             variant="h6"
             noWrap
-            // component="a"
-            // href="/"            
             component={Link} to={'/'}
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
-              // fontFamily: 'monospace',
-              // fontWeight: 700,
-              // letterSpacing: '.3rem',
               color: 'inherit',
               textDecoration: 'none',
             }}
@@ -78,18 +73,19 @@ const ResponsiveAppBar = () => {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu} component={Link} to={page === 'Home' ? '/' : page}>
+                <MenuItem key={page} onClick={handleCloseNavMenu} component={NavLink} to={page === 'Home' ? '/' : page}
+                sx={{
+                  backgroundColor: pathname === '/' && page === 'Home' ? '#00b3a4' : pathname === '/' + page ? '#00b3a4' : '',
+                  color: pathname === '/' && page === 'Home' ? '#ffffff' : pathname === '/' + page ? '#ffffff' : ''
+                }}>
                   <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
               ))}
             </Menu>
           </Box>
-          {/* <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} /> */}
           <Typography
             variant="h5"
             noWrap
-            // component="a"
-            // href="/"
             component={Link} to={'/'}
             sx={{
               mr: 2,
@@ -99,14 +95,22 @@ const ResponsiveAppBar = () => {
               textDecoration: 'none',
             }}
           >
-            Sekai Total<br/>Score Simulator
+            Sekai Total<br />Score Simulator
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
+                sx={{
+                  my: 2,
+                  color: 'white',
+                  display: 'block',
+                  backgroundColor: pathname === '/' && page === 'Home' ? '#008075' : pathname === '/' + page ? '#008075' : '',
+                  '&:hover': {
+                    backgroundColor: 'rgba(0, 0, 0, 0.3)'
+                  }
+                }}
                 component={Link} to={page === 'Home' ? '/' : page}
               >
                 {page}

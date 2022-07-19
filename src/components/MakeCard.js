@@ -12,31 +12,27 @@ export default function MakeCard(props) {
   subheader
   content
   */
-  const card = [];
-  card.push(
-    <Card
-      variant="outlined"
-      sx={props.sx}
-      key={props.id}
-      name={props.id}
-    >
-      <CardHeader
-        action={
-          <IconButton aria-label={'ariaLabel_' + props.id} onClick={props.clearHandler}>
-            <RefreshIcon />
-          </IconButton>
-        }
-        title={props.title}
-        subheader={props.subheader}
-        key={props.id}
-        name={props.id}
-      />
-      {props.content}
-    </Card>
-  );
   return (
     <Fragment>
-      {card}
+      <Card
+        variant="outlined"
+        sx={props.sx}
+        key={props.id}
+        name={props.id}
+      >
+        <CardHeader
+          action={
+            <IconButton aria-label={'ariaLabel_' + props.id} onClick={props.clearHandler}>
+              <RefreshIcon />
+            </IconButton>
+          }
+          title={props.title}
+          subheader={props.subheader}
+          key={props.id}
+          name={props.id}
+        />
+        {props.content}
+      </Card>
     </Fragment>
   );
 }

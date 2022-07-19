@@ -15,33 +15,30 @@ export default function MakeFormSelect(props) {
   helperText
   selectList
   */
-  const formSelect = [];
-  formSelect.push(
-    <FormControl
-      variant="standard"
-      sx={props.sx}
-      key={props.id}
-      disabled={props.disabled}
-    >
-      <InputLabel>{props.inputLabel}</InputLabel>
-      <Select
-        label={props.label}
-        labelId={props.id}
-        value={props.value}
-        onChange={props.handler}
-        name={props.id}
-        inputProps={{
-          id: props.id
-        }}
-      >
-        {props.selectList}
-      </Select>
-      <FormHelperText>{props.helperText}</FormHelperText>
-    </FormControl>
-  );
   return (
     <Fragment>
-      {formSelect}
+      <FormControl
+        variant="standard"
+        key={props.id}
+        sx={props.sx}
+      >
+        <InputLabel>{props.inputLabel}</InputLabel>
+        <Select
+          label={props.label}
+          labelId={props.id}
+          value={props.value}
+          onChange={props.handler}
+          name={props.id}
+          inputProps={{
+            id: props.id,
+            readOnly: props.readonly
+          }}
+          sx={props.selectSx}
+        >
+          {props.selectList}
+        </Select>
+        <FormHelperText>{props.helperText}</FormHelperText>
+      </FormControl>
     </Fragment>
   );
 }

@@ -1,17 +1,14 @@
-import * as React from 'react';
+import React, { Suspense, lazy } from 'react';
 import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-import Header from './Header';
+import Menu from './Menu';
 
-export default function AppSkeleton(props) {
+export default function AppSkeleton() {
   return (
-    <Box>
-      <Grid>
-        <Header />
-      </Grid>
-      <Grid sx={{ mt: 8, p: 1 }}>
-        {props.content}
-      </Grid>
+    <Box component="div">
+      <Box component="div">
+        <Menu />
+      </Box>
+      <Box component="div" sx={{ top: 0, height: '68.5px' }} />
     </Box>
   );
 }

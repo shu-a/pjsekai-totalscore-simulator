@@ -10,24 +10,20 @@ export default function MakeTextField(props) {
   sx
   inputProps
   */
-  const textField = [];
-  textField.push(
-    <TextField
-      id={props.id}
-      key={props.id}
-      label={props.label}
-      value = {props.value}
-      onChange={props.handler}
-      variant="standard"
-      type={props.type}
-      sx={props.sx}
-      name={props.id}
-      inputProps={props.inputProps}
-    />
-  );
   return (
     <Fragment>
-      {textField}
+      <TextField
+        id={props.id}
+        key={props.id}
+        label={props.label}
+        value={props.value}
+        onChange={props.handler}
+        variant="standard"
+        type={props.type}
+        sx={props.sx}
+        name={props.id}
+        inputProps={props.inputProps}
+      />
     </Fragment>
   );
 }

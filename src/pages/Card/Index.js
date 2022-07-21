@@ -52,10 +52,10 @@ export default function CardIndex() {
     setRankBonus(totalScore.rankBonus ? totalScore.rankBonus : 0);
     setTitleBonus(totalScore.titleBonus ? totalScore.titleBonus : 0);
     setPtsScore(totalScore.ptsScore ? totalScore.ptsScore : 0);
-  };
+  }
   const handleClose = () => {
     setOpen(false);
-  };
+  }
   const [open, setOpen] = useState(false);
   const [totalScore, setTotalScore] = useState(0);
   const [areaBonus, setAreaBonus] = useState(0);

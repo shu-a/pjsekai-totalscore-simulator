@@ -68,11 +68,6 @@ export default function CardIndex() {
         <Grid container sx={{ maxWidth: 1550 }}>
           <Grid container spacing={0.5} sx={gridStyle.default}>
             <Grid item xs>
-              <SekaiViewerLink />
-            </Grid>
-          </Grid>
-          <Grid container spacing={0.5} sx={gridStyle.default}>
-            <Grid item xs>
               <CharacterArea type="area" />
             </Grid>
             <Grid item xs>
@@ -85,6 +80,11 @@ export default function CardIndex() {
             </Grid>
             <Grid item xs>
               <AttrTeamArea type="attr" />
+            </Grid>
+          </Grid>
+          <Grid container spacing={0.5} sx={gridStyle.default}>
+            <Grid item xs>
+              <SekaiViewerLink />
             </Grid>
           </Grid>
           <Grid container spacing={0.05} sx={gridStyle.default}>

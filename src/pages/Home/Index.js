@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import CardIndex from '../Card/CardIndex';
+import CardIndex from '../Card/Index';
 
 export default function HomeIndex() {
   const content = <CardIndex />;

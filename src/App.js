@@ -1,9 +1,9 @@
 import './App.css';
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import ManualIndex from './pages/Manual/ManualIndex';
-import HomeIndex from './pages/Home/HomeIndex';
-import AboutIndex from './pages/About/AboutIndex';
+import ManualIndex from './pages/Manual/Index';
+import HomeIndex from './pages/Home/Index';
+import AboutIndex from './pages/About/Index';
 import NotFound from './NotFound';
 
 function App() {

@@ -45,13 +45,15 @@ const style3 = {
 export default function CardIndex() {
   const handleSubmit = (event) => {
     event.preventDefault();
-    setOpen(true);
     const totalScore = talantScore(event);
-    setTotalScore(totalScore.totalScore ? totalScore.totalScore : 0);
-    setAreaBonus(totalScore.areaBonus ? totalScore.areaBonus : 0);
-    setRankBonus(totalScore.rankBonus ? totalScore.rankBonus : 0);
-    setTitleBonus(totalScore.titleBonus ? totalScore.titleBonus : 0);
-    setPtsScore(totalScore.ptsScore ? totalScore.ptsScore : 0);
+    if (totalScore) {
+      setOpen(true);
+      setTotalScore(totalScore.totalScore ? totalScore.totalScore : 0);
+      setAreaBonus(totalScore.areaBonus ? totalScore.areaBonus : 0);
+      setRankBonus(totalScore.rankBonus ? totalScore.rankBonus : 0);
+      setTitleBonus(totalScore.titleBonus ? totalScore.titleBonus : 0);
+      setPtsScore(totalScore.ptsScore ? totalScore.ptsScore : 0);
+    }
   }
   const handleClose = () => {
     setOpen(false);
@@ -68,18 +70,18 @@ export default function CardIndex() {
         <Grid container sx={{ maxWidth: 1550 }}>
           <Grid container spacing={0.5} sx={gridStyle.default}>
             <Grid item xs>
-              <CharacterArea type="area" />
-            </Grid>
-            <Grid item xs>
-              <CharacterArea type="rank" />
-            </Grid>
-          </Grid>
-          <Grid container spacing={0.5} sx={gridStyle.default}>
-            <Grid item xs>
               <AttrTeamArea type="team" />
             </Grid>
             <Grid item xs>
               <AttrTeamArea type="attr" />
+            </Grid>
+          </Grid>
+          <Grid container spacing={0.5} sx={gridStyle.default}>
+            <Grid item xs>
+              <CharacterArea type="area" />
+            </Grid>
+            <Grid item xs>
+              <CharacterArea type="rank" />
             </Grid>
           </Grid>
           <Grid container spacing={0.5} sx={gridStyle.default}>

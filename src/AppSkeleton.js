@@ -8,7 +8,7 @@ export default function AppSkeleton() {
       <Box component="div">
         <Menu />
       </Box>
-      <Box component="div" sx={{ top: 0, height: '75px' }} />
+      <Box component="div" sx={{ top: 0, height: '100px' }} />
     </Box>
   );
 }

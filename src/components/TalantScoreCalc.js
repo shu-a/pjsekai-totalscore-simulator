@@ -1,24 +1,3 @@
-export const createMsg = (message) => {
-  return console.log(message);
-}
-
-export const validation = (array, maxIdx, message) => {
-  let idx = array.length - 1;
-  if (idx === maxIdx - 1) {
-    if (!array[idx].value) {
-      createMsg(message);
-      document.getElementById(array[idx].id).focus();
-      return false;
-    } else {
-      return true;
-    }
-  } else {
-    createMsg(message);
-    document.getElementById(array[idx].id).focus();
-    return false;
-  }
-}
-
 export const talantScore = (event) => {
   const formData = new FormData(event.currentTarget);
   let characterArea = {};
@@ -33,32 +12,90 @@ export const talantScore = (event) => {
   for (let key of formData.keys()) {
     let id = key.split('_')[0];
     let value = formData.get(key);
-    if (id === 'characterArea') {
-      characterArea = { ...characterArea, [key]: value }
-      // if (!value)
-      //   break;
-    } else if (id === 'characterRank') {
-      characterRank = { ...characterRank, [key]: value }
-      // if (!value)
-      //   break;
-    } else if (id === 'teamArea') {
+    if (id === 'teamArea') {
       teamArea = { ...teamArea, [key]: value }
-      // if (!value)
-      //   break;
+      if (!value) {
+        document.getElementById(key).focus();
+        alert("값을 입력해주세요.");
+        return false;
+      }
     } else if (id === 'attrArea') {
       attrArea = { ...attrArea, [key]: value }
-      // if (!value)
-      //   break;
+      if (!value) {
+        document.getElementById(key).focus();
+        alert("값을 입력해주세요.");
+        return false;
+      }
+    } else if (key === 'titleBonus') {
+      if (!value) {
+        document.getElementById(key).focus();
+        alert("값을 입력해주세요.");
+        return false;
+      }
+    } else if (id === 'characterArea') {
+      characterArea = { ...characterArea, [key]: value }
+      if (!value) {
+        document.getElementById(key).focus();
+        alert("값을 입력해주세요.");
+        return false;
+      }
+    } else if (id === 'characterRank') {
+      characterRank = { ...characterRank, [key]: value }
+      if (!value) {
+        document.getElementById(key).focus();
+        alert("값을 입력해주세요.");
+        return false;
+      }
     } else if (id === 'Reader') {
       reader = { ...reader, [key]: value }
+      if (!value) {
+        if (key === id + '_performance' || key === id + '_stamina' || key === id + '_technique')
+          document.getElementById(key).focus();
+        else
+          document.getElementById('mui-component-select-' + key).focus();
+        alert("값을 입력해주세요.");
+        return false;
+      }
     } else if (id === 'SubReader') {
       subReader = { ...subReader, [key]: value }
+      if (!value) {
+        if (key === id + '_performance' || key === id + '_stamina' || key === id + '_technique')
+          document.getElementById(key).focus();
+        else
+          document.getElementById('mui-component-select-' + key).focus();
+        alert("값을 입력해주세요.");
+        return false;
+      }
     } else if (id === 'Member1') {
       member1 = { ...member1, [key]: value }
+      if (!value) {
+        if (key === id + '_performance' || key === id + '_stamina' || key === id + '_technique')
+          document.getElementById(key).focus();
+        else
+          document.getElementById('mui-component-select-' + key).focus();
+        alert("값을 입력해주세요.");
+        return false;
+      }
     } else if (id === 'Member2') {
       member2 = { ...member2, [key]: value }
+      if (!value) {
+        if (key === id + '_performance' || key === id + '_stamina' || key === id + '_technique')
+          document.getElementById(key).focus();
+        else
+          document.getElementById('mui-component-select-' + key).focus();
+        alert("값을 입력해주세요.");
+        return false;
+      }
     } else if (id === 'Member3') {
       member3 = { ...member3, [key]: value }
+      if (!value) {
+        if (key === id + '_performance' || key === id + '_stamina' || key === id + '_technique')
+          document.getElementById(key).focus();
+        else
+          document.getElementById('mui-component-select-' + key).focus();
+        alert("값을 입력해주세요.");
+        return false;
+      }
     }
   }
   const cardData = {}

@@ -1,6 +1,6 @@
 # Sekai Event Deck Simulator
 
-This project shows whether the target total score comes out when configuring the deck.
+This project shows whether the target total score comes out when configuring the deck.\
 There may be some errors in the total score.
 
 # Getting Started with Create React App

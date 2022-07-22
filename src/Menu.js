@@ -26,6 +26,11 @@ const ResponsiveAppBar = () => {
     setAnchorElNav(null);
   };
 
+  const [disabled, setDisabled] = React.useState(false);
+  React.useEffect(() => {
+    pathname === '/' ? setDisabled(false) : setDisabled(true);
+  }, [pathname]);
+
   return (
     <AppBar position="fixed" sx={{ backgroundColor: '#00b3a4' }}>
       <Container maxWidth="xl">
@@ -41,7 +46,7 @@ const ResponsiveAppBar = () => {
               textDecoration: 'none',
             }}
           >
-            Sekai Total Score Simulator
+            Project Sekai Total Score Simulator
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
@@ -95,7 +100,7 @@ const ResponsiveAppBar = () => {
               textDecoration: 'none',
             }}
           >
-            Sekai Total<br />Score Simulator
+            Project Sekai Total<br />Score Simulator
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
@@ -117,7 +122,7 @@ const ResponsiveAppBar = () => {
               </Button>
             ))}
           </Box>
-          <TotalScore />
+          <TotalScore disabled={disabled} />
         </Toolbar>
       </Container>
     </AppBar>

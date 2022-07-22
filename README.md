@@ -1,4 +1,4 @@
-# Sekai Event Deck Simulator
+# Project Sekai Event Deck Simulator
 
 This project shows whether the target total score comes out when configuring the deck.\
 There may be some errors in the total score.

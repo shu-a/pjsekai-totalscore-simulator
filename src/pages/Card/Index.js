@@ -160,6 +160,9 @@ export default function CardIndex() {
                   </Grid>
                 </Grid>
               </Grid>
+              <Box sx={{ pt: 1, pb: 1 }}>
+                ※ 에어리어 아이템 보너스에 오차가 있을 수 있습니다.
+              </Box>
             </DialogContentText>
           </DialogContent>
           <DialogContent sx={{ textAlign: 'center', pt: 0, pb: 3 }}>

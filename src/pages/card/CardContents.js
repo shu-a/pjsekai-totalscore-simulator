@@ -36,14 +36,14 @@ export default function CardContents(props) {
         setTeam(value[getTeam] ? value[getTeam] : '');
         setRarities(value[getRarities] ? value[getRarities] : '')
       }
-    });
+    });// eslint-disable-next-line
   }, []);
   const handleChangeText = (e) => {
     const { name, value } = e.target;
     setFormValue({ ...formValue, [name]: value });
   }
   useEffect(() => {
-    localforage.setItem(props.title, formValue);
+    localforage.setItem(props.title, formValue);// eslint-disable-next-line
   }, [formValue]);
 
   const handleClear = () => {
@@ -120,7 +120,7 @@ export default function CardContents(props) {
         return <MenuItem key={c.id} value={c.id}>{c.fullName}</MenuItem>;
       else
         return false;
-    }));
+    }));// eslint-disable-next-line
   }, [team, loadSubUnit]);
 
   const teamList = props.teamList.map((c) =>

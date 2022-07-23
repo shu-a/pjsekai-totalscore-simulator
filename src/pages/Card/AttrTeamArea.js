@@ -38,14 +38,14 @@ export default function AttrTeamArea(props) {
     if (props.type === 'attr')
       setAttrTeamAreaList(getAttrList());
     else if (props.type === 'team')
-      getTeamList().then((resData) => setAttrTeamAreaList(resData));
+      getTeamList().then((resData) => setAttrTeamAreaList(resData));// eslint-disable-next-line
   }, [props.type]);
   const handleChangeText = (e) => {
     const { name, value } = e.target;
     setFormValue({ ...formValue, [name]: value });
   }
   useEffect(() => {
-    localforage.setItem(type, formValue);
+    localforage.setItem(type, formValue);// eslint-disable-next-line
   }, [formValue]);
   const textField = attrTeamAreaList.map((c) => {
     let value = '';

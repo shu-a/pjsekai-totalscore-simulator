@@ -30,10 +30,15 @@ export default function SimpleAccordion() {
             <Box sx={boxStyle}>{"메뉴 > 소지품 > 에어리어 아이템 > 효과 확인"}</Box>
           </Box>
           <Box>
-            <img src={require('../../assets/manual/app/profile_1.png')} alt="" width="100%"
+            <img src={require('../../assets/manual/app/area_2.png')} alt="" width="100%"
               onClick={e => {
                 e.preventDefault();
-                viewerOpen(require('../../assets/manual/app/profile_1.png'), '');
+                viewerOpen(require('../../assets/manual/app/area_2.png'), '');
+              }} />
+            <img src={require('../../assets/manual/app/area_3.png')} alt="" width="100%"
+              onClick={e => {
+                e.preventDefault();
+                viewerOpen(require('../../assets/manual/app/area_3.png'), '');
               }} />
           </Box>
         </Box>

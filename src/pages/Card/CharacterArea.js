@@ -35,14 +35,14 @@ export default function CharacterArea(props) {
       if (value)
         setFormValue(value);
     });
-    getCharacterList().then((resData) => setCharacterList(resData));
+    getCharacterList().then((resData) => setCharacterList(resData));// eslint-disable-next-line
   }, []);
   const handleChangeText = (e) => {
     const { name, value } = e.target;
     setFormValue({ ...formValue, [name]: value });
   }
   useEffect(() => {
-    localforage.setItem(type, formValue);
+    localforage.setItem(type, formValue);// eslint-disable-next-line
   }, [formValue]);
   const textField = characterList.map((c) => {
     let value = '';

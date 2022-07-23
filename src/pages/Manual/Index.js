@@ -30,12 +30,12 @@ export default function SimpleAccordion() {
             <Box sx={boxStyle}>{"메뉴 > 소지품 > 에어리어 아이템 > 효과 확인"}</Box>
           </Box>
           <Box>
-            <img src={require('../../assets/manual/app/area_2.png')} alt="" width="100%"
+            <img src={require('../../assets/manual/app/area_2.png')} alt="" width="90%"
               onClick={e => {
                 e.preventDefault();
                 viewerOpen(require('../../assets/manual/app/area_2.png'), '');
               }} />
-            <img src={require('../../assets/manual/app/area_3.png')} alt="" width="100%"
+            <img src={require('../../assets/manual/app/area_3.png')} alt="" width="90%"
               onClick={e => {
                 e.preventDefault();
                 viewerOpen(require('../../assets/manual/app/area_3.png'), '');
@@ -53,7 +53,7 @@ export default function SimpleAccordion() {
             <Box sx={boxStyle}>{"메뉴 > 프로필 > 기본 프로필 > 오른쪽 화살표 > 캐릭터 랭크"}</Box>
           </Box>
           <Box>
-            <img src={require('../../assets/manual/app/profile_2.png')} alt="" width="100%"
+            <img src={require('../../assets/manual/app/profile_2.png')} alt="" width="90%"
               onClick={e => {
                 e.preventDefault();
                 viewerOpen(require('../../assets/manual/app/profile_2.png'), '');
@@ -71,7 +71,7 @@ export default function SimpleAccordion() {
             <Box sx={boxStyle}>{"메뉴 > 프로필 > 기본 프로필 > 칭호 > 종합 능력치 보너스"}</Box>
           </Box>
           <Box>
-            <img src={require('../../assets/manual/app/profile_1_1.png')} alt="" width="100%"
+            <img src={require('../../assets/manual/app/profile_1_1.png')} alt="" width="90%"
               onClick={e => {
                 e.preventDefault();
                 viewerOpen(require('../../assets/manual/app/profile_1_1.png'), '');
@@ -89,7 +89,7 @@ export default function SimpleAccordion() {
             <Box sx={boxStyle}>{"1. SEKAI VIEWER 버튼 클릭"}</Box>
           </Box>
           <Box>
-            <img src={require('../../assets/manual/home/sekai_viewer.png')} alt="" width="100%"
+            <img src={require('../../assets/manual/home/sekai_viewer.png')} alt="" width="90%"
               onClick={e => {
                 e.preventDefault();
                 viewerOpen(require('../../assets/manual/home/sekai_viewer.png'), '');
@@ -102,7 +102,7 @@ export default function SimpleAccordion() {
             <Box sx={boxStyle}>{"2. SEKAI VIEWER 사이트에서 원하는 카드를 선택"}</Box>
           </Box>
           <Box>
-            <img src={require('../../assets/manual/sekai/sekai_1.png')} alt="" width="100%"
+            <img src={require('../../assets/manual/sekai/sekai_1.png')} alt="" width="90%"
               onClick={e => {
                 e.preventDefault();
                 viewerOpen(require('../../assets/manual/sekai/sekai_1.png'), '');
@@ -115,7 +115,7 @@ export default function SimpleAccordion() {
             <Box sx={boxStyle}>{"3. 원하는 Master Rank, Card Level을 선택 후 Performance, Technique, Stamina와 캐릭터 정보를 카드 정보에 입력"}</Box>
           </Box>
           <Box>
-            <img src={require('../../assets/manual/sekai/sekai_2.png')} alt="" width="100%"
+            <img src={require('../../assets/manual/sekai/sekai_2.png')} alt="" width="90%"
               onClick={e => {
                 e.preventDefault();
                 viewerOpen(require('../../assets/manual/sekai/sekai_2.png'), '');
@@ -128,7 +128,7 @@ export default function SimpleAccordion() {
             <Box sx={boxStyle}>{"4. 입력한 정보를 확인 후 종합력 계산 버튼을 클릭"}</Box>
           </Box>
           <Box>
-            <img src={require('../../assets/manual/home/card_2.png')} alt="" width="100%"
+            <img src={require('../../assets/manual/home/card_2.png')} alt="" width="90%"
               onClick={e => {
                 e.preventDefault();
                 viewerOpen(require('../../assets/manual/home/card_2.png'), '');

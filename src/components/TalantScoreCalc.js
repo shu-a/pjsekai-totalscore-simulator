@@ -109,12 +109,10 @@ export const talantScore = (event) => {
   cardData.member2 = member2;
   cardData.member3 = member3;
   cardData.bonus = formData.get('titleBonus');
-  // console.log('talant: ', talantScoreCalc(cardData));
   return talantScoreCalc(cardData);
 }
 
 export const talantScoreCalc = (props) => {
-  // console.log(props);
   const readerTeam = props.reader.Reader_team;
   const subReaderTeam = props.subReader.SubReader_team;
   const member1Team = props.member1.Member1_team;
@@ -220,7 +218,6 @@ const memberBonus = (card, characterArea, characterRank, teamArea, attrArea, tea
       }
     }
   }
-  // 팀 보너스 계산
   if (teamBonus === 'piapro') {
     if (vsingerUnit === 'Y')
       teamAreaBonus += teamAreaBonus;
@@ -231,7 +228,6 @@ const memberBonus = (card, characterArea, characterRank, teamArea, attrArea, tea
     teamAreaBonus = subUnitAreaBonus;
   } else
     teamAreaBonus = teamAreaBonus > subUnitAreaBonus ? teamAreaBonus : subUnitAreaBonus
-  // 속성 보너스 계산
   if (attrBonus === 'Y')
     attrAreaBonus += attrAreaBonus;
 

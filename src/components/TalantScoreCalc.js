@@ -4,8 +4,8 @@ export const talantScore = (event) => {
   let characterRank = {};
   let teamArea = {};
   let attrArea = {};
-  let reader = {};
-  let subReader = {};
+  let leader = {};
+  let subLeader = {};
   let member1 = {};
   let member2 = {};
   let member3 = {};
@@ -46,8 +46,8 @@ export const talantScore = (event) => {
         alert("값을 입력해주세요.");
         return false;
       }
-    } else if (id === 'Reader') {
-      reader = { ...reader, [key]: value }
+    } else if (id === 'Leader') {
+      leader = { ...leader, [key]: value }
       if (!value) {
         if (key === id + '_performance' || key === id + '_stamina' || key === id + '_technique')
           document.getElementById(key).focus();
@@ -56,8 +56,8 @@ export const talantScore = (event) => {
         alert("값을 입력해주세요.");
         return false;
       }
-    } else if (id === 'SubReader') {
-      subReader = { ...subReader, [key]: value }
+    } else if (id === 'SubLeader') {
+      subLeader = { ...subLeader, [key]: value }
       if (!value) {
         if (key === id + '_performance' || key === id + '_stamina' || key === id + '_technique')
           document.getElementById(key).focus();
@@ -103,8 +103,8 @@ export const talantScore = (event) => {
   cardData.characterRank = characterRank;
   cardData.teamArea = teamArea;
   cardData.attrArea = attrArea;
-  cardData.reader = reader;
-  cardData.subReader = subReader;
+  cardData.leader = leader;
+  cardData.subLeader = subLeader;
   cardData.member1 = member1;
   cardData.member2 = member2;
   cardData.member3 = member3;
@@ -113,41 +113,41 @@ export const talantScore = (event) => {
 }
 
 export const talantScoreCalc = (props) => {
-  const readerTeam = props.reader.Reader_team;
-  const subReaderTeam = props.subReader.SubReader_team;
+  const leaderTeam = props.leader.Leader_team;
+  const subLeaderTeam = props.subLeader.SubLeader_team;
   const member1Team = props.member1.Member1_team;
   const member2Team = props.member2.Member2_team;
   const member3Team = props.member3.Member3_team;
-  const readerSubUnit = props.reader.Reader_subUnit;
-  const subReaderSubUnit = props.subReader.SubReader_subUnit;
+  const leaderSubUnit = props.leader.Leader_subUnit;
+  const subLeaderSubUnit = props.subLeader.SubLeader_subUnit;
   const member1SubUnit = props.member1.Member1_subUnit;
   const member2SubUnit = props.member2.Member2_subUnit;
   const member3SubUnit = props.member3.Member3_subUnit;
-  const readerAttr = props.reader.Reader_attr;
-  const subReaderAttr = props.subReader.SubReader_attr;
+  const leaderAttr = props.leader.Leader_attr;
+  const subLeaderAttr = props.subLeader.SubLeader_attr;
   const member1Attr = props.member1.Member1_attr;
   const member2Attr = props.member2.Member2_attr;
   const member3Attr = props.member3.Member3_attr;
   let teamBonus = 'none';
-  if (readerTeam === subReaderTeam && readerTeam === member1Team && readerTeam === member2Team && readerTeam === member3Team) {
+  if (leaderTeam === subLeaderTeam && leaderTeam === member1Team && leaderTeam === member2Team && leaderTeam === member3Team) {
     teamBonus = 'piapro'
-  } else if (readerSubUnit === subReaderSubUnit && readerSubUnit === member1SubUnit && readerSubUnit === member2SubUnit && readerSubUnit === member3SubUnit) {
+  } else if (leaderSubUnit === subLeaderSubUnit && leaderSubUnit === member1SubUnit && leaderSubUnit === member2SubUnit && leaderSubUnit === member3SubUnit) {
     teamBonus = 'unit';
   }
   let attrBonus = 'N';
-  if (readerAttr === subReaderAttr && readerAttr === member1Attr && readerAttr === member2Attr && readerAttr === member3Attr)
+  if (leaderAttr === subLeaderAttr && leaderAttr === member1Attr && leaderAttr === member2Attr && leaderAttr === member3Attr)
     attrBonus = 'Y';
 
-  const reader = memberBonus(props.reader, props.characterArea, props.characterRank, props.teamArea, props.attrArea, teamBonus, attrBonus);
-  const subReader = memberBonus(props.subReader, props.characterArea, props.characterRank, props.teamArea, props.attrArea, teamBonus, attrBonus);
+  const leader = memberBonus(props.leader, props.characterArea, props.characterRank, props.teamArea, props.attrArea, teamBonus, attrBonus);
+  const subLeader = memberBonus(props.subLeader, props.characterArea, props.characterRank, props.teamArea, props.attrArea, teamBonus, attrBonus);
   const member1 = memberBonus(props.member1, props.characterArea, props.characterRank, props.teamArea, props.attrArea, teamBonus, attrBonus);
   const member2 = memberBonus(props.member2, props.characterArea, props.characterRank, props.teamArea, props.attrArea, teamBonus, attrBonus);
   const member3 = memberBonus(props.member3, props.characterArea, props.characterRank, props.teamArea, props.attrArea, teamBonus, attrBonus);
   const totalScore = {};
-  totalScore.totalScore = reader.resultBonus + subReader.resultBonus + member1.resultBonus + member2.resultBonus + member3.resultBonus + Number(props.bonus);
+  totalScore.totalScore = leader.resultBonus + subLeader.resultBonus + member1.resultBonus + member2.resultBonus + member3.resultBonus + Number(props.bonus);
   totalScore.titleBonus = Number(props.bonus);
-  totalScore.areaBonus = reader.cAreaBonus + subReader.cAreaBonus + member1.cAreaBonus + member2.cAreaBonus + member3.cAreaBonus;
-  totalScore.rankBonus = reader.cRankBonus + subReader.cRankBonus + member1.cRankBonus + member2.cRankBonus + member3.cRankBonus;
+  totalScore.areaBonus = leader.cAreaBonus + subLeader.cAreaBonus + member1.cAreaBonus + member2.cAreaBonus + member3.cAreaBonus;
+  totalScore.rankBonus = leader.cRankBonus + subLeader.cRankBonus + member1.cRankBonus + member2.cRankBonus + member3.cRankBonus;
   totalScore.ptsScore = totalScore.totalScore - totalScore.titleBonus - totalScore.areaBonus - totalScore.rankBonus;
   return totalScore;
 }

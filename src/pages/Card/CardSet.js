@@ -21,8 +21,8 @@ export default function Card() {
   }, []);
 
   const cardInfo = [
-    { title: 'Reader', idx: 1, color: '#ed5fab', backgroundColor: '#fffafd', border: 2, pb: 2 },
-    { title: 'SubReader', idx: 2, color: '#00b3a4', backgroundColor: '#faffff', border: 2, pb: 2 },
+    { title: 'Leader', idx: 1, color: '#ed5fab', backgroundColor: '#fffafd', border: 2, pb: 2 },
+    { title: 'SubLeader', idx: 2, color: '#00b3a4', backgroundColor: '#faffff', border: 2, pb: 2 },
     { title: 'Member1', idx: 3, color: '#444564', backgroundColor: '#fafbff', border: 2, pb: 2 },
     { title: 'Member2', idx: 4, color: '#444564', backgroundColor: '#fafbff', border: 2, pb: 2 },
     { title: 'Member3', idx: 5, color: '#444564', backgroundColor: '#fafbff', border: 2, pb: 2 }

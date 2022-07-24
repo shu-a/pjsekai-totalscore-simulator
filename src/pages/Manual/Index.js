@@ -164,7 +164,7 @@ export default function SimpleAccordion() {
     return <MakeAccordion key={i} id={i} title={c.title} content={c.content} sx={{ fontSize: 20 }} />;
   });
   return (
-    <Box sx={{ p: 1, pt: 1 }}>
+    <Box sx={{ pt: 1, pl: 5, pr: 5 }}>
       {content}
       <MakeViewer src={src} alt={alt} visible={visible} close={viewerClose} />
     </Box>

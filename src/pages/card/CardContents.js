@@ -143,7 +143,7 @@ export default function CardContents(props) {
       sx: { m: 1, width: 120 }, id: 'subUnit', label: '서브유닛', selectSx: { color: readOnlySubUnit ? 'rgba(0, 0, 0, 0.38)' : '' },
       value: subUnit, handler: handleSelectSubUnit, selectList: teamList, helperText: helperText, readonly: readOnlySubUnit
     },
-    { sx: { m: 1, width: 120 }, id: 'rarities', label: '성급', value: rarities, handler: handleSelectRarities, selectList: raritiesList },
+    { sx: { m: 1, width: 120 }, id: 'rarities', label: '별', value: rarities, handler: handleSelectRarities, selectList: raritiesList },
     {
       sx: { m: 1, width: 120 }, id: 'character', label: '캐릭터명', selectSx: { color: readOnlySubUnit ? 'rgba(0, 0, 0, 0.38)' : '' },
       value: character, handler: handleSelectCharacter, selectList: charactList, helperText: helperText, readonly: readOnlyCharacter

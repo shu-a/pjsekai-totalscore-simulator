@@ -25,7 +25,7 @@ export async function getCharacterList() {
   }
 }
 
-// 성급 목록 불러오기
+// 별 목록 불러오기
 export async function getRaritiesList() {
   try {
     const response = await axios.get('https://shu-a.github.io/sekai-master-db-diff/cardRarities.json');

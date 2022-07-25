@@ -91,6 +91,7 @@ export default function CardContents(props) {
 
   const [charactList, setCharacterList] = useState([]);
   const [loadSubUnit, setLoadSubUnit] = useState('N');
+  const [loadCharacterList, setLoadCharacterList] = useState('N');
   useEffect(() => {
     changeReadonly(team);
     const subUnitName = props.title + '_subUnit';
@@ -107,21 +108,25 @@ export default function CardContents(props) {
     const characterName = props.title + '_character';
     if (loadSubUnit === 'Y') {
       setCharacterList(props.characterList.map((c) => {
+        if (loadCharacterList === 'N')
+          setLoadCharacterList('Y');
         if (team === (c.unit))
           return <MenuItem key={c.id} value={c.id}>{c.fullName}</MenuItem>;
         else
           return false;
       }));
-      if (team && loadTeam === 'N') {
-        const characterEvent = { target: { name: characterName, value: formValue[characterName] } };
-        handleSelectCharacter(characterEvent);
-      } else if (team && loadTeam === 'Y') {
-        setCharacter('');
-        const characterEvent = { target: { name: characterName, value: '' } };
-        handleSelectCharacter(characterEvent);
+      if (loadCharacterList === 'Y') {
+        if (team && loadTeam === 'N') {
+          const characterEvent = { target: { name: characterName, value: formValue[characterName] } };
+          handleSelectCharacter(characterEvent);
+        } else if (team && loadTeam === 'Y') {
+          setCharacter('');
+          const characterEvent = { target: { name: characterName, value: '' } };
+          handleSelectCharacter(characterEvent);
+        }
       }
     }// eslint-disable-next-line
-  }, [team, loadSubUnit]);
+  }, [team, loadSubUnit, loadCharacterList]);
 
   const teamList = props.teamList.map((c) =>
     <MenuItem key={c.seq} value={c.unit} unit={c.unit}>{c.unitName}</MenuItem>

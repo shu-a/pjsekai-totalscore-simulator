@@ -106,6 +106,12 @@ export default function CardContents(props) {
     }
     const characterName = props.title + '_character';
     if (loadSubUnit === 'Y') {
+      setCharacterList(props.characterList.map((c) => {
+        if (team === (c.unit))
+          return <MenuItem key={c.id} value={c.id}>{c.fullName}</MenuItem>;
+        else
+          return false;
+      }));
       if (team && loadTeam === 'N') {
         const characterEvent = { target: { name: characterName, value: formValue[characterName] } };
         handleSelectCharacter(characterEvent);
@@ -114,13 +120,7 @@ export default function CardContents(props) {
         const characterEvent = { target: { name: characterName, value: '' } };
         handleSelectCharacter(characterEvent);
       }
-    }
-    setCharacterList(props.characterList.map((c) => {
-      if (team === (c.unit))
-        return <MenuItem key={c.id} value={c.id}>{c.fullName}</MenuItem>;
-      else
-        return false;
-    }));// eslint-disable-next-line
+    }// eslint-disable-next-line
   }, [team, loadSubUnit]);
 
   const teamList = props.teamList.map((c) =>

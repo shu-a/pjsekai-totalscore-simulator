@@ -5,14 +5,14 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
-interface Props {
+interface InfProps {
   sx: any
   id: string | number
   title: string
   content: JSX.Element
 }
 
-export default function SimpleAccordion(props: Props) {
+export default function SimpleAccordion(props: InfProps) {
   let propsId = String(props.id);
   return (
     <React.Fragment>

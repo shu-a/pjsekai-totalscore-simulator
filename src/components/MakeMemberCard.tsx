@@ -1,7 +1,7 @@
 import React from 'react';
 import MakeCard from './MakeCard';
 
-interface Props {
+interface InfProps {
   sx: any
   id: string
   title: string
@@ -14,7 +14,7 @@ interface Props {
   makeFormSelect: any
 }
 
-export default function MakeMemberCard(props: Props) {
+export default function MakeMemberCard(props: InfProps) {
   /* 옵션
   sx
   id

@@ -4,7 +4,7 @@ import CardHeader from '@mui/material/CardHeader';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import IconButton from '@mui/material/IconButton';
 
-interface Props {
+interface InfProps {
   sx: any
   id: string
   title: string
@@ -12,7 +12,7 @@ interface Props {
   content: JSX.Element[]
   clearHandler: any
 }
-export default function MakeCard(props: Props) {
+export default function MakeCard(props: InfProps) {
   /* 옵션
   sx
   id

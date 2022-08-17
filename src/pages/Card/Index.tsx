@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { InfKeyValue } from '../../common/common';
 import CardSet from './CardSet';
 import CharacterArea from './CharacterArea';
 import AttrTeamArea from './AttrTeamArea';
@@ -13,16 +14,8 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { talantScore } from '../../components/TalantScoreCalc'
 import Chip from '@mui/material/Chip';
 
-export type CalcType = {
-  
-};
-
 export interface InfCharacterArea {
   type: string
-}
-
-export interface InfKeyValue {
-  [key: string]: string | number
 }
 
 const gridStyle = {

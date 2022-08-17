@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { getCharacterList } from '../../apis/apiClient'
+import { InfKeyValue } from '../../common/common';
+import { getCharacterList } from '../../apis/apiClient';
 import MakeCard from '../../components/MakeCard';
 import MakeTextField from '../../components/MakeTextField';
 import localforage from 'localforage';
-import { InfCharacterArea, InfKeyValue } from '../Card/Index';
+import { InfCharacterArea } from '../Card/Index';
 
 function switchiId(props: string) {
   switch (props) {

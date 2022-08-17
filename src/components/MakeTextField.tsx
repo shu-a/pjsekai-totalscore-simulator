@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import TextField from '@mui/material/TextField';
 
-interface Props {
+interface InfProps {
   sx: any
   id: string | number
   label: string
@@ -10,7 +10,7 @@ interface Props {
   type: string
   inputProps: any
 }
-export default function MakeTextField(props: Props) {
+export default function MakeTextField(props: InfProps) {
   let propsId = String(props.id);
   /* 옵션
   id

@@ -1,12 +1,11 @@
 import React, { Fragment } from 'react';
+import { InfMakeProps } from '../common/common';
 import Select from '@mui/material/Select';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import FormHelperText from '@mui/material/FormHelperText';
 
-interface InfProps {
-  sx: any
-  id: string
+interface InfProps extends InfMakeProps {
   inputLabel: string
   label: string
   value: string | number
@@ -17,6 +16,7 @@ interface InfProps {
   helperText: string
 }
 export default function MakeFormSelect(props: InfProps) {
+  let propsId = String(props.id);
   /* 옵션
   sx
   id
@@ -37,12 +37,12 @@ export default function MakeFormSelect(props: InfProps) {
         <InputLabel>{props.inputLabel}</InputLabel>
         <Select
           label={props.label}
-          labelId={props.id}
+          labelId={propsId}
           value={props.value}
           onChange={props.handler}
-          name={props.id}
+          name={propsId}
           inputProps={{
-            id: props.id,
+            id: propsId,
             readOnly: props.readonly
           }}
           sx={props.selectSx}

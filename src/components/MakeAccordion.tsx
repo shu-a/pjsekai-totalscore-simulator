@@ -1,14 +1,12 @@
 import * as React from 'react';
+import { InfMakePropsTitle } from '../common/common';
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
-interface InfProps {
-  sx: any
-  id: string | number
-  title: string
+interface InfProps extends InfMakePropsTitle {
   content: JSX.Element
 }
 

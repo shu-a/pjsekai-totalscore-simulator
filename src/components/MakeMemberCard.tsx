@@ -1,10 +1,8 @@
 import React from 'react';
+import { InfMakePropsTitle } from '../common/common';
 import MakeCard from './MakeCard';
 
-interface InfProps {
-  sx: any
-  id: string
-  title: string
+interface InfProps extends InfMakePropsTitle {
   subheader: string
   clearHandler: any
   border: any

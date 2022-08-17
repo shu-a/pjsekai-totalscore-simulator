@@ -1,9 +1,8 @@
 import React, { Fragment } from 'react';
+import { InfMakeProps } from '../common/common';
 import TextField from '@mui/material/TextField';
 
-interface InfProps {
-  sx: any
-  id: string | number
+interface InfProps extends InfMakeProps {
   label: string
   value: string | number
   handler: any

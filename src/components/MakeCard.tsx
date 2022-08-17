@@ -1,13 +1,11 @@
 import React, { Component, Fragment } from 'react';
+import { InfMakePropsTitle } from '../common/common';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import IconButton from '@mui/material/IconButton';
 
-interface InfProps {
-  sx: any
-  id: string
-  title: string
+interface InfProps extends InfMakePropsTitle {
   subheader: string
   content: JSX.Element[]
   clearHandler: any

@@ -13,6 +13,18 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { talantScore } from '../../components/TalantScoreCalc'
 import Chip from '@mui/material/Chip';
 
+export type CalcType = {
+  
+};
+
+export interface InfCharacterArea {
+  type: string
+}
+
+export interface InfKeyValue {
+  [key: string]: string | number
+}
+
 const gridStyle = {
   default: {
     mt: 0.5,
@@ -43,7 +55,7 @@ const style3 = {
 }
 
 export default function CardIndex() {
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: any) => {
     event.preventDefault();
     const totalScore = talantScore(event);
     if (totalScore) {

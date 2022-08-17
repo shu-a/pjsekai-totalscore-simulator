@@ -5,14 +5,22 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
-export default function SimpleAccordion(props) {
+interface Props {
+  sx: any
+  id: string | number
+  title: string
+  content: JSX.Element
+}
+
+export default function SimpleAccordion(props: Props) {
+  let propsId = String(props.id);
   return (
     <React.Fragment>
       <Accordion>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon sx={{ color: '#ffffff' }} />}
-          aria-controls={props.id}
-          id={props.id}
+          aria-controls={propsId}
+          // id={propsId}
           sx={{
             backgroundColor: '#00b3a4',
             color: '#ffffff'

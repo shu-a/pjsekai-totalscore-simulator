@@ -9,7 +9,7 @@ import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import MakeViewer from '../../components/MakeViewer';
+import MakeViewer from '../../components/MakeViewer.js';
 
 const style3 = {
   backgroundColor: '#00b3a4',
@@ -38,11 +38,11 @@ const dialog = {
   }
 }
 
-export default function ActionAreaCard(props) {
+export default function ActionAreaCard(props: any) {
   const [src, setSrc] = useState('');
   const [alt, setAlt] = useState('');
   const [visible, setVisible] = useState(false);
-  const viewerOpen = (src, alt) => {
+  const viewerOpen = (src: any, alt: any) => {
     setSrc(src);
     setAlt(alt);
     setVisible(true);
@@ -88,7 +88,7 @@ export default function ActionAreaCard(props) {
           카드 덱 입력 방법
         </DialogTitle>
         <DialogContent sx={{ height: '50vh' }}>
-          <DialogContent component="div" id="alert-dialog-description" sx={dialog.img}
+          <DialogContent id="alert-dialog-description" sx={dialog.img}
             onClick={e => {
               e.preventDefault();
               viewerOpen(imgSrc.sekai_viewer, '');
@@ -99,7 +99,7 @@ export default function ActionAreaCard(props) {
             1. SEKAI VIEWER 버튼 클릭
           </DialogContentText>
           <DialogContentText component="div" id="alert-dialog-description" sx={dialog.img}
-            onClick={e => {
+            onClick={(e: any) => {
               e.preventDefault();
               viewerOpen(imgSrc.sekai_1, '');
             }}>
@@ -109,7 +109,7 @@ export default function ActionAreaCard(props) {
             2. SEKAI VIEWER 사이트에서 원하는 카드를 선택
           </DialogContentText>
           <DialogContentText component="div" id="alert-dialog-description" sx={dialog.img}
-            onClick={e => {
+            onClick={(e: any) => {
               e.preventDefault();
               viewerOpen(imgSrc.sekai_2, '');
             }}>
@@ -119,7 +119,7 @@ export default function ActionAreaCard(props) {
             3. Master Rank, Card Level을 선택 후 나온 Performance, Technique, Stamina와 캐릭터 정보를 카드 덱에 입력
           </DialogContentText>
           <DialogContentText component="div" id="alert-dialog-description" sx={dialog.img}
-            onClick={e => {
+            onClick={(e: any) => {
               e.preventDefault();
               viewerOpen(imgSrc.card_2, '');
             }}>

@@ -1,7 +1,20 @@
 import React from 'react';
 import MakeCard from './MakeCard';
 
-export default function MakeMemberCard(props) {
+interface Props {
+  sx: any
+  id: string
+  title: string
+  subheader: string
+  clearHandler: any
+  border: any
+  color: string
+  backgroundColor: string
+  // makeFormSelect: JSX.Element[]
+  makeFormSelect: any
+}
+
+export default function MakeMemberCard(props: Props) {
   /* 옵션
   sx
   id
@@ -26,6 +39,7 @@ export default function MakeMemberCard(props) {
       key="teamCard"
       title={props.title}
       content={props.makeFormSelect}
+      subheader={props.subheader}
     />
   );
 }

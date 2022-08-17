@@ -9,7 +9,7 @@ import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import MakeViewer from '../../components/MakeViewer';
+import MakeViewer from '../../components/MakeViewer.js';
 
 const style3 = {
   backgroundColor: '#00b3a4',
@@ -18,11 +18,11 @@ const style3 = {
   fontSize: 15
 }
 
-export default function ActionAreaCard(props) {
+export default function ActionAreaCard(props: any) {
   const [src, setSrc] = useState('');
   const [alt, setAlt] = useState('');
   const [visible, setVisible] = useState(false);
-  const viewerOpen = (src, alt) => {
+  const viewerOpen = (src: any, alt: any) => {
     setSrc(src);
     setAlt(alt);
     setVisible(true);
@@ -69,7 +69,7 @@ export default function ActionAreaCard(props) {
         </DialogTitle>
         <DialogContent>
           <DialogContentText component="div" id="alert-dialog-description" sx={{ textAlign: 'center', pr: 3, pl: 3, mt: 2 }}
-            onClick={e => {
+            onClick={(e: any) => {
               e.preventDefault();
               viewerOpen(props.imgSrc, '');
             }}>

@@ -1,4 +1,36 @@
-export const talantScore = (event) => {
+import { InfKeyValue } from '../pages/Card/Index';
+
+interface CardData {  
+  characterArea: {
+    [key: string]: string | number
+  }
+  characterRank: {
+    [key: string]: string | number
+  }
+  teamArea: {
+    [key: string]: string | number
+  }
+  attrArea: {
+    [key: string]: string | number
+  }
+  leader: {
+    [key: string]: string | number
+  }
+  subLeader: {
+    [key: string]: string | number
+  }
+  member1: {
+    [key: string]: string | number
+  }
+  member2: {
+    [key: string]: string | number
+  }
+  member3: {
+    [key: string]: string | number
+  }
+  bonus: FormDataEntryValue | null
+}
+export const talantScore = (event: any) => {
   const formData = new FormData(event.currentTarget);
   let characterArea = {};
   let characterRank = {};
@@ -15,34 +47,34 @@ export const talantScore = (event) => {
     if (id === 'teamArea') {
       teamArea = { ...teamArea, [key]: value }
       if (!value) {
-        document.getElementById(key).focus();
+        document.getElementById(key)!.focus();
         alert("값을 입력해주세요.");
         return false;
       }
     } else if (id === 'attrArea') {
       attrArea = { ...attrArea, [key]: value }
       if (!value) {
-        document.getElementById(key).focus();
+        document.getElementById(key)!.focus();
         alert("값을 입력해주세요.");
         return false;
       }
     } else if (key === 'titleBonus') {
       if (!value) {
-        document.getElementById(key).focus();
+        document.getElementById(key)!.focus();
         alert("값을 입력해주세요.");
         return false;
       }
     } else if (id === 'characterArea') {
       characterArea = { ...characterArea, [key]: value }
       if (!value) {
-        document.getElementById(key).focus();
+        document.getElementById(key)!.focus();
         alert("값을 입력해주세요.");
         return false;
       }
     } else if (id === 'characterRank') {
       characterRank = { ...characterRank, [key]: value }
       if (!value) {
-        document.getElementById(key).focus();
+        document.getElementById(key)!.focus();
         alert("값을 입력해주세요.");
         return false;
       }
@@ -50,9 +82,9 @@ export const talantScore = (event) => {
       leader = { ...leader, [key]: value }
       if (!value) {
         if (key === id + '_performance' || key === id + '_stamina' || key === id + '_technique')
-          document.getElementById(key).focus();
+          document.getElementById(key)!.focus();
         else
-          document.getElementById('mui-component-select-' + key).focus();
+          document.getElementById('mui-component-select-' + key)!.focus();
         alert("값을 입력해주세요.");
         return false;
       }
@@ -60,9 +92,9 @@ export const talantScore = (event) => {
       subLeader = { ...subLeader, [key]: value }
       if (!value) {
         if (key === id + '_performance' || key === id + '_stamina' || key === id + '_technique')
-          document.getElementById(key).focus();
+          document.getElementById(key)!.focus();
         else
-          document.getElementById('mui-component-select-' + key).focus();
+          document.getElementById('mui-component-select-' + key)!.focus();
         alert("값을 입력해주세요.");
         return false;
       }
@@ -70,9 +102,9 @@ export const talantScore = (event) => {
       member1 = { ...member1, [key]: value }
       if (!value) {
         if (key === id + '_performance' || key === id + '_stamina' || key === id + '_technique')
-          document.getElementById(key).focus();
+          document.getElementById(key)!.focus();
         else
-          document.getElementById('mui-component-select-' + key).focus();
+          document.getElementById('mui-component-select-' + key)!.focus();
         alert("값을 입력해주세요.");
         return false;
       }
@@ -80,9 +112,9 @@ export const talantScore = (event) => {
       member2 = { ...member2, [key]: value }
       if (!value) {
         if (key === id + '_performance' || key === id + '_stamina' || key === id + '_technique')
-          document.getElementById(key).focus();
+          document.getElementById(key)!.focus();
         else
-          document.getElementById('mui-component-select-' + key).focus();
+          document.getElementById('mui-component-select-' + key)!.focus();
         alert("값을 입력해주세요.");
         return false;
       }
@@ -90,29 +122,31 @@ export const talantScore = (event) => {
       member3 = { ...member3, [key]: value }
       if (!value) {
         if (key === id + '_performance' || key === id + '_stamina' || key === id + '_technique')
-          document.getElementById(key).focus();
+          document.getElementById(key)!.focus();
         else
-          document.getElementById('mui-component-select-' + key).focus();
+          document.getElementById('mui-component-select-' + key)!.focus();
         alert("값을 입력해주세요.");
         return false;
       }
     }
   }
-  const cardData = {}
-  cardData.characterArea = characterArea;
-  cardData.characterRank = characterRank;
-  cardData.teamArea = teamArea;
-  cardData.attrArea = attrArea;
-  cardData.leader = leader;
-  cardData.subLeader = subLeader;
-  cardData.member1 = member1;
-  cardData.member2 = member2;
-  cardData.member3 = member3;
-  cardData.bonus = formData.get('titleBonus');
+  const cardData: CardData = {
+    characterArea: characterArea,
+    characterRank: characterRank,
+    teamArea: teamArea,
+    attrArea: attrArea,
+    leader: leader,
+    subLeader: subLeader,
+    member1: member1,
+    member2: member2,
+    member3: member3,
+    bonus: formData.get('titleBonus')
+  };
   return talantScoreCalc(cardData);
 }
 
-export const talantScoreCalc = (props) => {
+
+export const talantScoreCalc = (props: CardData) => {
   const leaderTeam = props.leader.Leader_team;
   const subLeaderTeam = props.subLeader.SubLeader_team;
   const member1Team = props.member1.Member1_team;
@@ -143,16 +177,41 @@ export const talantScoreCalc = (props) => {
   const member1 = memberBonus(props.member1, props.characterArea, props.characterRank, props.teamArea, props.attrArea, teamBonus, attrBonus);
   const member2 = memberBonus(props.member2, props.characterArea, props.characterRank, props.teamArea, props.attrArea, teamBonus, attrBonus);
   const member3 = memberBonus(props.member3, props.characterArea, props.characterRank, props.teamArea, props.attrArea, teamBonus, attrBonus);
-  const totalScore = {};
-  totalScore.totalScore = leader.resultBonus + subLeader.resultBonus + member1.resultBonus + member2.resultBonus + member3.resultBonus + Number(props.bonus);
-  totalScore.titleBonus = Number(props.bonus);
-  totalScore.areaBonus = leader.cAreaBonus + subLeader.cAreaBonus + member1.cAreaBonus + member2.cAreaBonus + member3.cAreaBonus;
-  totalScore.rankBonus = leader.cRankBonus + subLeader.cRankBonus + member1.cRankBonus + member2.cRankBonus + member3.cRankBonus;
-  totalScore.ptsScore = totalScore.totalScore - totalScore.titleBonus - totalScore.areaBonus - totalScore.rankBonus;
+  interface TotalScore {
+    totalScore: number
+    titleBonus: number
+    areaBonus: number
+    rankBonus: number
+    ptsScore: number
+  }
+  const totalScore: TotalScore = {
+    totalScore: leader.resultBonus + subLeader.resultBonus + member1.resultBonus + member2.resultBonus + member3.resultBonus + Number(props.bonus),
+    titleBonus: Number(props.bonus),
+    areaBonus: leader.cAreaBonus + subLeader.cAreaBonus + member1.cAreaBonus + member2.cAreaBonus + member3.cAreaBonus,
+    rankBonus: leader.cRankBonus + subLeader.cRankBonus + member1.cRankBonus + member2.cRankBonus + member3.cRankBonus,
+    ptsScore: 0
+  };
+  totalScore.ptsScore = totalScore.totalScore - totalScore.titleBonus - totalScore.areaBonus - totalScore.rankBonus
+  
   return totalScore;
 }
 
-const memberBonus = (card, characterArea, characterRank, teamArea, attrArea, teamBonus, attrBonus) => {
+interface ResultBonus {
+  resultBonus: number
+  cAreaBonus: number
+  cRankBonus: number
+};
+
+interface PTSValue {
+  performance: number
+  technique: number
+  stamina: number
+  rankBonus: number
+  areaBonus: number
+};
+
+const memberBonus = (card: InfKeyValue, characterArea: InfKeyValue, characterRank: InfKeyValue,
+  teamArea: InfKeyValue, attrArea: InfKeyValue, teamBonus: string, attrBonus: string) => {
   let performance = 0;
   let technique = 0;
   let stamina = 0;
@@ -232,39 +291,41 @@ const memberBonus = (card, characterArea, characterRank, teamArea, attrArea, tea
     attrAreaBonus += attrAreaBonus;
 
   areaBonus = characterAreaBonus + teamAreaBonus + attrAreaBonus;
-  const value = {};
-  value.performance = performance;
-  value.technique = technique;
-  value.stamina = stamina;
-  value.rankBonus = characterRankBonus;
-  value.areaBonus = areaBonus;
+  const value: PTSValue = {
+    performance: performance,
+    technique: technique,
+    stamina: stamina,
+    rankBonus: characterRankBonus,
+    areaBonus: areaBonus
+  };
 
   const cAreaBonus = getBonus(value, 'area');
   const cRankBonus = getBonus(value, 'rank');
-  const resultBonus = {};
-  resultBonus.resultBonus = cAreaBonus + cRankBonus + performance + technique + stamina;
-  resultBonus.cAreaBonus = cAreaBonus;
-  resultBonus.cRankBonus = cRankBonus;
+  const resultBonus: ResultBonus = {
+    resultBonus: cAreaBonus + cRankBonus + performance + technique + stamina,
+    cAreaBonus: cAreaBonus,
+    cRankBonus: cRankBonus
+  };
 
   return resultBonus;
 }
 
-const getPerformanceBonus = (props, type) => {
+const getPerformanceBonus = (props: PTSValue, type: string) => {
   const bonus = Math.floor(Number(props.performance) * Number(type === 'rank' ? props.rankBonus / 1000 : props.areaBonus / 100));
   return bonus;
 }
 
-const getTechniqueBonus = (props, type) => {
+const getTechniqueBonus = (props: PTSValue, type: string) => {
   const bonus = Math.floor(Number(props.technique) * Number(type === 'rank' ? props.rankBonus / 1000 : props.areaBonus / 100));
   return bonus;
 }
 
-const getStaminaBonus = (props, type) => {
+const getStaminaBonus = (props: PTSValue, type: string) => {
   const bonus = Math.floor(Number(props.stamina) * Number(type === 'rank' ? props.rankBonus / 1000 : props.areaBonus / 100));
   return bonus;
 }
 
-const getBonus = (props, type) => {
+const getBonus = (props: PTSValue, type: string) => {
   const bonus = getPerformanceBonus(props, type) + getTechniqueBonus(props, type) + getStaminaBonus(props, type);
   return bonus;
 }

@@ -1,19 +1,19 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import CardContents from './CardContents';
-import { getTeamList, getCharacterList, getRaritiesList, getAttrList } from '../../apis/apiClient'
+import { getTeamList, getCharacterList, getRaritiesList, getAttrList, InfAttrList } from '../../apis/apiClient'
 
 export default function Card() {
   const [teamList, setTeamList] = useState([]);
   useEffect(() => {
     getTeamList().then((resData) => setTeamList(resData));
   }, []);
-  const [attrList, setAttrList] = useState([]);
+  const [attrList, setAttrList] = useState<InfAttrList[]>([]);
   useEffect(() => {
     setAttrList(getAttrList());
   }, []);
   const [characterList, setCharacterList] = useState([]);
   useEffect(() => {
-    getCharacterList().then((resData) => setCharacterList(resData));
+    getCharacterList().then((resData: any) => setCharacterList(resData));
   }, []);
   const [raritiesList, setRaritiesList] = useState([]);
   useEffect(() => {

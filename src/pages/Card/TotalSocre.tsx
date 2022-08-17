@@ -16,7 +16,10 @@ const style3 = {
   '&:hover': { color: '#ffffff', backgroundColor: '#008075' }
 }
 
-export default function TotalScore(props) {
+interface Props {
+  disabled: boolean
+}
+export default function TotalScore(props: Props) {
   return (
     <div>
       <Button type="submit" variant="contained" sx={style3} form="talantForm" disabled={props.disabled}>

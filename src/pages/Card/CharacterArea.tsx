@@ -3,8 +3,9 @@ import { getCharacterList } from '../../apis/apiClient'
 import MakeCard from '../../components/MakeCard';
 import MakeTextField from '../../components/MakeTextField';
 import localforage from 'localforage';
+import { InfCharacterArea, InfKeyValue } from '../Card/Index';
 
-function switchiId(props) {
+function switchiId(props: string) {
   switch (props) {
     case 'area':
       return 'characterArea_';
@@ -15,7 +16,7 @@ function switchiId(props) {
   }
 }
 
-function switchTitle(props) {
+function switchTitle(props: string) {
   switch (props) {
     case 'area':
       return '캐릭터 에어리어';
@@ -25,36 +26,37 @@ function switchTitle(props) {
       return '';
   }
 }
-
-export default function CharacterArea(props) {
+export default function CharacterArea(props: InfCharacterArea) {
   const [characterList, setCharacterList] = useState([]);
-  const [formValue, setFormValue] = useState({});
+  const [formValue, setFormValue] = useState<InfKeyValue>({});
   const type = switchiId(props.type);
   useEffect(() => {
-    localforage.getItem(type).then((value) => {
+    localforage.getItem(type).then((value: any) => {
       if (value)
         setFormValue(value);
     });
-    getCharacterList().then((resData) => setCharacterList(resData));// eslint-disable-next-line
+    getCharacterList().then((resData: any) => setCharacterList(resData));// eslint-disable-next-line
   }, []);
-  const handleChangeText = (e) => {
+  const handleChangeText = (e: any) => {
     const { name, value } = e.target;
     setFormValue({ ...formValue, [name]: value });
   }
   useEffect(() => {
     localforage.setItem(type, formValue);// eslint-disable-next-line
   }, [formValue]);
-  const textField = characterList.map((c) => {
+  const textField = characterList.map((c: InfKeyValue) => {
     let value = '';
     let id = type + c.id;
     if (formValue[id])
-      value = formValue[id];
-    return <MakeTextField key={type + c.id} id={type + c.id} label={c.fullName} value={value} handler={handleChangeText}
-      type={'number'} sx={{ width: 256, margin: 1 }} />
+      value = String(formValue[id]);
+    return <MakeTextField key={type + c.id} id={type + c.id} label={String(c.fullName)} value={value} handler={handleChangeText}
+      type={'number'} sx={{ width: 256, margin: 1 }} inputProps="" />
   });
   const handleClear = () => {
     for (let key in formValue) {
-      setFormValue(delete formValue[key]);
+      // setFormValue(delete formValue[key]);
+      delete formValue[key];
+      setFormValue(formValue);
     }
   }
 
@@ -71,6 +73,7 @@ export default function CharacterArea(props) {
       title={switchTitle(props.type)}
       content={textField}
       clearHandler={handleClear}
+      subheader=""
     />
   );
 }

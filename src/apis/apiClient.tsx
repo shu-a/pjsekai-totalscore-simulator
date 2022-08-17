@@ -35,6 +35,15 @@ export async function getRaritiesList() {
   }
 }
 
+export interface InfAttrList {
+  seq: number
+  areaItemId: number
+  level: number
+  targetUnit: string
+  targetCardAttr: string
+  unit: string
+  unitName: string
+}
 // 속성 목록 불러오기
 export function getAttrList() {
     const attrList = [{

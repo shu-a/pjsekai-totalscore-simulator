@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Component, Fragment, useState } from 'react';
 import { Box } from '@mui/material';
 import MakeAccordion from '../../components/MakeAccordion';
 import MakeViewer from '../../components/MakeViewer';
@@ -13,7 +13,7 @@ export default function SimpleAccordion() {
   const [src, setSrc] = useState('');
   const [alt, setAlt] = useState('');
   const [visible, setVisible] = useState(false);
-  const viewerOpen = (src, alt) => {
+  const viewerOpen = (src: NodeRequire, alt: string) => {
     setSrc(src);
     setAlt(alt);
     setVisible(true);
@@ -139,22 +139,24 @@ export default function SimpleAccordion() {
     );
   }
   const accordion = [];
-  let obj = {};
-  obj.title = "에어리어 정보 위치";
-  obj.content = <AreaInfo />;
+  interface InfObj {
+    title: string
+    content: JSX.Element
+  }
+  let obj: InfObj = {
+    title: "에어리어 정보 위치",
+    content: <AreaInfo />
+  }
   accordion.push(obj);
 
-  obj = {};
   obj.title = "캐릭터 랭크 정보 위치";
   obj.content = <RankInfo />;
   accordion.push(obj);
 
-  obj = {};
   obj.title = "칭호 보너스 정보 위치";
   obj.content = <TitleBonusInfo />;
   accordion.push(obj);
 
-  obj = {};
   obj.title = "카드 정보 입력 방법";
   obj.content = <CardManual />;
   accordion.push(obj);

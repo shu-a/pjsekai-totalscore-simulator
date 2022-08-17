@@ -1,6 +1,6 @@
+import React from 'react';
 import { Link } from '@mui/material';
 import { Box } from '@mui/system';
-import React from 'react';
 // import GitHubIcon from '@mui/icons-material/GitHub';
 import MailIcon from '@mui/icons-material/Mail';
 

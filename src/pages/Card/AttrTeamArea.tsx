@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { getTeamList, getAttrList } from '../../apis/apiClient'
+import { InfKeyValue } from '../../common/common';
+import { getTeamList, getAttrList, InfAttrList } from '../../apis/apiClient'
 import MakeCard from '../../components/MakeCard';
 import MakeTextField from '../../components/MakeTextField';
 import localforage from 'localforage';
 
-function switchiId(props) {
+function switchiId(props: string) {
   switch (props) {
     case 'team':
       return 'teamArea_';
@@ -15,7 +16,7 @@ function switchiId(props) {
   }
 }
 
-function switchTitle(props) {
+function switchTitle(props: string) {
   switch (props) {
     case 'team':
       return '팀 에어리어';
@@ -26,12 +27,12 @@ function switchTitle(props) {
   }
 }
 
-export default function AttrTeamArea(props) {
-  const [attrTeamAreaList, setAttrTeamAreaList] = useState([]);
-  const [formValue, setFormValue] = useState({});
+export default function AttrTeamArea(props: any) {
+  const [attrTeamAreaList, setAttrTeamAreaList] = useState<InfAttrList[]>([]);
+  const [formValue, setFormValue] = useState<InfKeyValue>({});
   const type = switchiId(props.type);
   useEffect(() => {
-    localforage.getItem(type).then((value) => {
+    localforage.getItem(type).then((value: any) => {
       if (value)
         setFormValue(value);
     });
@@ -40,7 +41,7 @@ export default function AttrTeamArea(props) {
     else if (props.type === 'team')
       getTeamList().then((resData) => setAttrTeamAreaList(resData));// eslint-disable-next-line
   }, [props.type]);
-  const handleChangeText = (e) => {
+  const handleChangeText = (e: any) => {
     const { name, value } = e.target;
     setFormValue({ ...formValue, [name]: value });
   }
@@ -51,13 +52,14 @@ export default function AttrTeamArea(props) {
     let value = '';
     let id = type + c.unit;
     if (formValue[id])
-      value = formValue[id];
+      value = String(formValue[id]);
     return <MakeTextField key={type + c.unit} id={type + c.unit} label={c.unitName} value={value} handler={handleChangeText}
       type={"number"} sx={{ width: 256, margin: 1 }} inputProps={{ step: 0.1 }} />
   });
   const handleClear = () => {
     for (let key in formValue) {
-      setFormValue(delete formValue[key]);
+      delete formValue[key];
+      setFormValue(formValue);
     }
   }
 
@@ -77,6 +79,7 @@ export default function AttrTeamArea(props) {
       title={switchTitle(props.type)}
       content={textField}
       clearHandler={handleClear}
+      subheader=""
     />
   );
 }

@@ -16,9 +16,9 @@ const pages = ['Home', 'Manual', 'About'];
 
 const ResponsiveAppBar = () => {
   const { pathname } = useLocation();
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const [anchorElNav, setAnchorElNav] = React.useState<null>(null);
 
-  const handleOpenNavMenu = (event) => {
+  const handleOpenNavMenu = (event: any) => {
     setAnchorElNav(event.currentTarget);
   };
 

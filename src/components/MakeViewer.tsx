@@ -1,7 +1,13 @@
 import React from 'react';
 import Viewer from 'react-viewer';
 
-export default function MakeViewer(props) {
+interface Props {
+  visible: boolean
+  close: () => void
+  src: string
+  alt: string
+}
+export default function MakeViewer(props: Props) {
   // const [src, setSrc] = useState('');
   // const [alt, setAlt] = useState('');
   // const [visible, setVisible] = useState(false);

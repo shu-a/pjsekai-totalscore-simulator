@@ -1,10 +1,18 @@
-import React, { Fragment } from 'react';
+import React, { Component, Fragment } from 'react';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import IconButton from '@mui/material/IconButton';
 
-export default function MakeCard(props) {
+interface Props {
+  sx: any
+  id: string
+  title: string
+  subheader: string
+  content: JSX.Element[]
+  clearHandler: any
+}
+export default function MakeCard(props: Props) {
   /* 옵션
   sx
   id
@@ -18,7 +26,7 @@ export default function MakeCard(props) {
         variant="outlined"
         sx={props.sx}
         key={props.id}
-        name={props.id}
+        // name={props.id}
       >
         <CardHeader
           action={

@@ -1,14 +1,15 @@
 import React, { useState, Fragment, useEffect } from 'react';
+import { InfKeyValue } from '../../common/common'
 import MakeMemberCard from '../../components/MakeMemberCard';
 import MenuItem from '@mui/material/MenuItem';
 import MakeFormSelect from '../../components/MakeFormSelect';
 import MakeTextField from '../../components/MakeTextField';
 import localforage from 'localforage';
 
-export default function CardContents(props) {
+export default function CardContents(props: any) {
   const [readOnlySubUnit, setReadOnlySubUnit] = useState(true);
   const [readOnlyCharacter, setReadOnlyCharacter] = useState(true);
-  const changeReadonly = (team) => {
+  const changeReadonly = (team: string) => {
     if (team && team === 'piapro') {
       setReadOnlySubUnit(false);
       setReadOnlyCharacter(false);
@@ -23,10 +24,10 @@ export default function CardContents(props) {
       setHelperText(defaultHelperText);
     }
   }
-  const [formValue, setFormValue] = useState('');
+  const [formValue, setFormValue] = useState<InfKeyValue>({});
   const [loadTeam, setLoadTeam] = useState('N');
   useEffect(() => {
-    localforage.getItem(props.title).then((value) => {
+    localforage.getItem(props.title).then((value: any) => {
       const getAttr = props.title + '_attr';
       const getTeam = props.title + '_team';
       const getRarities = props.title + '_rarities';
@@ -38,7 +39,7 @@ export default function CardContents(props) {
       }
     });// eslint-disable-next-line
   }, []);
-  const handleChangeText = (e) => {
+  const handleChangeText = (e: any) => {
     const { name, value } = e.target;
     setFormValue({ ...formValue, [name]: value });
   }
@@ -61,29 +62,29 @@ export default function CardContents(props) {
   const [subUnit, setSubUnit] = useState('');
   const [character, setCharacter] = useState('');
   const [rarities, setRarities] = useState('');
-  const handleSelectAttr = (e) => {
+  const handleSelectAttr = (e: any) => {
     const { name, value } = e.target;
     setAttr(e.target.value);
     setFormValue({ ...formValue, [name]: value });
   }
-  const handleSelectTeam = (e) => {
+  const handleSelectTeam = (e: any) => {
     const { name, value } = e.target;
     setTeam(e.target.value);
     setLoadTeam('Y');
     setLoadSubUnit('N');
     setFormValue({ ...formValue, [name]: value });
   }
-  const handleSelectSubUnit = (e) => {
+  const handleSelectSubUnit = (e: any) => {
     const { name, value } = e.target;
     setSubUnit(e.target.value);
     setFormValue({ ...formValue, [name]: value });
   }
-  const handleSelectRarities = (e) => {
+  const handleSelectRarities = (e: any) => {
     const { name, value } = e.target;
     setRarities(e.target.value);
     setFormValue({ ...formValue, [name]: value });
   }
-  const handleSelectCharacter = (e) => {
+  const handleSelectCharacter = (e: any) => {
     const { name, value } = e.target;
     setCharacter(e.target.value);
     setFormValue({ ...formValue, [name]: value });
@@ -115,7 +116,7 @@ export default function CardContents(props) {
         handleSelectCharacter(characterEvent);
       }
     }
-    setCharacterList(props.characterList.map((c) => {
+    setCharacterList(props.characterList.map((c: any) => {
       if (team === (c.unit))
         return <MenuItem key={c.id} value={c.id}>{c.fullName}</MenuItem>;
       else
@@ -123,13 +124,14 @@ export default function CardContents(props) {
     }));// eslint-disable-next-line
   }, [team, loadSubUnit]);
 
-  const teamList = props.teamList.map((c) =>
-    <MenuItem key={c.seq} value={c.unit} unit={c.unit}>{c.unitName}</MenuItem>
+  const teamList = props.teamList.map((c: any) =>
+    // <MenuItem key={c.seq} value={c.unit} unit={c.unit}>{c.unitName}</MenuItem>
+    <MenuItem key={c.seq} value={c.unit}>{c.unitName}</MenuItem>
   );
-  const attrList = props.attrList.map((c) =>
+  const attrList = props.attrList.map((c: any) =>
     <MenuItem key={c.unit} value={c.unit}>{c.unitName}</MenuItem>
   );
-  const raritiesList = props.raritiesList.map((c) =>
+  const raritiesList = props.raritiesList.map((c: any) =>
     <MenuItem key={c.seq} value={c.seq} >{c.cardRarityType.split('_')[1]}</MenuItem>
   );
 
@@ -151,7 +153,7 @@ export default function CardContents(props) {
   ];
   const makeFormSelectlist = makeFormSelectContents.map((c) => {
     return <MakeFormSelect key={c.id} id={props.title + '_' + c.id} sx={c.sx} label={c.label} inputLabel={c.label} value={c.value ? c.value : ''} handler={c.handler}
-      selectList={c.selectList} readonly={c.readonly} helperText={c.helperText} />
+      selectList={c.selectList} readonly={c.readonly!} helperText={c.helperText!} selectSx="" />
   });
   makeFormSelect.push(makeFormSelectlist);
 
@@ -164,15 +166,15 @@ export default function CardContents(props) {
     let value = '';
     let id = props.title + "_" + c.id;
     if (formValue[id])
-      value = formValue[id];
-    return <MakeTextField key={c.id} id={props.title + "_" + c.id} label={c.label} type={c.type} sx={c.sx} value={value} handler={handleChangeText} />
+      value = String(formValue[id]);
+    return <MakeTextField key={c.id} id={props.title + "_" + c.id} label={c.label} type={c.type} sx={c.sx} value={value} handler={handleChangeText} inputProps=""/>
   }
   );
   makeFormSelect.push(makeTextFieldList);
   return (
     <Fragment>
       <MakeMemberCard key="MakeMemberCard" makeFormSelect={makeFormSelect} title={props.title} border={props.border} color={props.color}
-      backgroundColor={props.backgroundColor} clearHandler={handleClear} />
+      backgroundColor={props.backgroundColor} clearHandler={handleClear} sx="" id="" subheader="" />
     </Fragment>
   );
 }

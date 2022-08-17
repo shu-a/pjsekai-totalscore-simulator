@@ -4,7 +4,19 @@ import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import FormHelperText from '@mui/material/FormHelperText';
 
-export default function MakeFormSelect(props) {
+interface Props {
+  sx: any
+  id: string
+  inputLabel: string
+  label: string
+  value: string | number
+  handler: any
+  readonly: boolean
+  selectSx: any
+  selectList: any
+  helperText: string
+}
+export default function MakeFormSelect(props: Props) {
   /* 옵션
   sx
   id

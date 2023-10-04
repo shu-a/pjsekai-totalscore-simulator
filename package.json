@@ -2,7 +2,7 @@
   "name": "sekai-event-deck-simulator",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://pjsekai.totalscore.shu-a.app/",
+  "homepage": "http://pjsekai.shu-a.app/",
   "dependencies": {
     "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.9.3",

@@ -3,9 +3,5 @@ import CardIndex from '../Card/Index';
 
 export default function HomeIndex() {
   const content = <CardIndex />;
-  return (
-    <Fragment>
-      {content}
-    </Fragment>
-  );
+  return <Fragment>{content}</Fragment>;
 }

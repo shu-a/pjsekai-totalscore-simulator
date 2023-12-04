@@ -12,16 +12,20 @@ import Button from '@mui/material/Button';
 // }
 const style3 = {
   backgroundColor: '#00b3a4',
-  '&:hover': { backgroundColor: '#008075' }
-}
+  '&:hover': { backgroundColor: '#008075' },
+};
 
 function SekaiViewerLink() {
-  return(
+  return (
     <div>
-      <Button variant="contained" sx={style3} onClick={e => {
-        e.preventDefault();
-        window.open('https://sekai.best/card', '_blank')
-      }}>
+      <Button
+        variant="contained"
+        sx={style3}
+        onClick={(e) => {
+          e.preventDefault();
+          window.open('https://sekai.best/card', '_blank');
+        }}
+      >
         Sekai Viewer 카드 목록
       </Button>
     </div>

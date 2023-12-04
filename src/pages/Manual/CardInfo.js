@@ -15,8 +15,8 @@ const style3 = {
   backgroundColor: '#00b3a4',
   '&:hover': { backgroundColor: '#008075' },
   width: 100,
-  fontSize: 15
-}
+  fontSize: 15,
+};
 
 export default function ActionAreaCard(props) {
   const [src, setSrc] = useState('');
@@ -26,18 +26,18 @@ export default function ActionAreaCard(props) {
     setSrc(src);
     setAlt(alt);
     setVisible(true);
-  }
+  };
   const viewerClose = () => {
     setVisible(false);
-  }
+  };
 
   const [open, setOpen] = useState(false);
   const handleOpen = () => {
     setOpen(true);
-  }
+  };
   const handleClose = () => {
     setOpen(false);
-  }
+  };
   return (
     <Card sx={{ maxWidth: 345, m: 1, minWidth: 350 }}>
       <CardActionArea onClick={handleOpen}>
@@ -62,25 +62,43 @@ export default function ActionAreaCard(props) {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
         PaperProps={{ sx: { borderRadius: 3 } }}
-        maxWidth='lg'
+        maxWidth="lg"
       >
-        <DialogTitle id="alert-dialog-title" sx={{ color: '#ffffff', backgroundColor: '#00b3a4', textAlign: 'center' }}>
+        <DialogTitle
+          id="alert-dialog-title"
+          sx={{
+            color: '#ffffff',
+            backgroundColor: '#00b3a4',
+            textAlign: 'center',
+          }}
+        >
           {props.title}
         </DialogTitle>
         <DialogContent>
-          <DialogContentText component="div" id="alert-dialog-description" sx={{ textAlign: 'center', pr: 3, pl: 3, mt: 2 }}
-            onClick={e => {
+          <DialogContentText
+            component="div"
+            id="alert-dialog-description"
+            sx={{ textAlign: 'center', pr: 3, pl: 3, mt: 2 }}
+            onClick={(e) => {
               e.preventDefault();
               viewerOpen(props.imgSrc, '');
-            }}>
-            <img src={props.imgSrc} alt='' width="100%" />
+            }}
+          >
+            <img src={props.imgSrc} alt="" width="100%" />
           </DialogContentText>
-          <DialogContentText sx={{ mt: 2, p: 3, textAlign: 'center', fontSize: 20 }}>
+          <DialogContentText
+            sx={{ mt: 2, p: 3, textAlign: 'center', fontSize: 20 }}
+          >
             {props.content}
           </DialogContentText>
         </DialogContent>
         <DialogContent sx={{ textAlign: 'center', pt: 0, pb: 3 }}>
-          <Button onClick={handleClose} autoFocus variant="contained" sx={style3}>
+          <Button
+            onClick={handleClose}
+            autoFocus
+            variant="contained"
+            sx={style3}
+          >
             확인
           </Button>
         </DialogContent>

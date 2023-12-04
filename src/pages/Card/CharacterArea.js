@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getCharacterList } from '../../apis/apiClient'
+import { getCharacterList } from '../../apis/apiClient';
 import MakeCard from '../../components/MakeCard';
 import MakeTextField from '../../components/MakeTextField';
 import localforage from 'localforage';
@@ -32,31 +32,38 @@ export default function CharacterArea(props) {
   const type = switchiId(props.type);
   useEffect(() => {
     localforage.getItem(type).then((value) => {
-      if (value)
-        setFormValue(value);
+      if (value) setFormValue(value);
     });
-    getCharacterList().then((resData) => setCharacterList(resData));// eslint-disable-next-line
+    getCharacterList().then((resData) => setCharacterList(resData)); // eslint-disable-next-line
   }, []);
   const handleChangeText = (e) => {
     const { name, value } = e.target;
     setFormValue({ ...formValue, [name]: value });
-  }
+  };
   useEffect(() => {
-    localforage.setItem(type, formValue);// eslint-disable-next-line
+    localforage.setItem(type, formValue); // eslint-disable-next-line
   }, [formValue]);
   const textField = characterList.map((c) => {
     let value = '';
     let id = type + c.id;
-    if (formValue[id])
-      value = formValue[id];
-    return <MakeTextField key={type + c.id} id={type + c.id} label={c.fullName} value={value} handler={handleChangeText}
-      type={'number'} sx={{ width: 256, margin: 1 }} />
+    if (formValue[id]) value = formValue[id];
+    return (
+      <MakeTextField
+        key={type + c.id}
+        id={type + c.id}
+        label={c.fullName}
+        value={value}
+        handler={handleChangeText}
+        type={'number'}
+        sx={{ width: 256, margin: 1 }}
+      />
+    );
   });
   const handleClear = () => {
     for (let key in formValue) {
       setFormValue(delete formValue[key]);
     }
-  }
+  };
 
   return (
     <MakeCard
@@ -64,7 +71,7 @@ export default function CharacterArea(props) {
         minWidth: 300,
         pb: 2,
         backgroundColor: '#fffff7',
-        border: '2px solid #cceeef'
+        border: '2px solid #cceeef',
       }}
       id="subUnitCard"
       key="subUnitCard"

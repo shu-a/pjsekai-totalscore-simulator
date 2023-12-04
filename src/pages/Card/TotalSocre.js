@@ -13,13 +13,19 @@ import Button from '@mui/material/Button';
 const style3 = {
   backgroundColor: '#ffffff',
   color: '#00b3a4',
-  '&:hover': { color: '#ffffff', backgroundColor: '#008075' }
-}
+  '&:hover': { color: '#ffffff', backgroundColor: '#008075' },
+};
 
 export default function TotalScore(props) {
   return (
     <div>
-      <Button type="submit" variant="contained" sx={style3} form="talantForm" disabled={props.disabled}>
+      <Button
+        type="submit"
+        variant="contained"
+        sx={style3}
+        form="talantForm"
+        disabled={props.disabled}
+      >
         종합력 계산
       </Button>
     </div>

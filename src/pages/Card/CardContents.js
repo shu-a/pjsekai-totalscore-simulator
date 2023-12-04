@@ -1,39 +1,39 @@
-import React, { useState, Fragment, useEffect } from "react";
-import MakeMemberCard from "../../components/MakeMemberCard";
-import MenuItem from "@mui/material/MenuItem";
-import MakeFormSelect from "../../components/MakeFormSelect";
-import MakeTextField from "../../components/MakeTextField";
-import localforage from "localforage";
+import React, { useState, Fragment, useEffect } from 'react';
+import MakeMemberCard from '../../components/MakeMemberCard';
+import MenuItem from '@mui/material/MenuItem';
+import MakeFormSelect from '../../components/MakeFormSelect';
+import MakeTextField from '../../components/MakeTextField';
+import localforage from 'localforage';
 
 export default function CardContents(props) {
   const [readOnlySubUnit, setReadOnlySubUnit] = useState(true);
   const [readOnlyCharacter, setReadOnlyCharacter] = useState(true);
   const changeReadonly = (team) => {
-    if (team && team === "piapro") {
+    if (team && team === 'piapro') {
       setReadOnlySubUnit(false);
       setReadOnlyCharacter(false);
-      setHelperText(" ");
-    } else if (team && team !== "piapro") {
+      setHelperText(' ');
+    } else if (team && team !== 'piapro') {
       setReadOnlySubUnit(true);
       setReadOnlyCharacter(false);
-      setHelperText(" ");
+      setHelperText(' ');
     } else {
       setReadOnlySubUnit(true);
       setHelperText(defaultHelperText);
     }
   };
-  const [formValue, setFormValue] = useState("");
-  const [loadTeam, setLoadTeam] = useState("N");
+  const [formValue, setFormValue] = useState('');
+  const [loadTeam, setLoadTeam] = useState('N');
   useEffect(() => {
     localforage.getItem(props.title).then((value) => {
-      const getAttr = props.title + "_attr";
-      const getTeam = props.title + "_team";
-      const getRarities = props.title + "_rarities";
+      const getAttr = props.title + '_attr';
+      const getTeam = props.title + '_team';
+      const getRarities = props.title + '_rarities';
       if (value) {
         setFormValue(value);
-        setAttr(value[getAttr] ? value[getAttr] : "");
-        setTeam(value[getTeam] ? value[getTeam] : "");
-        setRarities(value[getRarities] ? value[getRarities] : "");
+        setAttr(value[getAttr] ? value[getAttr] : '');
+        setTeam(value[getTeam] ? value[getTeam] : '');
+        setRarities(value[getRarities] ? value[getRarities] : '');
       }
     }); // eslint-disable-next-line
   }, []);
@@ -47,19 +47,19 @@ export default function CardContents(props) {
 
   const handleClear = () => {
     setFormValue({});
-    setAttr("");
-    setTeam("");
-    setSubUnit("");
-    setCharacter("");
-    setRarities("");
+    setAttr('');
+    setTeam('');
+    setSubUnit('');
+    setCharacter('');
+    setRarities('');
     setReadOnlySubUnit(true);
     setReadOnlyCharacter(true);
   };
-  const [attr, setAttr] = useState("");
-  const [team, setTeam] = useState("");
-  const [subUnit, setSubUnit] = useState("");
-  const [character, setCharacter] = useState("");
-  const [rarities, setRarities] = useState("");
+  const [attr, setAttr] = useState('');
+  const [team, setTeam] = useState('');
+  const [subUnit, setSubUnit] = useState('');
+  const [character, setCharacter] = useState('');
+  const [rarities, setRarities] = useState('');
   const handleSelectAttr = (e) => {
     const { name, value } = e.target;
     setAttr(e.target.value);
@@ -68,8 +68,8 @@ export default function CardContents(props) {
   const handleSelectTeam = (e) => {
     const { name, value } = e.target;
     setTeam(e.target.value);
-    setLoadTeam("Y");
-    setLoadSubUnit("N");
+    setLoadTeam('Y');
+    setLoadSubUnit('N');
     setFormValue({ ...formValue, [name]: value });
   };
   const handleSelectSubUnit = (e) => {
@@ -89,32 +89,32 @@ export default function CardContents(props) {
   };
 
   const [charactList, setCharacterList] = useState([]);
-  const [loadSubUnit, setLoadSubUnit] = useState("N");
+  const [loadSubUnit, setLoadSubUnit] = useState('N');
   useEffect(() => {
     changeReadonly(team);
-    const subUnitName = props.title + "_subUnit";
-    if (team && loadTeam === "N") {
+    const subUnitName = props.title + '_subUnit';
+    if (team && loadTeam === 'N') {
       const subUnitEvent = {
         target: { name: subUnitName, value: formValue[subUnitName] },
       };
       handleSelectSubUnit(subUnitEvent);
-      setLoadSubUnit("Y");
-    } else if (team && loadTeam === "Y") {
-      setSubUnit("");
+      setLoadSubUnit('Y');
+    } else if (team && loadTeam === 'Y') {
+      setSubUnit('');
       const subUnitEvent = { target: { name: subUnitName, value: team } };
       handleSelectSubUnit(subUnitEvent);
-      setLoadSubUnit("Y");
+      setLoadSubUnit('Y');
     }
-    const characterName = props.title + "_character";
-    if (loadSubUnit === "Y") {
-      if (team && loadTeam === "N") {
+    const characterName = props.title + '_character';
+    if (loadSubUnit === 'Y') {
+      if (team && loadTeam === 'N') {
         const characterEvent = {
           target: { name: characterName, value: formValue[characterName] },
         };
         handleSelectCharacter(characterEvent);
-      } else if (team && loadTeam === "Y") {
-        setCharacter("");
-        const characterEvent = { target: { name: characterName, value: "" } };
+      } else if (team && loadTeam === 'Y') {
+        setCharacter('');
+        const characterEvent = { target: { name: characterName, value: '' } };
         handleSelectCharacter(characterEvent);
       }
     }
@@ -143,35 +143,35 @@ export default function CardContents(props) {
   ));
   const raritiesList = props.raritiesList.map((c) => (
     <MenuItem key={c.seq} value={c.seq}>
-      {c.cardRarityType.split("_")[1]}
+      {c.cardRarityType.split('_')[1]}
     </MenuItem>
   ));
 
   const makeFormSelect = [];
-  const defaultHelperText = "팀을 선택하세요";
+  const defaultHelperText = '팀을 선택하세요';
   const [helperText, setHelperText] = useState(defaultHelperText);
   const makeFormSelectContents = [
     {
       sx: { m: 1, width: 256 },
-      id: "attr",
-      label: "속성",
+      id: 'attr',
+      label: '속성',
       value: attr,
       handler: handleSelectAttr,
       selectList: attrList,
     },
     {
       sx: { m: 1, width: 120 },
-      id: "team",
-      label: "팀",
+      id: 'team',
+      label: '팀',
       value: team,
       handler: handleSelectTeam,
       selectList: teamList,
     },
     {
       sx: { m: 1, width: 120 },
-      id: "subUnit",
-      label: "서브유닛",
-      selectSx: { color: readOnlySubUnit ? "rgba(0, 0, 0, 0.38)" : "" },
+      id: 'subUnit',
+      label: '서브유닛',
+      selectSx: { color: readOnlySubUnit ? 'rgba(0, 0, 0, 0.38)' : '' },
       value: subUnit,
       handler: handleSelectSubUnit,
       selectList: teamList,
@@ -180,17 +180,17 @@ export default function CardContents(props) {
     },
     {
       sx: { m: 1, width: 120 },
-      id: "rarities",
-      label: "별",
+      id: 'rarities',
+      label: '별',
       value: rarities,
       handler: handleSelectRarities,
       selectList: raritiesList,
     },
     {
       sx: { m: 1, width: 120 },
-      id: "character",
-      label: "캐릭터명",
-      selectSx: { color: readOnlySubUnit ? "rgba(0, 0, 0, 0.38)" : "" },
+      id: 'character',
+      label: '캐릭터명',
+      selectSx: { color: readOnlySubUnit ? 'rgba(0, 0, 0, 0.38)' : '' },
       value: character,
       handler: handleSelectCharacter,
       selectList: charactList,
@@ -202,11 +202,11 @@ export default function CardContents(props) {
     return (
       <MakeFormSelect
         key={c.id}
-        id={props.title + "_" + c.id}
+        id={props.title + '_' + c.id}
         sx={c.sx}
         label={c.label}
         inputLabel={c.label}
-        value={c.value ? c.value : ""}
+        value={c.value ? c.value : ''}
         handler={c.handler}
         selectList={c.selectList}
         readonly={c.readonly}
@@ -218,32 +218,32 @@ export default function CardContents(props) {
 
   const makeTextFieldContents = [
     {
-      id: "performance",
-      label: "Performance",
-      type: "number",
+      id: 'performance',
+      label: 'Performance',
+      type: 'number',
       sx: { width: 256, marginTop: 1 },
     },
     {
-      id: "technique",
-      label: "Technique",
-      type: "number",
+      id: 'technique',
+      label: 'Technique',
+      type: 'number',
       sx: { width: 256, marginTop: 1 },
     },
     {
-      id: "stamina",
-      label: "Stamina",
-      type: "number",
+      id: 'stamina',
+      label: 'Stamina',
+      type: 'number',
       sx: { width: 256, marginTop: 1 },
     },
   ];
   const makeTextFieldList = makeTextFieldContents.map((c) => {
-    let value = "";
-    let id = props.title + "_" + c.id;
+    let value = '';
+    let id = props.title + '_' + c.id;
     if (formValue[id]) value = formValue[id];
     return (
       <MakeTextField
         key={c.id}
-        id={props.title + "_" + c.id}
+        id={props.title + '_' + c.id}
         label={c.label}
         type={c.type}
         sx={c.sx}

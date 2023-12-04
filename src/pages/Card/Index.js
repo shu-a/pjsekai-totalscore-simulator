@@ -10,37 +10,37 @@ import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import { talantScore } from '../../components/TalantScoreCalc'
+import { talantScore } from '../../components/TalantScoreCalc';
 import Chip from '@mui/material/Chip';
 
 const gridStyle = {
   default: {
     mt: 0.5,
-    mb: 0.5
+    mb: 0.5,
   },
   bonus: {
     fontSize: 20,
     mt: 1,
-    textAlign: 'right'
+    textAlign: 'right',
   },
   chip: {
     fontSize: 20,
-    mt: 1
-  }
-}
+    mt: 1,
+  },
+};
 const chipStyle = {
   backgroundColor: '#00b3a4',
   color: '#ffffff',
   width: 220,
   height: 30,
-  fontSize: 15
-}
+  fontSize: 15,
+};
 const style3 = {
   backgroundColor: '#00b3a4',
   '&:hover': { backgroundColor: '#008075' },
   width: 100,
-  fontSize: 15
-}
+  fontSize: 15,
+};
 
 export default function CardIndex() {
   const handleSubmit = (event) => {
@@ -54,10 +54,10 @@ export default function CardIndex() {
       setTitleBonus(totalScore.titleBonus ? totalScore.titleBonus : 0);
       setPtsScore(totalScore.ptsScore ? totalScore.ptsScore : 0);
     }
-  }
+  };
   const handleClose = () => {
     setOpen(false);
-  }
+  };
   const [open, setOpen] = useState(false);
   const [totalScore, setTotalScore] = useState(0);
   const [areaBonus, setAreaBonus] = useState(0);
@@ -99,65 +99,93 @@ export default function CardIndex() {
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
           PaperProps={{ sx: { borderRadius: 3 } }}
-          maxWidth='sm'
+          maxWidth="sm"
         >
-          <DialogTitle id="alert-dialog-title" sx={{ color: '#ffffff', backgroundColor: '#00b3a4', textAlign: 'center' }}>
-            {"종합 능력치 상세 보기"}
+          <DialogTitle
+            id="alert-dialog-title"
+            sx={{
+              color: '#ffffff',
+              backgroundColor: '#00b3a4',
+              textAlign: 'center',
+            }}
+          >
+            {'종합 능력치 상세 보기'}
           </DialogTitle>
           <DialogContent>
-            <DialogContentText component="div" id="alert-dialog-description" sx={{ textAlign: 'center', pr: 3, pl: 3, mt: 2 }}>
-              <Box component="div" sx={{ fontSize: 20 }}>종합 능력치<br /></Box>
-              <Box component="div" sx={{ fontSize: 25, mb: 1 }}>
-                <img src={require('../../assets/icon_totalStrength.png')} alt="icon" width="15" /> {totalScore}<br />
+            <DialogContentText
+              component="div"
+              id="alert-dialog-description"
+              sx={{ textAlign: 'center', pr: 3, pl: 3, mt: 2 }}
+            >
+              <Box component="div" sx={{ fontSize: 20 }}>
+                종합 능력치
+                <br />
               </Box>
-              <Grid container spacing={3} sx={{ m: 0, width: '100%', backgroundColor: '#feffed', borderRadius: 3, p: 1, border: 2, borderColor: '#cceeef' }}>
-                <Grid container justifyContent="space-between" sx={{ pb: 1, borderBottom: 2, borderColor: '#cceeef' }}>
-                  <Grid item xs={1} sm={2}>
-                  </Grid>
+              <Box component="div" sx={{ fontSize: 25, mb: 1 }}>
+                <img
+                  src={require('../../assets/icon_totalStrength.png')}
+                  alt="icon"
+                  width="15"
+                />{' '}
+                {totalScore}
+                <br />
+              </Box>
+              <Grid
+                container
+                spacing={3}
+                sx={{
+                  m: 0,
+                  width: '100%',
+                  backgroundColor: '#feffed',
+                  borderRadius: 3,
+                  p: 1,
+                  border: 2,
+                  borderColor: '#cceeef',
+                }}
+              >
+                <Grid
+                  container
+                  justifyContent="space-between"
+                  sx={{ pb: 1, borderBottom: 2, borderColor: '#cceeef' }}
+                >
+                  <Grid item xs={1} sm={2}></Grid>
                   <Grid item xs={5} sm={5} sx={gridStyle.chip}>
                     <Chip sx={chipStyle} label="종합 능력치" />
                   </Grid>
                   <Grid item xs={5} sm={3} sx={gridStyle.bonus}>
                     {ptsScore}
                   </Grid>
-                  <Grid item xs sm>
-                  </Grid>
+                  <Grid item xs sm></Grid>
                 </Grid>
                 <Grid container justifyContent="space-between">
-                  <Grid item xs={1} sm={2}>
-                  </Grid>
+                  <Grid item xs={1} sm={2}></Grid>
                   <Grid item xs={5} sm={5} sx={gridStyle.chip}>
                     <Chip sx={chipStyle} label="에어리어 아이템 보너스" />
                   </Grid>
                   <Grid item xs={5} sm={3} sx={gridStyle.bonus}>
                     {areaBonus}
                   </Grid>
-                  <Grid item xs sm>
-                  </Grid>
+                  <Grid item xs sm></Grid>
                 </Grid>
                 <Grid container justifyContent="space-between">
-                  <Grid item xs={1} sm={2}>
-                  </Grid>
+                  <Grid item xs={1} sm={2}></Grid>
                   <Grid item xs={5} sm={5} sx={gridStyle.chip}>
                     <Chip sx={chipStyle} label="캐릭터 랭크 보너스" />
                   </Grid>
                   <Grid item xs={5} sm={3} sx={gridStyle.bonus}>
                     {rankBonus}
                   </Grid>
-                  <Grid item xs sm>
-                  </Grid>
+                  <Grid item xs sm></Grid>
                 </Grid>
                 <Grid container justifyContent="space-between" sx={{ pb: 1 }}>
-                  <Grid item xs={1} sm={2}>
-                  </Grid>
+                  <Grid item xs={1} sm={2}></Grid>
                   <Grid item xs={5} sm={5} sx={gridStyle.chip}>
                     <Chip sx={chipStyle} label="칭호 보너스" />
                   </Grid>
                   <Grid item xs={5} sm={3} sx={gridStyle.bonus}>
                     {titleBonus}
                   </Grid>
-                  <Grid item xs sm>
-                  </Grid>
+                  <Grid item xs sm></Grid>
                 </Grid>
               </Grid>
               <Box sx={{ pt: 1, pb: 1 }}>
@@ -166,7 +194,12 @@ export default function CardIndex() {
             </DialogContentText>
           </DialogContent>
           <DialogContent sx={{ textAlign: 'center', pt: 0, pb: 3 }}>
-            <Button onClick={handleClose} autoFocus variant="contained" sx={style3}>
+            <Button
+              onClick={handleClose}
+              autoFocus
+              variant="contained"
+              sx={style3}
+            >
               확인
             </Button>
           </DialogContent>
